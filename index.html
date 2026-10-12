@@ -29,7 +29,7 @@
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+html { -webkit-font-smoothing: antialiased; }
 body { background: var(--bg); color: var(--ink); font: 400 17px/1.5 var(--sans); letter-spacing: -0.01em; }
 h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
 h1 { font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.04; letter-spacing: -0.035em; }
@@ -140,7 +140,7 @@ svg text { font-family: var(--sans); }
 /* floating iOS surfaces */
 .stage { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: center; justify-items: center; }
 .stage > * { min-width: 0; }
-.notif { width: 300px; max-width: 100%; background: rgba(255,255,255,0.86); backdrop-filter: blur(20px); border-radius: 20px; padding: 12px 14px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.06); font-size: 14px; line-height: 1.3; }
+.notif { width: 300px; max-width: 100%; min-height: 86px; background: #fff; border-radius: 20px; padding: 12px 14px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.06); font-size: 14px; line-height: 1.3; }
 .notif .app { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--imsg), var(--violet)); }
 .notif .row { display: flex; justify-content: space-between; gap: 8px; }
 .notif .row span { color: var(--faint); font-size: 12px; }
@@ -299,7 +299,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 [data-v="health"] { --v: #0A9FB5; --v2: #2DC6A0; --vt: rgba(10,159,181,0.12); }
 [data-v="money"] { --v: #7A4DF0; --v2: #C15AF2; --vt: rgba(122,77,240,0.11); }
 [data-v="home"] { --v: #F2702A; --v2: #FFB020; --vt: rgba(242,112,42,0.12); }
-.page-v { transition: --vt 0.8s ease; }
+
 .seg button { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
 .seg .si { width: 16px; height: 16px; margin-right: 6px; flex: none; }
 .seg.lg button[aria-selected="true"] { color: var(--v); }
@@ -379,6 +379,14 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   input, select { font-size: 16px; }
   .pass { width: 100%; }
 }
+
+/* calm playback */
+.ctrl { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.replay { border: 0; background: none; color: var(--accent); font: 500 0.85rem var(--sans); cursor: pointer; padding: 4px 6px; }
+.replay[disabled] { color: var(--faint); cursor: default; }
+.ln { transition: opacity 0.45s ease, transform 0.45s ease; }
+.ln.pend { opacity: 0.16; transform: translateY(4px); }
+.st { transition: background-color .3s, color .3s; }
 
 /* in-chat dynamic cards */
 .ccard { align-self: flex-start; width: 80%; background: #fff; border: 0.5px solid #D6D6DB; border-radius: 16px; padding: 10px 12px; font-size: 12.5px; line-height: 1.3; display: grid; gap: 3px; color: #000; }
@@ -524,7 +532,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
         <p class="sub">Text Onus the thing that keeps dragging on. It opens a case, works with the people on the other side, and doesn't stop until it's done.</p>
         <div class="btns"><button class="btn" data-jump="m-join">Request an invite</button><button class="link" data-jump="m-stuck">Why it works</button></div>
       </div>
-      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a case" id="m-seg"></div><div class="progress" id="m-prog"></div><span class="live">Live scenario</span></div>
+      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a case" id="m-seg"></div><div class="ctrl"><span class="live">Live scenario</span><button class="replay" id="m-replay" type="button">↻ Replay</button></div></div>
       <div class="center"><div class="vtag" id="m-vtag"></div></div>
       <div class="stage vglow">
         <div class="notif" id="m-notif"></div>
@@ -545,12 +553,17 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   <section class="band">
     <div class="wrap">
       <div class="head center"><h2>We work with trusted partners.</h2><p class="sub">Onus partners with doctors' offices, insurance agencies and HOA managers. They've asked for your requests, so nothing gets lost in a portal.</p></div>
+      <div class="grid2">
+        <div class="tile"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>If your provider is a partner</h3><p class="muted">Your request goes straight into their system, in the format they need. No forms, no hold music.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-loop"/></svg></span><h3>If they aren't yet</h3><p class="muted">Onus still has a head start. It learns from the partners in your area, so it very likely already knows your provider: who to contact, what they need and how long they take.</p></div>
+      </div>
       <div class="chips">
         <span><svg><use href="#i-check"/></svg>Knows how claims, disputes and repairs work everywhere</span>
         <span><svg><use href="#i-check"/></svg>Knows how your provider works specifically</span>
+        <span><svg><use href="#i-check"/></svg>Learns from every partner in your area</span>
       </div>
       <svg class="viz" viewBox="0 0 1000 460" id="network" role="img" aria-label="You at the center, connected directly to partner offices and through standard follow-up to other companies"></svg>
-      <div class="legend"><span><i></i>Partner: straight into their system</span><span><i class="dash"></i>Not a partner yet: Onus still follows up by email, forms and calls</span></div>
+      <div class="legend"><span><i></i>Partner: straight into their system</span><span><i class="dash"></i>Not a partner yet: Onus uses what partners nearby taught it, plus email, forms and calls</span></div>
     </div>
   </section>
 
@@ -607,7 +620,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
         <p class="sub">Your clients text Onus. Routine requests resolve on their own. The rest reach your team complete and ready to act on.</p>
         <div class="btns"><button class="btn" data-jump="p-join">Become a founding partner</button><button class="link" data-jump="p-stuck">Why now</button></div>
       </div>
-      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a vertical" id="p-seg"></div><div class="progress" id="p-prog"></div><span class="live">Live scenario</span></div>
+      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a vertical" id="p-seg"></div><div class="ctrl"><span class="live">Live scenario</span><button class="replay" id="p-replay" type="button">↻ Replay</button></div></div>
       <div class="duo-wrap vglow">
         <div class="duo">
           <div id="p-phone"></div>
@@ -1076,38 +1089,48 @@ const VS_RIGHT = {
 };
 function vsMount(id, side) {
   const root = $(id);
-  root.innerHTML = `<div class="head center" style="margin-bottom:20px"><div class="seg" role="tablist" aria-label="Choose a channel"><button role="tab" data-m="phone">Phone call</button><button role="tab" data-m="portal">Web portal</button></div></div>
+  root.innerHTML = `<div class="ctrl" style="margin-bottom:20px"><div class="seg" role="tablist" aria-label="Choose a channel"><button role="tab" data-m="phone">Phone call</button><button role="tab" data-m="portal">Web portal</button></div><button class="replay" type="button">↻ Replay</button></div>
     <div class="vs">
-      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av">AI</span><div><b>A typical AI agent</b><span class="small sub-l"></span></div><span class="st st-l">Working…</span></div><div class="vs-log log-l"></div></div>
-      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av on">O</span><div><b>Onus</b><span class="small">${VS_RIGHT[side].sub}</span></div><span class="st st-r">Working…</span></div><div class="vs-log log-r"></div></div>
+      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av">AI</span><div><b>A typical AI agent</b><span class="small sub-l"></span></div><span class="st st-l">Waiting</span></div><div class="vs-log log-l"></div></div>
+      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av on">O</span><div><b>Onus</b><span class="small">${VS_RIGHT[side].sub}</span></div><span class="st st-r">Waiting</span></div><div class="vs-log log-r"></div></div>
     </div>`;
-  const q = (s) => root.querySelector(s);
-  let run = 0, auto = true, mode = "phone";
-  const line = ([c, t]) => `<div class="ln ${c} enter"><i></i><span>${t}</span></div>`;
-  async function go(m) {
-    mode = m; const id = ++run, alive = () => id === run;
+  const q = (s) => root.querySelector(s), replay = q(".replay");
+  let run = 0, mode = "phone", played = false;
+  const line = ([c, t]) => `<div class="ln ${c} pend"><i></i><span>${t}</span></div>`;
+  function lay(m, final) {
+    mode = m;
     root.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-selected", b.dataset.m === m));
-    const L = VS_LEFT[m], R = VS_RIGHT[side];
-    q(".sub-l").textContent = L.sub;
+    q(".sub-l").textContent = VS_LEFT[m].sub;
+    q(".log-l").innerHTML = VS_LEFT[m].lines.map(line).join("");
+    q(".log-r").innerHTML = VS_RIGHT[side].lines.map(line).join("");
     const sl = q(".st-l"), sr = q(".st-r");
-    sl.className = "st st-l"; sr.className = "st st-r"; sl.textContent = sr.textContent = "Working…";
-    if (REDUCED) {
-      q(".log-l").innerHTML = L.lines.map(line).join(""); q(".log-r").innerHTML = R.lines.map(line).join("");
-      sl.textContent = "Stuck"; sl.classList.add("stuck"); sr.textContent = "Done"; sr.classList.add("done"); return;
-    }
-    q(".log-l").innerHTML = ""; q(".log-r").innerHTML = "";
-    for (let i = 0; i < Math.max(L.lines.length, R.lines.length); i++) {
-      await sleep(1100); if (!alive()) return;
-      if (L.lines[i]) q(".log-l").insertAdjacentHTML("beforeend", line(L.lines[i]));
-      if (R.lines[i]) q(".log-r").insertAdjacentHTML("beforeend", line(R.lines[i]));
-      if (i === R.lines.length - 1) { sr.textContent = "Done"; sr.classList.add("done"); }
-      if (i === L.lines.length - 1) { sl.textContent = "Stuck"; sl.classList.add("stuck"); }
-    }
-    await sleep(4000);
-    if (alive() && auto) go(mode === "phone" ? "portal" : "phone");
+    sl.className = "st st-l"; sr.className = "st st-r";
+    if (final) {
+      root.querySelectorAll(".ln").forEach((l) => l.classList.remove("pend"));
+      sl.textContent = "Stuck"; sl.classList.add("stuck"); sr.textContent = "Done"; sr.classList.add("done");
+    } else { sl.textContent = sr.textContent = "Working…"; }
   }
-  root.querySelector(".seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { auto = false; go(b.dataset.m); } });
-  return { start: () => go(mode), stop: () => run++ };
+  async function go(m) {
+    played = true;
+    const id = ++run, alive = () => id === run;
+    lay(m, REDUCED);
+    if (REDUCED) return;
+    replay.disabled = true;
+    const L = [...q(".log-l").children], R = [...q(".log-r").children];
+    for (let i = 0; i < Math.max(L.length, R.length); i++) {
+      await sleep(1000); if (!alive()) return;
+      if (L[i]) L[i].classList.remove("pend");
+      if (R[i]) R[i].classList.remove("pend");
+      if (i === R.length - 1) { q(".st-r").textContent = "Done"; q(".st-r").classList.add("done"); }
+      if (i === L.length - 1) { q(".st-l").textContent = "Stuck"; q(".st-l").classList.add("stuck"); }
+    }
+    replay.disabled = false;
+  }
+  lay("phone", REDUCED);
+  root.querySelector(".seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) go(b.dataset.m); });
+  replay.addEventListener("click", () => go(mode));
+  new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting && !played) go(mode); }), { threshold: 0.4 }).observe(q(".vs"));
+  return { stop: () => run++ };
 }
 const VS = { members: [vsMount("#vs-members", "members")], partners: [vsMount("#vs-partners", "partners")], thesis: [vsMount("#vs-thesis", "members")] };
 
@@ -1201,36 +1224,35 @@ function countUp(el, target) {
     if (k < 1) requestAnimationFrame(tick);
   })(t0);
 }
-function progress(el, keys, k, thread, auto) {
-  el.innerHTML = keys.map((x, i) => {
-    const cls = x === k ? "on" : (auto && i < keys.indexOf(k) ? "done" : "");
-    return `<i class="${cls}" style="--dur:${duration(thread)}ms"></i>`;
-  }).join("");
-}
 function seg(el, data, pick) {
   el.innerHTML = Object.entries(data).map(([k, v]) => `<button role="tab" data-v="${k}">${v.icon ? `<svg class="si"><use href="#${v.icon}"/></svg>` : ""}${v.label}</button>`).join("");
   el.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) pick(b.dataset.v); });
 }
 const sel = (el, k) => el.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.v === k));
 
-function scenario({ data, segEl, progEl, setup, finish }) {
+function scenario({ data, segEl, replayEl, watchEl, setup, finish }) {
   const keys = Object.keys(data);
-  let run = 0, auto = true, current = keys[0];
+  let run = 0, current = keys[0], played = false;
   async function go(k) {
-    current = k;
+    current = k; played = true;
     const id = ++run, alive = () => id === run;
     sel(segEl, k);
     const v = data[k];
     const threadEl = setup(v, !REDUCED);
-    progress(progEl, keys, k, v.thread, auto && !REDUCED);
     if (REDUCED) { finish(v, false); return; }
-    if (!(await play(threadEl, v.thread, alive))) return;
-    finish(v, true);
-    await sleep(HOLD);
-    if (alive() && auto) go(keys[(keys.indexOf(k) + 1) % keys.length]);
+    replayEl.disabled = true;
+    const done = await play(threadEl, v.thread, alive);
+    if (!alive()) return;
+    if (done) finish(v, true);
+    replayEl.disabled = false;
   }
-  seg(segEl, data, (k) => { auto = false; go(k); });
-  return { go, start: () => go(current), stop: () => run++ };
+  seg(segEl, data, (k) => go(k));
+  replayEl.addEventListener("click", () => go(current));
+  /* render the resting first frame, play once when it scrolls into view */
+  sel(segEl, current);
+  if (REDUCED) { setup(data[current], false); finish(data[current], false); } else setup(data[current], true);
+  new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting && !played) go(current); }), { threshold: 0.35 }).observe(watchEl);
+  return { stop: () => run++ };
 }
 
 const MEMBER = {
@@ -1335,7 +1357,7 @@ const PARTNER = {
 };
 
 const members = scenario({
-  data: MEMBER, segEl: $("#m-seg"), progEl: $("#m-prog"),
+  data: MEMBER, segEl: $("#m-seg"), replayEl: $("#m-replay"), watchEl: $("#m-phone"),
   setup(v, live) {
     $("#page-members").dataset.v = v.label.toLowerCase();
     $("#m-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span><span>${v.tag}</span>`;
@@ -1365,7 +1387,7 @@ function queueRow([t, d], fresh) {
 const autoRow = ([t, d]) => `<div class="q done"><svg class="okc"><use href="#i-check"/></svg><div><b>${t}</b><span>${d}</span></div><em>Done</em></div>`;
 const listTile = (ic, cls, h, items) => `<div class="tile"><span class="ico ${cls}"><svg><use href="#${ic}"/></svg></span><h3>${h}</h3><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`;
 const partners = scenario({
-  data: PARTNER, segEl: $("#p-seg"), progEl: $("#p-prog"),
+  data: PARTNER, segEl: $("#p-seg"), replayEl: $("#p-replay"), watchEl: $("#p-phone"),
   setup(v, live) {
     $("#page-partners").dataset.v = v.label.toLowerCase();
     $("#p-phone").innerHTML = phone(v.thread, live);
@@ -1388,11 +1410,10 @@ const partners = scenario({
 
 /* ---------- tabs ---------- */
 const PAGES = ["members", "partners", "thesis"];
-const RUNNERS = { members: [members, ...VS.members], partners: [partners, ...VS.partners], thesis: VS.thesis };
+
 function show(p) {
   if (!PAGES.includes(p)) p = "members";
   PAGES.forEach((x) => { $("#page-" + x).hidden = x !== p; $("#tab-" + x).setAttribute("aria-selected", x === p); });
-  Object.entries(RUNNERS).forEach(([name, rs]) => rs.forEach((r) => (name === p ? r.start() : r.stop())));
   try { localStorage.setItem("onus-tab", p); } catch (e) {}
 }
 document.querySelectorAll(".nav .seg button").forEach((b) => b.addEventListener("click", () => {
@@ -1405,7 +1426,9 @@ document.querySelectorAll("[data-jump]").forEach((a) => a.addEventListener("clic
 let start = location.hash.slice(1);
 if (!PAGES.includes(start)) { try { start = localStorage.getItem("onus-tab") || "members"; } catch (e) { start = "members"; } }
 show(start);
-if (REDUCED) document.querySelectorAll("svg").forEach((s) => s.pauseAnimations && s.pauseAnimations());
+/* only animate diagrams that are on screen */
+const svgIO = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting && !REDUCED ? e.target.unpauseAnimations() : e.target.pauseAnimations())), { rootMargin: "100px" });
+document.querySelectorAll("svg.viz").forEach((s) => { s.pauseAnimations(); svgIO.observe(s); });
 
 function preview(form, msg, req) {
   form.addEventListener("submit", (e) => {
