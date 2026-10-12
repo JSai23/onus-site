@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<title>Onus</title>
+<meta name="description" content="Onus is a personal AI you text that owns the problem until it's done, working with the offices on the other side.">
+<style>
+/* Layout: Apple-style product pages. Light only, by choice. Wide whitespace, centered display type, white / soft-grey bands; every idea gets a visual (live iPhones, flow diagrams, swimlanes, network maps) instead of a table. */
+:root {
+  --bg: #FFFFFF;
+  --alt: #F5F5F7;
+  --ink: #1D1D1F;
+  --muted: #6E6E73;
+  --faint: #86868B;
+  --line: #E3E3E8;
+  --accent: #0071E3;
+  --imsg: #0A84FF;
+  --violet: #5E5CE6;
+  --bubble: #E9E9EB;
+  --green: #28A745;
+  --amber: #FF9F0A;
+  --red: #FF453A;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.5 var(--sans); letter-spacing: -0.01em; }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+h1 { font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.04; letter-spacing: -0.035em; }
+h2 { font-size: clamp(2rem, 4.6vw, 3.3rem); line-height: 1.07; letter-spacing: -0.03em; }
+h3 { font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.02em; }
+p { margin: 0; }
+.grad { background: linear-gradient(90deg, var(--imsg), var(--violet) 60%, #BF5AF2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.eyebrow { font-size: 0.95rem; font-weight: 600; color: var(--accent); }
+.sub { font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.45; color: var(--muted); max-width: 42ch; }
+.center { text-align: center; justify-items: center; margin-inline: auto; }
+.small { font-size: 0.8rem; color: var(--faint); }
+.muted { color: var(--muted); }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,0.72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.nav-in { max-width: 1080px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.04em; display: flex; align-items: center; gap: 8px; }
+.logo i { width: 22px; height: 22px; border-radius: 7px; background: linear-gradient(135deg, var(--imsg), var(--violet)); display: inline-block; }
+.seg { display: inline-flex; background: rgba(118,118,128,0.12); border-radius: 9px; padding: 2px; }
+.seg button { border: 0; background: transparent; color: var(--ink); font: 500 0.85rem var(--sans); padding: 6px 14px; border-radius: 7px; cursor: pointer; transition: background .2s; }
+.seg button[aria-selected="true"] { background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.04); }
+.seg.lg button { font-size: 0.95rem; padding: 8px 22px; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(0,113,227,0.45); outline-offset: 2px; }
+
+/* bands */
+.band { padding-inline: 20px; padding-block: clamp(72px, 10vw, 120px); }
+.band.alt { background: var(--alt); }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 52px; }
+.head { display: grid; gap: 16px; }
+.btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
+.btn { display: inline-flex; align-items: center; border: 0; background: var(--accent); color: #fff; font: 500 1rem var(--sans); padding: 12px 22px; border-radius: 999px; cursor: pointer; text-decoration: none; }
+.link { color: var(--accent); background: none; border: 0; font: 500 1rem var(--sans); cursor: pointer; padding: 0; }
+.link::after { content: " ›"; }
+
+/* shared surfaces */
+.tile { background: var(--alt); border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); display: grid; gap: 16px; align-content: start; min-width: 0; }
+.band.alt .tile { background: #fff; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid2 > *, .grid3 > * { min-width: 0; }
+.ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--imsg), var(--violet)); }
+.ico svg { width: 22px; height: 22px; }
+.ico.soft { background: rgba(10,132,255,0.1); color: var(--imsg); }
+.tile ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.tile li { padding: 11px 0; border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: baseline; }
+.tile li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--imsg); transform: translateY(-2px); }
+.viz { width: 100%; height: auto; display: block; overflow: visible; }
+.scroll-x { overflow-x: auto; margin-inline: -20px; padding-inline: 20px; }
+.legend { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; font-size: 0.85rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 22px; height: 0; border-top: 2.5px solid var(--imsg); display: inline-block; }
+.legend i.dash { border-top: 2px dashed #B8B8BE; }
+.legend i.dot { width: 9px; height: 9px; border: 0; border-radius: 50%; background: var(--imsg); }
+.legend i.big { width: 14px; height: 14px; border: 0; border-radius: 50%; background: #C7C7CC; }
+
+/* SVG text + shapes */
+svg text { font-family: var(--sans); }
+.t-lbl { font-size: 13px; fill: var(--muted); }
+.t-strong { font-size: 15px; font-weight: 600; fill: var(--ink); }
+.t-small { font-size: 11px; fill: var(--faint); }
+.t-white { font-size: 14px; font-weight: 600; fill: #fff; }
+.flow { fill: none; stroke: #D8D8DE; stroke-width: 2; }
+.flow.blue { stroke: url(#gBlue); stroke-width: 2.5; }
+.flow.dash { stroke-dasharray: 5 6; stroke: #C2C2C8; }
+.flow.tangle { stroke: #E2B9B5; stroke-width: 1.6; }
+.pkt { fill: var(--imsg); }
+.pkt.v { fill: var(--violet); }
+.pkt.red { fill: var(--red); }
+
+/* ---------- iPhone ---------- */
+.iphone { width: 300px; max-width: 100%; aspect-ratio: 300 / 620; border-radius: 54px; padding: 11px; position: relative;
+  background: linear-gradient(145deg, #E3E1DC, #B9B6B0 30%, #D9D6D0 55%, #A7A49E);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.18), inset 0 0 0 1.5px rgba(255,255,255,0.6), 0 50px 80px -30px rgba(0,0,0,0.35), 0 20px 30px -20px rgba(0,0,0,0.25); }
+.iphone::before { content: ""; position: absolute; left: -3px; top: 120px; width: 3px; height: 56px; border-radius: 2px 0 0 2px; background: #A9A6A0; box-shadow: 0 -40px 0 -0.5px #A9A6A0, 0 70px 0 #A9A6A0; }
+.iphone::after { content: ""; position: absolute; right: -3px; top: 170px; width: 3px; height: 86px; border-radius: 0 2px 2px 0; background: #A9A6A0; }
+.screen { position: relative; height: 100%; border-radius: 44px; background: #fff; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 3px #0B0B0C; }
+.island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; border-radius: 20px; background: #000; z-index: 3; }
+.status { height: 46px; flex: none; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 26px 6px 32px; font: 600 14px var(--sans); letter-spacing: -0.02em; }
+.status svg { display: block; }
+.status .icons { display: flex; gap: 5px; align-items: center; }
+.ihead { flex: none; display: grid; justify-items: center; gap: 3px; padding: 4px 0 8px; border-bottom: 0.5px solid rgba(0,0,0,0.12); background: rgba(249,249,249,0.94); position: relative; }
+.ihead .back { position: absolute; left: 12px; top: 14px; color: var(--imsg); font-size: 26px; line-height: 1; font-weight: 300; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--imsg), var(--violet)); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 17px; }
+.ihead .name { font-size: 11px; color: #000; }
+.ihead .name::after { content: " ›"; color: var(--faint); }
+.thread { flex: 1; overflow-y: auto; padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 3px; scrollbar-width: none; }
+.thread::-webkit-scrollbar { display: none; }
+.ts { align-self: center; font-size: 10.5px; color: var(--faint); margin: 10px 0 4px; }
+.ts b { font-weight: 600; }
+.b { max-width: 76%; padding: 7px 11px; border-radius: 17px; font-size: 13.5px; line-height: 1.3; letter-spacing: -0.01em; }
+.b.me { align-self: flex-end; background: var(--imsg); color: #fff; }
+.b.ai { align-self: flex-start; background: var(--bubble); color: #000; }
+.b.me.tail { border-bottom-right-radius: 5px; }
+.b.ai.tail { border-bottom-left-radius: 5px; }
+.b + .ts { margin-top: 12px; }
+.rich { align-self: flex-start; width: 72%; border-radius: 17px; overflow: hidden; background: var(--bubble); font-size: 12px; }
+.rich .img { height: 64px; background: linear-gradient(135deg, #DCE9FF, #EDE4FF); display: grid; place-items: center; }
+.rich .img span { width: 26px; height: 26px; border-radius: 8px; background: #fff; display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-size: 13px; }
+.rich .t { padding: 7px 11px 8px; display: grid; }
+.rich .t b { font-weight: 600; color: #000; }
+.rich .t span { color: var(--faint); font-size: 11px; }
+.delivered { align-self: flex-end; font-size: 10px; color: var(--faint); margin: 1px 4px 0 0; }
+.compose { flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 12px 22px; position: relative; }
+.compose .plus { width: 30px; height: 30px; border-radius: 50%; background: #EDEDF0; color: #8E8E93; display: grid; place-items: center; font-size: 20px; font-weight: 300; }
+.compose .field { flex: 1; height: 32px; border: 1px solid #D6D6DB; border-radius: 16px; padding: 0 12px; display: flex; align-items: center; color: #B0B0B5; font-size: 13.5px; }
+.compose::after { content: ""; position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 110px; height: 4px; border-radius: 3px; background: #000; }
+
+/* floating iOS surfaces */
+.stage { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: center; justify-items: center; }
+.stage > * { min-width: 0; }
+.notif { width: 300px; max-width: 100%; background: rgba(255,255,255,0.86); backdrop-filter: blur(20px); border-radius: 20px; padding: 12px 14px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.06); font-size: 14px; line-height: 1.3; }
+.notif .app { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--imsg), var(--violet)); }
+.notif .row { display: flex; justify-content: space-between; gap: 8px; }
+.notif .row span { color: var(--faint); font-size: 12px; }
+.notif p { color: #333; }
+.widget { width: 300px; max-width: 100%; background: #fff; border-radius: 24px; padding: 20px; display: grid; gap: 14px; box-shadow: 0 20px 40px -18px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.06); }
+.widget .top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.widget .closed { color: var(--green); display: flex; align-items: center; gap: 5px; }
+.widget .closed::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.widget .big { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.widget .what { font-size: 0.95rem; color: var(--muted); }
+.widget dl { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; margin: 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.88rem; }
+.widget dt { color: var(--muted); }
+.widget dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* Mac window */
+.mac { width: 100%; max-width: 560px; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12), 0 50px 80px -30px rgba(0,0,0,0.3), 0 20px 30px -20px rgba(0,0,0,0.2); font-size: 14px; }
+.mac .bar { height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #F6F6F6; border-bottom: 1px solid #E6E6E6; }
+.mac .bar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.mac .bar span { flex: 1; text-align: center; font-size: 12px; color: var(--muted); font-weight: 500; margin-right: 52px; }
+.mac .body { padding: 18px 20px 20px; display: grid; gap: 4px; }
+.mac .body h4 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.mac .body h4 span { font-size: 12px; font-weight: 500; color: var(--faint); }
+.q { display: grid; grid-template-columns: 10px 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid #F0F0F2; }
+.q .dot { width: 8px; height: 8px; border-radius: 50%; }
+.q .dot.ready { background: var(--green); }
+.q .dot.wait { background: var(--amber); }
+.q div { min-width: 0; display: grid; }
+.q div b { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.q div span { font-size: 12px; color: var(--faint); }
+.q em { font-style: normal; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+.duo { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; justify-items: center; }
+.duo > * { min-width: 0; }
+.duo-wrap { display: grid; gap: 28px; justify-items: center; }
+.caption { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; font-size: 0.95rem; color: var(--muted); }
+.caption b { color: var(--ink); font-weight: 600; }
+
+/* live playback */
+.typing { align-self: flex-start; background: var(--bubble); border-radius: 17px; border-bottom-left-radius: 5px; padding: 10px 12px; display: flex; gap: 4px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: #9A9AA0; animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: 0.15s; } .typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes blink { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+.enter { animation: pop 0.42s cubic-bezier(.2,.9,.25,1.15) both; }
+.b.me.enter { transform-origin: bottom right; } .b.ai.enter { transform-origin: bottom left; }
+@keyframes pop { from { transform: translateY(10px) scale(0.92); opacity: 0.2; } to { transform: none; opacity: 1; } }
+.notif, .widget { transition: transform 0.6s cubic-bezier(.2,.9,.25,1.1), opacity 0.5s ease; }
+.notif.wait { transform: translateY(-14px) scale(0.96); opacity: 0.45; }
+.widget.wait { opacity: 0.55; }
+.widget.wait .closed { color: var(--amber); }
+.widget.wait .closed::before { background: var(--amber); }
+.live { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #FF3B30; animation: blink 1.6s infinite; }
+.progress { display: flex; gap: 6px; justify-content: center; }
+.progress i { width: 28px; height: 3px; border-radius: 2px; background: #D2D2D7; overflow: hidden; position: relative; }
+.progress i.on::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left; animation: fill var(--dur, 12s) linear forwards; }
+.progress i.done::after { content: ""; position: absolute; inset: 0; background: var(--ink); }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.q.new { animation: slidein 0.6s cubic-bezier(.2,.9,.25,1.1) both; background: linear-gradient(90deg, rgba(10,132,255,0.08), transparent); margin-inline: -20px; padding-inline: 20px; }
+.q.new em { color: var(--imsg); font-weight: 600; }
+@keyframes slidein { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* chat vs case */
+.mini-chat { display: grid; gap: 6px; }
+.mini-chat .b { max-width: 88%; font-size: 14.5px; }
+.mini-chat .b.me { justify-self: end; }
+.mini-chat .b.ai { justify-self: start; }
+.ended { justify-self: center; font-size: 12px; color: var(--faint); display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.ended::before, .ended::after { content: ""; width: 40px; height: 1px; background: var(--line); }
+.tracker { display: grid; gap: 0; position: relative; }
+.stage-row { display: grid; grid-template-columns: 28px 1fr auto; gap: 14px; align-items: start; padding-bottom: 18px; position: relative; }
+.stage-row::before { content: ""; position: absolute; left: 13px; top: 26px; bottom: 0; width: 2px; background: var(--line); }
+.stage-row:last-child::before { display: none; }
+.stage-row.done::before { background: var(--imsg); }
+.stage-row .node { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line); background: #fff; display: grid; place-items: center; transition: all .4s; }
+.stage-row.done .node { background: var(--imsg); border-color: var(--imsg); }
+.stage-row.done .node::after { content: ""; width: 8px; height: 5px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+.stage-row.now .node { border-color: var(--imsg); box-shadow: 0 0 0 6px rgba(10,132,255,0.15); }
+.stage-row.now .node::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--imsg); animation: blink 1.4s infinite; }
+.stage-row b { font-weight: 600; display: block; }
+.stage-row span { font-size: 0.85rem; color: var(--muted); }
+.stage-row em { font-style: normal; font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
+
+/* stats strip */
+.strip { display: flex; justify-content: center; gap: clamp(28px, 6vw, 80px); flex-wrap: wrap; text-align: center; }
+.strip div { display: grid; gap: 4px; }
+.strip b { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+.strip span { font-size: 0.9rem; color: var(--muted); }
+
+/* stepper */
+.stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+.stepper::before { content: ""; position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(90deg, var(--imsg), var(--violet)); opacity: 0.35; }
+.stepper > div { display: grid; gap: 10px; justify-items: center; text-align: center; position: relative; min-width: 0; }
+.stepper .ico { width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 0 0 8px var(--bg); }
+.band.alt .stepper .ico { box-shadow: 0 0 0 8px var(--alt); }
+.stepper p { color: var(--muted); font-size: 0.95rem; max-width: 24ch; }
+
+/* stack */
+.stack { display: grid; gap: 10px; justify-items: center; }
+.layer { border-radius: 20px; padding: 22px 28px; color: #fff; display: grid; gap: 4px; text-align: center; width: 100%; }
+.layer b { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; }
+.layer span { font-size: 0.92rem; opacity: 0.85; }
+.layer.l1 { max-width: 640px; background: linear-gradient(135deg, #5AC8FA, var(--imsg)); }
+.layer.l2 { max-width: 820px; background: linear-gradient(135deg, var(--imsg), var(--violet)); }
+.layer.l3 { max-width: 1000px; background: linear-gradient(135deg, var(--violet), #3A2E8C); }
+
+/* risks */
+.risk { display: grid; gap: 10px; }
+.risk .r { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em; }
+.risk .why { color: var(--muted); font-size: 0.95rem; }
+.risk .ans { display: flex; gap: 10px; align-items: baseline; font-size: 0.95rem; padding-top: 12px; border-top: 1px solid var(--line); }
+.risk .ans::before { content: "→"; color: var(--imsg); font-weight: 600; }
+
+/* metric tiles */
+.metric { display: grid; gap: 6px; }
+.metric b { font-size: 0.95rem; font-weight: 600; }
+.metric svg { width: 100%; height: 44px; display: block; }
+
+/* pass + forms */
+.pass { width: 320px; max-width: 100%; border-radius: 18px; padding: 20px 22px; color: #fff; background: linear-gradient(160deg, #1C1C1E, #2C2C34 55%, #3A2E5C); box-shadow: 0 40px 60px -30px rgba(0,0,0,0.5); display: grid; gap: 22px; }
+.pass .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pass .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
+.pass .val { font-size: 1.05rem; font-weight: 500; }
+.pass .huge { font-size: 1.9rem; font-weight: 600; letter-spacing: -0.03em; }
+.pass .code { justify-self: center; width: 96px; height: 96px; border-radius: 8px; background: conic-gradient(from 90deg at 50% 50%, #fff 0 25%, #1C1C1E 0 50%, #fff 0 75%, #1C1C1E 0) 0 0 / 16px 16px; border: 6px solid #fff; }
+.join { display: grid; grid-template-columns: auto 1fr; gap: 64px; align-items: center; }
+.join > * { min-width: 0; }
+form { display: grid; gap: 12px; max-width: 460px; }
+input, select { font: 400 1rem var(--sans); color: var(--ink); background: #fff; border: 1px solid #D2D2D7; border-radius: 12px; padding: 14px 16px; width: 100%; appearance: none; }
+input::placeholder { color: #A1A1A6; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-msg { font-size: 0.85rem; color: var(--muted); min-height: 1.3em; }
+label.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.statement { font-size: clamp(1.8rem, 4.2vw, 3.2rem); line-height: 1.12; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; text-wrap: balance; }
+.statement span { color: var(--faint); }
+
+footer { background: var(--alt); border-top: 1px solid var(--line); padding-inline: 20px; padding-block: 28px 48px; }
+footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1.6; color: var(--faint); }
+
+@media (max-width: 960px) {
+  .stage { grid-template-columns: 1fr; gap: 28px; }
+  .stage .notif { order: -1; }
+  .duo, .join { grid-template-columns: 1fr !important; gap: 40px; justify-items: center; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+  .stepper { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+  .stepper::before { display: none; }
+}
+@media (max-width: 640px) {
+  .grid2, .grid3, .two { grid-template-columns: 1fr; }
+  .seg.lg button { padding: 7px 14px; font-size: 0.85rem; }
+}
+
+/* phone-only / desktop-only */
+.only-m { display: none !important; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; }
+.tl li { display: grid; grid-template-columns: 54px auto 1fr; gap: 10px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
+.tl li em { font-style: normal; font-size: 0.78rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.tl .chip { font-size: 0.72rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.tl .you .chip { background: var(--imsg); color: #fff; }
+.tl .onus .chip { background: linear-gradient(135deg, var(--imsg), var(--violet)); color: #fff; }
+.tl .office .chip { background: rgba(94,92,230,0.12); color: var(--violet); }
+.tl .insurer .chip { background: #EDEDF0; color: var(--muted); }
+.tl .onus span:last-child { color: var(--muted); }
+.fly { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: f; }
+.fly li { display: flex; gap: 12px; align-items: center; font-weight: 500; }
+.fly li span { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--imsg); color: var(--ink); display: grid; place-items: center; font-size: 0.85rem; font-weight: 600; }
+@media (max-width: 760px) {
+  .only-m { display: block !important; }
+  ol.only-m { display: grid !important; }
+  .only-d { display: none !important; }
+  #before .t-lbl, #after .t-lbl { font-size: 17px; }
+  #before .t-strong, #after .t-strong { font-size: 18px; }
+}
+@media (max-width: 640px) {
+  .band { padding-block: 64px; }
+  .wrap { gap: 40px; }
+  h1 { font-size: clamp(2.3rem, 11vw, 3rem); }
+  h2 { font-size: clamp(1.8rem, 8.4vw, 2.3rem); }
+  .sub { font-size: 1.05rem; }
+  .nav-in { justify-content: space-between; flex-wrap: nowrap; padding-inline: 16px; }
+  .seg button { padding: 8px 12px; min-height: 34px; }
+  .seg.lg { width: 100%; max-width: 360px; }
+  .seg.lg button { flex: 1; min-height: 38px; }
+  .tile { border-radius: 22px; padding: 22px; }
+  .stage { gap: 22px; }
+  .stepper { grid-template-columns: 1fr; row-gap: 28px; }
+  .strip { gap: 22px 32px; }
+  .btn { padding: 14px 24px; }
+  input, select { font-size: 16px; }
+  .pass { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter, .q.new, .typing i, .live::before, .stage-row.now .node::after { animation: none; }
+  .progress i.on::after { animation: none; }
+}
+</style>
+
+<!-- icon set -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBlue" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0A84FF"/><stop offset="1" stop-color="#5E5CE6"/></linearGradient>
+    <linearGradient id="gOrb" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0A84FF"/><stop offset="1" stop-color="#5E5CE6"/></linearGradient>
+    <radialGradient id="gGlow"><stop offset="0" stop-color="#0A84FF" stop-opacity=".28"/><stop offset="1" stop-color="#0A84FF" stop-opacity="0"/></radialGradient>
+  </defs>
+  <symbol id="i-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+  <symbol id="i-loop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/><path d="M8 11h2l1-2 2 4 1-2h2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1Z"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.5"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0Z M12 17v4"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4Z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-9M15 6h5v5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14a6.5 6.5 0 0 1 3 6"/></symbol>
+</svg>
+
+<nav class="nav">
+  <div class="nav-in">
+    <div class="logo"><i></i>onus</div>
+    <div class="seg" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-members" data-page="members">Members</button>
+      <button role="tab" id="tab-partners" data-page="partners">Partners</button>
+      <button role="tab" id="tab-thesis" data-page="thesis">Thesis</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= MEMBERS ================= -->
+<div id="page-members" role="tabpanel" aria-labelledby="tab-members" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">Personal AI. By invitation.</span>
+        <h1>Hand it off.<br><span class="grad">It stays handled.</span></h1>
+        <p class="sub">Text Onus the thing that keeps dragging on. It opens a case, follows up for you, and doesn't stop until it's done.</p>
+        <div class="btns"><button class="btn" data-jump="m-join">Request an invite</button><button class="link" data-jump="m-how">See how it works</button></div>
+      </div>
+      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a case" id="m-seg"></div><div class="progress" id="m-prog"></div><span class="live">Live scenario</span></div>
+      <div class="stage">
+        <div class="notif" id="m-notif"></div>
+        <div id="m-phone"></div>
+        <div class="widget" id="m-widget"></div>
+      </div>
+      <p class="small center">Illustrative scenario. Onus is in private development.</p>
+    </div>
+  </section>
+
+  <!-- chat vs case -->
+  <section class="band alt" id="m-how">
+    <div class="wrap">
+      <div class="head center"><h2>Other assistants answer.<br>Onus follows through.</h2><p class="sub">An answer ends the conversation. A case stays open until the problem is actually solved.</p></div>
+      <div class="grid2">
+        <div class="tile">
+          <span class="small">A typical AI assistant</span>
+          <div class="mini-chat">
+            <div class="b me tail">My MRI claim got denied. Can you help?</div>
+            <div class="b ai tail">Here's an appeal letter template you can send to your insurer. Let me know if you need anything else!</div>
+            <span class="ended">You take it from here</span>
+          </div>
+          <ul><li>You send it, you call, you wait on hold</li><li>You remember to follow up</li><li>It forgets the moment you close the app</li></ul>
+        </div>
+        <div class="tile">
+          <span class="small">Onus</span>
+          <div class="tracker" id="tracker">
+            <div class="stage-row"><span class="node"></span><div><b>Case opened</b><span>Bill and insurance card received</span></div><em>Day 1</em></div>
+            <div class="stage-row"><span class="node"></span><div><b>Sent to your doctor's office</b><span>Retro authorization requested</span></div><em>Day 1</em></div>
+            <div class="stage-row"><span class="node"></span><div><b>Waiting on insurer</b><span>Onus checks in every few days</span></div><em>Day 4</em></div>
+            <div class="stage-row"><span class="node"></span><div><b>Approved</b><span>New balance: $85 copay</span></div><em>Day 11</em></div>
+            <div class="stage-row"><span class="node"></span><div><b>Closed</b><span>Paid with your approval</span></div><em>Day 11</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- swimlane -->
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>You sent three texts.<br>Onus handled the rest.</h2><p class="sub">Everything that happened in the MRI case, by who did it.</p></div>
+      <div class="scroll-x only-d"><svg class="viz" id="swim" viewBox="0 0 1000 330" role="img" aria-label="Timeline of the MRI case over 11 days, split into lanes for you, Onus, the doctor's office and the insurer"></svg></div>
+      <ol class="tl only-m" id="swim-list"></ol>
+      <div class="strip">
+        <div><b>3</b><span>texts from you</span></div>
+        <div><b>9</b><span>actions by Onus</span></div>
+        <div><b>0</b><span>minutes on hold</span></div>
+      </div>
+      <p class="small center">Illustrative case.</p>
+    </div>
+  </section>
+
+  <!-- network -->
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Why it actually finishes.</h2><p class="sub">Onus works directly inside the offices that partner with it. For everyone else, it handles the emails, forms and follow-ups for you.</p></div>
+      <svg class="viz" viewBox="0 0 1000 440" role="img" aria-label="You at the center, connected directly to partner offices and through standard follow-up to other companies" id="network"></svg>
+      <div class="legend"><span><i></i>Partner: goes straight into their workflow</span><span><i class="dash"></i>Everyone else: email, forms and follow-ups</span></div>
+    </div>
+  </section>
+
+  <!-- verticals -->
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>What it takes off your plate.</h2></div>
+      <div class="grid3">
+        <div class="tile"><span class="ico"><svg><use href="#i-heart"/></svg></span><h3>Health</h3><ul><li>Denied claims and appeals</li><li>Surprise and incorrect bills</li><li>Prior authorizations</li><li>Appointments and referrals</li></ul></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-card"/></svg></span><h3>Money</h3><ul><li>Card fraud and disputes</li><li>Insurance claim follow-up</li><li>Subscriptions and bill errors</li><li>Renewals, with your approval</li></ul></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-home"/></svg></span><h3>Home</h3><ul><li>HOA requests and disputes</li><li>Repairs and contractors</li><li>Warranty and home claims</li><li>Utilities and service issues</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- invite -->
+  <section class="band alt" id="m-join">
+    <div class="wrap">
+      <div class="head center"><h2>You can't sign up.<br>You get invited.</h2><p class="sub">Membership starts with a provider you already trust, then spreads one invite at a time.</p></div>
+      <svg class="viz" viewBox="0 0 1000 250" id="invite-tree" role="img" aria-label="A partner office invites you; after your first closed case you invite two friends"></svg>
+      <div class="join">
+        <div class="pass" aria-label="Example invitation">
+          <div class="row"><b style="font-size:1.1rem;letter-spacing:-0.03em">onus</b><div><div class="lbl">Membership</div><div class="val">Founding</div></div></div>
+          <div><div class="lbl">Invited by</div><div class="huge">Lakeview Family Medicine</div></div>
+          <div class="row"><div><div class="lbl">Member</div><div class="val">Alex Rivera</div></div><div><div class="lbl">Invites</div><div class="val">2 to share</div></div></div>
+          <div class="code" aria-hidden="true"></div>
+        </div>
+        <div class="head">
+          <h3>Request an invite</h3>
+          <p class="muted">Tell us what you're waiting on and a provider you'd like to see on Onus.</p>
+          <form id="m-form" novalidate>
+            <div class="two">
+              <div><label class="sr" for="m-name">Name</label><input id="m-name" autocomplete="name" placeholder="Name"></div>
+              <div><label class="sr" for="m-phone-in">Mobile number</label><input id="m-phone-in" inputmode="tel" autocomplete="tel" placeholder="Mobile number"></div>
+            </div>
+            <label class="sr" for="m-waiting">What are you still waiting on?</label>
+            <input id="m-waiting" placeholder="What's the one thing you're still waiting on?">
+            <div class="btns" style="justify-content:flex-start"><button class="btn" type="submit">Request an invite</button></div>
+            <p class="form-msg" id="m-msg" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= PARTNERS ================= -->
+<div id="page-partners" role="tabpanel" aria-labelledby="tab-partners" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">For practices, agencies and property managers</span>
+        <h1>Your clients' problems.<br><span class="grad">Solved before they call.</span></h1>
+        <p class="sub">Your clients text Onus. Their requests reach your team complete, structured and ready to act on.</p>
+        <div class="btns"><button class="btn" data-jump="p-join">Become a founding partner</button><button class="link" data-jump="p-how">How a pilot works</button></div>
+      </div>
+      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a vertical" id="p-seg"></div><div class="progress" id="p-prog"></div><span class="live">Live scenario</span></div>
+      <div class="duo-wrap">
+        <div class="duo">
+          <div id="p-phone"></div>
+          <div class="mac" id="p-mac"></div>
+        </div>
+        <div class="caption"><span><b>Their side.</b> One text.</span><span><b>Your side.</b> A finished request.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- before / after -->
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>From five channels<br>to one clean queue.</h2><p class="sub">Today requests arrive however clients feel like sending them. With Onus they arrive the way your team works.</p></div>
+      <div class="grid2">
+        <div class="tile"><span class="small">Today</span><svg class="viz" viewBox="0 0 460 300" id="before" role="img" aria-label="Phone, email, fax, portal and walk-in requests tangle into an overloaded front desk"></svg><p class="muted">Missing documents, callbacks, and the same question three times.</p></div>
+        <div class="tile"><span class="small">With Onus</span><svg class="viz" viewBox="0 0 460 300" id="after" role="img" aria-label="Every channel flows through Onus into one structured queue"></svg><p class="muted">Every request arrives with documents attached and routed to the right person.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- vertical detail -->
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2 id="p-title"></h2><p class="sub" id="p-today"></p></div>
+      <div class="grid3" id="p-cols"></div>
+      <p class="small center" id="p-rules"></p>
+    </div>
+  </section>
+
+  <!-- owner operators venn -->
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Your business is already<br>half personal.</h2><p class="sub">Owners and staff get their own membership, because in a practice, an agency or a few rental units the line between work and life admin is blurry.</p></div>
+      <svg class="viz" viewBox="0 0 1000 380" id="venn" role="img" aria-label="Venn diagram: personal admin and business admin overlap for owner-operators"></svg>
+    </div>
+  </section>
+
+  <!-- pilot -->
+  <section class="band" id="p-how">
+    <div class="wrap">
+      <div class="head center"><h2>How a pilot works.</h2><p class="sub">We learn your workflows from your clients' side first, then fix the slowest steps on both ends.</p></div>
+      <div class="stepper">
+        <div><span class="ico"><svg><use href="#i-map"/></svg></span><h3>Map</h3><p>A few sessions with your front desk to document your most common requests.</p></div>
+        <div><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Connect</h3><p>Into the systems you already use. Nothing to rip out.</p></div>
+        <div><span class="ico"><svg><use href="#i-send"/></svg></span><h3>Invite</h3><p>Offer Onus to your clients under your name, as a member benefit.</p></div>
+        <div><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Improve</h3><p>Review cases together and remove the steps that cost the most.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="p-join">
+    <div class="wrap join" style="grid-template-columns:1fr 1fr">
+      <div class="head">
+        <h2>A few founding partners per city.</h2>
+        <p class="sub">We keep each area small so we can map every workflow properly. Founding partners' clients get first access to membership.</p>
+      </div>
+      <form id="p-form" novalidate>
+        <div class="two">
+          <div><label class="sr" for="p-name">Your name</label><input id="p-name" autocomplete="name" placeholder="Your name"></div>
+          <div><label class="sr" for="p-org">Organization</label><input id="p-org" autocomplete="organization" placeholder="Organization"></div>
+        </div>
+        <label class="sr" for="p-type">Organization type</label>
+        <select id="p-type"><option>Medical or dental practice</option><option>Insurance agency</option><option>CPA, wealth or family office</option><option>HOA or property management</option><option>Other</option></select>
+        <div class="btns" style="justify-content:flex-start"><button class="btn" type="submit">Request a pilot conversation</button></div>
+        <p class="form-msg" id="p-msg" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- ================= THESIS ================= -->
+<div id="page-thesis" role="tabpanel" aria-labelledby="tab-thesis" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">Thesis · Draft, October 2026</span>
+        <p class="statement">Personal AI can only own outcomes if someone modernizes the other side. <span>So we build both sides, and the businesses we modernize bring us their clients.</span></p>
+      </div>
+      <svg class="viz" viewBox="0 0 1000 300" id="hero-flow" role="img" aria-label="Member, Onus and partner office connected, with requests flowing in both directions"></svg>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Every outcome has two sides.<br>Today's AI covers one.</h2><p class="sub">Follow a single case from question to result, and see where each approach stops.</p></div>
+      <div><svg class="viz" viewBox="0 0 1000 330" id="stall" role="img" aria-label="Consumer AI stalls at the counterparty; operator modernization only covers the inside of the firm; Onus covers the whole case"></svg></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>The long tail won't<br>modernize on its own.</h2><p class="sub">The biggest insurers, health systems and banks are already building for AI. The thousands of independent offices where most problems actually get stuck are not.</p></div>
+      <svg class="viz" viewBox="0 0 1000 300" id="dots" role="img" aria-label="A few large institutions beside a large field of small mid-market operators"></svg>
+      <div class="legend"><span><i class="big"></i>Large institutions, modernizing themselves</span><span><i class="dot"></i>Mid-market and commercial operators: where we start</span></div>
+      <p class="small center">Schematic, not to scale.</p>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Three bets.</h2></div>
+      <div class="grid3">
+        <div class="tile">
+          <svg class="viz" viewBox="0 0 300 120" aria-hidden="true"><path class="flow blue" d="M20 30 C110 30, 110 60, 150 60 M20 90 C110 90, 110 60, 150 60"/><circle cx="20" cy="30" r="8" fill="#0A84FF"/><circle cx="20" cy="90" r="8" fill="#5E5CE6"/><circle cx="150" cy="60" r="14" fill="url(#gOrb)"/><path class="flow blue" d="M164 60 H270"/><circle cx="278" cy="60" r="10" fill="#28A745"/><text x="36" y="22" class="t-small">Consumer</text><text x="36" y="112" class="t-small">Operator</text><text x="236" y="88" class="t-small">Outcome</text></svg>
+          <h3>Two sides, one problem.</h3><p class="muted">Client cases reveal an operator's real workflow. Operator integration makes client outcomes reliable. Doing both is cheaper than doing either alone.</p>
+        </div>
+        <div class="tile">
+          <svg class="viz" viewBox="0 0 300 120" aria-hidden="true"><circle cx="115" cy="60" r="50" fill="#0A84FF" fill-opacity=".14" stroke="#0A84FF" stroke-opacity=".4"/><circle cx="185" cy="60" r="50" fill="#5E5CE6" fill-opacity=".14" stroke="#5E5CE6" stroke-opacity=".4"/><text x="88" y="64" class="t-small" text-anchor="middle">Personal</text><text x="212" y="64" class="t-small" text-anchor="middle">Business</text><text x="150" y="64" class="t-small" text-anchor="middle" style="font-weight:600;fill:#1D1D1F">Owner</text></svg>
+          <h3>Personal is business.</h3><p class="muted">Practice owners, landlords, trustees and shop owners run their business by text, email and phone. They won't buy enterprise software. A personal agent fits them.</p>
+        </div>
+        <div class="tile">
+          <svg class="viz" viewBox="0 0 300 120" aria-hidden="true"><path class="flow blue" d="M150 26 L80 70 M150 26 L220 70 M80 70 L50 106 M80 70 L110 106 M220 70 L190 106 M220 70 L250 106"/><rect x="132" y="10" width="36" height="32" rx="9" fill="url(#gOrb)"/><g fill="#0A84FF"><circle cx="80" cy="70" r="9"/><circle cx="220" cy="70" r="9"/></g><g fill="#5E5CE6" fill-opacity=".6"><circle cx="50" cy="106" r="7"/><circle cx="110" cy="106" r="7"/><circle cx="190" cy="106" r="7"/><circle cx="250" cy="106" r="7"/></g></svg>
+          <h3>Operators distribute.</h3><p class="muted">Partners offer Onus as a member benefit, and members invite friends. The exclusivity is real because it works best where we're partnered.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>Members bring the next partner.</h2><p class="sub">When a case hits an office that isn't on Onus, that office becomes a lead, with data on how many of its clients got stuck and where.</p></div>
+      <svg class="viz" viewBox="0 0 1000 520" id="flywheel" role="img" aria-label="Flywheel: partner joins, invites clients, cases open, workflow data, better outcomes, clients ask their other providers"></svg>
+      <ol class="fly only-m" id="fly-list"></ol>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Where it ends up.</h2><p class="sub">Each layer builds on the one beneath it.</p></div>
+      <div class="stack">
+        <div class="layer l1"><b>Consumer AI for the mid-market</b><span>The simplest way to modernize for businesses that will never buy enterprise software</span></div>
+        <div class="layer l2"><b>The vertical provider for personal agents</b><span>Any agent's case that touches medical billing, a claim or an HOA runs through our integrations</span></div>
+        <div class="layer l3"><b>The two-sided data layer</b><span>A map of how mid-market workflows really run, seen from the customer's side and the operator's</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>How this could fail.</h2><p class="sub">And what we do about each risk.</p></div>
+      <div class="grid3">
+        <div class="tile risk"><span class="r">Hollow membership</span><span class="why">Most of a member's problems involve companies that aren't partners.</span><span class="ans">A strong generalist agent. Partners are the fast lane, not the only lane.</span></div>
+        <div class="tile risk"><span class="r">Partners won't distribute</span><span class="why">They fear losing the client relationship.</span><span class="ans">Invites go out under the partner's name, backed by a concierge pilot.</span></div>
+        <div class="tile risk"><span class="r">Regulation</span><span class="why">HIPAA, public-adjuster licensing, practice of law, messaging consent.</span><span class="ans">Admin and advocacy only, with legal review per vertical.</span></div>
+        <div class="tile risk"><span class="r">Unit economics</span><span class="why">Long cases and human escalations are expensive.</span><span class="ans">Partner fees fund the consumer side. Narrow first case types.</span></div>
+        <div class="tile risk"><span class="r">Big players copy it</span><span class="why">Instinct or OpenAI add persistence.</span><span class="ans">Persistence is copyable. Partnered workflows and data aren't.</span></div>
+        <div class="tile risk"><span class="r">Slow partner sales</span><span class="why">Mid-market offices are busy and wary of new software.</span><span class="ans">Nothing to install. We start from their clients' texts.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer><p>Onus is a working name. This is a concept preview: the product is not live, and every conversation, notification, queue, timeline and invitation shown is an illustrative example. Calls, payments and iMessage delivery are planned capabilities, not yet available.</p></footer>
+
+<script>
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (s) => document.querySelector(s);
+const NS = "http://www.w3.org/2000/svg";
+
+/* ---------- SVG helpers ---------- */
+function svgEl(svg, html) { svg.insertAdjacentHTML("beforeend", html); }
+function packet(pathId, dur, begin, cls = "", r = 4.5) {
+  return `<circle r="${r}" class="pkt ${cls}" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/><animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".4 0 .2 1"><mpath href="#${pathId}"/></animateMotion></circle>`;
+}
+function label(x, y, text, cls = "t-lbl", anchor = "middle") { return `<text x="${x}" y="${y}" class="${cls}" text-anchor="${anchor}">${text}</text>`; }
+
+/* Diagrams render a desktop layout or a vertical phone layout, and re-render when the breakpoint flips. */
+const NARROW = matchMedia("(max-width: 760px)");
+const anim = (s) => (REDUCED ? "" : s);
+function draw(sel, wide, narrow) {
+  const s = $(sel), n = NARROW.matches;
+  const [vb, html] = n ? narrow() : wide();
+  s.setAttribute("viewBox", vb);
+  s.innerHTML = html;
+}
+const miniPhone = (x, y) => `<g transform="translate(${x} ${y})"><rect width="96" height="180" rx="22" fill="#fff" stroke="#C9C7C2" stroke-width="3"/><rect x="34" y="8" width="28" height="8" rx="4" fill="#1D1D1F"/>
+  <rect x="40" y="38" width="46" height="18" rx="9" fill="#0A84FF"/><rect x="10" y="62" width="56" height="26" rx="10" fill="#E9E9EB"/><rect x="34" y="94" width="52" height="18" rx="9" fill="#0A84FF"/><rect x="10" y="118" width="50" height="18" rx="9" fill="#E9E9EB"/></g>`;
+const miniOffice = (x, y) => `<g transform="translate(${x} ${y})"><rect width="140" height="160" rx="14" fill="#fff" stroke="#D8D8DE" stroke-width="1.5"/><rect width="140" height="26" rx="14" fill="#F2F2F4"/><rect y="13" width="140" height="13" fill="#F2F2F4"/>
+  <circle cx="14" cy="13" r="4" fill="#FF5F57"/><circle cx="27" cy="13" r="4" fill="#FEBC2E"/><circle cx="40" cy="13" r="4" fill="#28C840"/>
+  <circle cx="18" cy="48" r="4" fill="#28A745"/><rect x="30" y="44" width="90" height="8" rx="4" fill="#E3E3E8"/><circle cx="18" cy="76" r="4" fill="#28A745"/><rect x="30" y="72" width="70" height="8" rx="4" fill="#E3E3E8"/><circle cx="18" cy="104" r="4" fill="#FF9F0A"/><rect x="30" y="100" width="84" height="8" rx="4" fill="#E3E3E8"/><circle cx="18" cy="132" r="4" fill="#28A745"/><rect x="30" y="128" width="60" height="8" rx="4" fill="#E3E3E8"/></g>`;
+const orb = (x, y, r, t, size = 20) => `<circle cx="${x}" cy="${y}" r="${r}" fill="url(#gOrb)"/><text x="${x}" y="${y + size * 0.35}" class="t-white" text-anchor="middle" style="font-size:${size}px">${t}</text>`;
+
+/* Thesis hero: member ⇄ Onus ⇄ partner */
+function heroFlow() {
+  draw("#hero-flow",
+    () => ["0 0 1000 300", `<circle cx="500" cy="130" r="120" fill="url(#gGlow)"/>
+      <path id="hf1" class="flow blue" d="M215 110 C330 70, 400 90, 450 120"/><path id="hf2" class="flow blue" d="M450 145 C400 175, 330 180, 215 150"/>
+      <path id="hf3" class="flow blue" d="M550 120 C600 90, 670 70, 785 110"/><path id="hf4" class="flow blue" d="M785 150 C670 180, 600 175, 550 145"/>
+      ${miniPhone(120, 40)}${orb(500, 132, 52, "onus")}${miniOffice(785, 50)}
+      ${anim(packet("hf1", 2.4, 0) + packet("hf1", 2.4, 1.2) + packet("hf3", 2.4, .6, "v") + packet("hf3", 2.4, 1.8, "v") + packet("hf4", 2.6, .3, "v") + packet("hf2", 2.6, 1.5))}
+      ${label(168, 256, "The member", "t-strong")}${label(168, 276, "texts a problem")}
+      ${label(500, 222, "Onus", "t-strong")}${label(500, 242, "owns the case, both directions")}
+      ${label(855, 256, "The partner office", "t-strong")}${label(855, 276, "gets a finished request")}`],
+    () => ["0 0 400 640", `<circle cx="200" cy="300" r="110" fill="url(#gGlow)"/>
+      <path id="hf1" class="flow blue" d="M185 195 C165 225, 170 245, 186 258"/><path id="hf2" class="flow blue" d="M214 258 C230 245, 235 225, 215 195"/>
+      <path id="hf3" class="flow blue" d="M186 344 C170 365, 165 395, 185 418"/><path id="hf4" class="flow blue" d="M215 418 C235 395, 230 365, 214 344"/>
+      ${miniPhone(152, 10)}${orb(200, 300, 46, "onus", 18)}${miniOffice(130, 420)}
+      ${anim(packet("hf1", 2, 0) + packet("hf3", 2, .8, "v") + packet("hf4", 2.2, .4, "v") + packet("hf2", 2.2, 1.4))}
+      ${label(266, 92, "The member", "t-strong", "start")}${label(266, 112, "texts a problem", "t-lbl", "start")}
+      ${label(262, 294, "Onus owns", "t-strong", "start")}${label(262, 314, "the case", "t-lbl", "start")}
+      ${label(200, 606, "The partner office", "t-strong")}${label(200, 626, "gets a finished request")}`]);
+}
+
+/* Thesis: where outcomes stall */
+const STALL = [
+  { name: "Consumer AI", short: ["Consumer", "AI"], note: "Stalls at the phone tree", from: 0, to: 2.55, color: "#C7C7CC", end: "stall" },
+  { name: "Operator modernization", short: ["Firm", "software"], note: "Only inside one firm", from: 3, to: 4, color: "#C7C7CC", end: "none" },
+  { name: "Onus", short: ["Onus", ""], note: "The whole case, both sides", from: 0, to: 5, color: "url(#gBlue)", end: "done" }
+];
+const STAGES = ["Ask", "Gather documents", "Reach the office", "Office processes it", "Verified result"];
+const xMark = (x, y) => `<g transform="translate(${x} ${y})"><circle r="12" fill="#FF453A"/><path d="M-4 -4 4 4M4 -4 -4 4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g>`;
+const vMark = (x, y) => `<g transform="translate(${x} ${y})"><circle r="14" fill="#28A745"/><path d="M-5 0 -1 4 6 -4" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+const grow = (attr, to) => anim(`<animate attributeName="${attr}" from="0" to="${to}" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".2 .8 .2 1"/>`);
+function stall() {
+  draw("#stall",
+    () => {
+      const x0 = 210, w = 150;
+      let h = STAGES.map((c, i) => label(x0 + i * w + w / 2, 30, c)).join("");
+      h += STAGES.map((_, i) => `<line x1="${x0 + i * w}" y1="46" x2="${x0 + i * w}" y2="300" stroke="#E3E3E8" stroke-dasharray="2 4"/>`).join("");
+      STALL.forEach((r, k) => {
+        const y = 90 + k * 80, a = x0 + r.from * w + 8, b = x0 + r.to * w - 8;
+        h += label(0, y + 5, r.name, "t-strong", "start") + label(0, y + 25, r.note, "t-small", "start");
+        h += `<rect x="${x0 + 8}" y="${y - 9}" width="${5 * w - 16}" height="18" rx="9" fill="#F5F5F7"/>`;
+        h += `<rect x="${a}" y="${y - 9}" width="${b - a}" height="18" rx="9" fill="${r.color}">${grow("width", b - a)}</rect>`;
+        if (r.end === "stall") h += xMark(b + 18, y);
+        if (r.end === "done") h += vMark(b - 2, y);
+      });
+      return ["0 0 1000 330", h];
+    },
+    () => {
+      const y0 = 70, sh = 66, cx = [196, 276, 356];
+      let h = "";
+      STAGES.forEach((s, i) => {
+        h += `<line x1="0" y1="${y0 + i * sh}" x2="400" y2="${y0 + i * sh}" stroke="#E3E3E8" stroke-dasharray="2 4"/>`;
+        h += label(0, y0 + i * sh + sh / 2 + 5, s, "t-lbl", "start");
+      });
+      STALL.forEach((r, k) => {
+        const x = cx[k], a = y0 + r.from * sh + 6, b = y0 + r.to * sh - 6;
+        h += label(x, 22, r.short[0], "t-strong") + label(x, 40, r.short[1], "t-small");
+        h += `<rect x="${x - 9}" y="${y0 + 6}" width="18" height="${5 * sh - 12}" rx="9" fill="#F5F5F7"/>`;
+        h += `<rect x="${x - 9}" y="${a}" width="18" height="${b - a}" rx="9" fill="${r.color === "url(#gBlue)" ? "#0A84FF" : r.color}">${grow("height", b - a)}</rect>`;
+        if (r.end === "stall") h += xMark(x, b + 18);
+        if (r.end === "done") h += vMark(x, b - 2);
+      });
+      const yN = y0 + 5 * sh + 34;
+      STALL.forEach((r, k) => (h += label(0, yN + k * 22, `${r.short.join(" ").trim()}: ${r.note.toLowerCase()}`, "t-small", "start")));
+      return ["0 0 400 " + (yN + 56), h];
+    });
+}
+
+/* Thesis: long tail dots */
+function dotField(x0, y0, cols, rows) {
+  let seed = 7, h = "";
+  const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const x = x0 + c * 20 + (r % 2) * 10, y = y0 + r * 20;
+    const op = (0.35 + rnd() * 0.65).toFixed(2), d = (rnd() * 4).toFixed(2);
+    h += `<circle cx="${x}" cy="${y}" r="4.5" fill="${rnd() > 0.5 ? "#0A84FF" : "#5E5CE6"}" opacity="${op}">${anim(`<animate attributeName="opacity" values="${op};1;${op}" dur="4s" begin="${d}s" repeatCount="indefinite"/>`)}</circle>`;
+  }
+  return h;
+}
+function dots() {
+  draw("#dots",
+    () => ["0 0 1000 300", [[90, 110, 62], [210, 200, 48], [120, 230, 34], [250, 80, 40]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#D1D1D6"/>`).join("")
+      + `<line x1="350" y1="20" x2="350" y2="280" stroke="#E3E3E8"/>` + dotField(390, 30, 30, 13)],
+    () => ["0 0 400 390", [[58, 52, 42], [150, 56, 34], [232, 50, 28], [318, 54, 36]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#D1D1D6"/>`).join("")
+      + `<line x1="0" y1="118" x2="400" y2="118" stroke="#E3E3E8"/>` + dotField(26, 150, 17, 12)]);
+}
+
+/* Thesis: flywheel */
+const FLY = ["Partner joins", "Invites its clients", "Cases open", "Workflow data", "Better outcomes", "Clients ask their other providers"];
+function flywheel() {
+  const ring = (cx, cy, R, orbR, withLabels) => {
+    let h = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#E3E3E8" stroke-width="2"/>
+      <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#gBlue)" stroke-width="3" stroke-dasharray="${R * 0.63} ${R * 6}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})">${anim(`<animateTransform attributeName="transform" type="rotate" from="-90 ${cx} ${cy}" to="270 ${cx} ${cy}" dur="9s" repeatCount="indefinite"/>`)}</circle>
+      <circle cx="${cx}" cy="${cy}" r="${orbR * 1.3}" fill="url(#gGlow)"/><circle cx="${cx}" cy="${cy}" r="${orbR}" fill="url(#gOrb)"/>
+      ${label(cx, cy - 4, "onus", "t-white")}${label(cx, cy + 16, "gets better", "t-white")}`;
+    FLY.forEach((t, i) => {
+      const a = -Math.PI / 2 + (i * 2 * Math.PI) / 6, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
+      h += `<circle cx="${x}" cy="${y}" r="16" fill="#fff" stroke="#0A84FF" stroke-width="2.5"/>${label(x, y + 5, i + 1, "t-strong")}`;
+      if (withLabels) {
+        const lx = cx + (R + 34) * Math.cos(a), ly = cy + (R + 34) * Math.sin(a);
+        const anchor = Math.abs(Math.cos(a)) < 0.2 ? "middle" : Math.cos(a) > 0 ? "start" : "end";
+        h += label(lx, ly + (Math.sin(a) > 0.9 ? 14 : Math.sin(a) < -0.9 ? -4 : 5), t, "t-strong", anchor);
+      }
+    });
+    return h;
+  };
+  draw("#flywheel", () => ["0 0 1000 520", ring(500, 260, 190, 70, true)], () => ["0 0 400 380", ring(200, 190, 150, 62, false)]);
+  $("#fly-list").innerHTML = FLY.map((t, i) => `<li><span>${i + 1}</span>${t}</li>`).join("");
+}
+
+/* Members: swimlane (desktop) + timeline list (phone) */
+const SWIM_EVENTS = [
+  [0, 1, "Texts the bill"], [1, 1, "Opens case"], [1, 1.35, "Requests auth"], [2, 1.7, "Files retro auth"], [0, 2, "Uploads card"],
+  [1, 4, "Confirms receipt"], [3, 4, "Acknowledges"], [1, 7, "Follows up"], [1, 9, "Checks status"], [3, 10.6, "Approves"],
+  [1, 11, "Asks to pay"], [0, 11.2, "Approves payment"]
+];
+const LANES = ["You", "Onus", "Lakeview (partner)", "Insurer"];
+function swim() {
+  const x0 = 170, x1 = 980, days = 11, dx = (x1 - x0) / (days - 1), ly = (i) => 60 + i * 66;
+  let h = "";
+  LANES.forEach((l, i) => {
+    h += `<rect x="0" y="${ly(i) - 24}" width="1000" height="48" rx="14" fill="${i === 1 ? "rgba(10,132,255,0.06)" : "#F7F7F9"}"/>`;
+    h += label(16, ly(i) + 5, l, i === 1 ? "t-strong" : "t-lbl", "start");
+  });
+  for (let d = 1; d <= days; d++) h += label(x0 + (d - 1) * dx, 318, "Day " + d, "t-small");
+  let prev = null;
+  SWIM_EVENTS.forEach(([lane, day]) => {
+    const x = x0 + (day - 1) * dx, y = ly(lane);
+    if (prev) h += `<path d="M${prev[0]} ${prev[1]} C${(prev[0] + x) / 2} ${prev[1]}, ${(prev[0] + x) / 2} ${y}, ${x} ${y}" class="flow" stroke="#C9D8F5"/>`;
+    prev = [x, y];
+  });
+  SWIM_EVENTS.forEach(([lane, day, t], i) => {
+    const x = x0 + (day - 1) * dx, y = ly(lane);
+    const fill = lane === 0 ? "#0A84FF" : lane === 1 ? "url(#gOrb)" : "#fff";
+    const stroke = lane >= 2 ? `stroke="#5E5CE6" stroke-width="2.5"` : "";
+    h += `<circle cx="${x}" cy="${y}" r="8" fill="${fill}" ${stroke}>${anim(`<animate attributeName="r" values="8;11;8" dur="0.6s" begin="${(i * 0.5).toFixed(2)}s;swimLoop.end+${(i * 0.5).toFixed(2)}s"/>`)}</circle>`;
+    h += label(x, y - 14, t, "t-small");
+  });
+  h += anim(`<line x1="${x0}" y1="30" x2="${x0}" y2="300" stroke="#0A84FF" stroke-width="1.5" opacity=".5"><animate id="swimLoop" attributeName="x1" from="${x0}" to="${x1}" dur="6s" begin="0s;swimLoop.end+1s"/><animate attributeName="x2" from="${x0}" to="${x1}" dur="6s" begin="0s;swimLoop.end+1s"/></line>`);
+  $("#swim").innerHTML = h;
+  const who = ["you", "onus", "office", "insurer"], short = ["You", "Onus", "Lakeview", "Insurer"];
+  $("#swim-list").innerHTML = SWIM_EVENTS.map(([lane, day, t], i) =>
+    `<li class="${who[lane]}" style="--i:${i}"><em>Day ${Math.floor(day)}</em><span class="chip">${short[lane]}</span><span>${t}</span></li>`).join("");
+}
+
+/* Members: network */
+function network() {
+  const build = (cx, cy, nodes, youR) => {
+    let h = `<circle cx="${cx}" cy="${cy}" r="${youR * 2.4}" fill="url(#gGlow)"/>`;
+    nodes.forEach(([n, p, x, y], i) => {
+      h += `<path id="nw${i}" d="M${cx} ${cy} Q${(cx + x) / 2 + (i % 2 ? 30 : -30)} ${(cy + y) / 2} ${x} ${y}" class="flow ${p ? "blue" : "dash"}"/>`;
+      if (p) h += anim(packet("nw" + i, 2.2, i * 0.5) + packet("nw" + i, 2.2, i * 0.5 + 1.1, "v"));
+    });
+    nodes.forEach(([n, p, x, y]) => {
+      h += `<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${p ? "#0A84FF" : "#C7C7CC"}" stroke-width="${p ? 3 : 2}"/>`;
+      h += p ? `<circle cx="${x}" cy="${y}" r="9" fill="url(#gOrb)"/>` : `<circle cx="${x}" cy="${y}" r="7" fill="#C7C7CC"/>`;
+      h += label(x, y > cy ? y + 50 : y - 38, n, "t-strong");
+    });
+    return h + `<circle cx="${cx}" cy="${cy}" r="${youR}" fill="#0A84FF"/>${label(cx, cy + 6, "You", "t-white")}`;
+  };
+  draw("#network",
+    () => ["0 0 1000 460", build(500, 225, [["Your doctor", 1, 180, 100], ["Your HOA manager", 1, 820, 100], ["Your insurance agent", 1, 170, 340],
+      ["Health insurer", 0, 500, 60], ["Your bank", 0, 830, 340], ["Utility company", 0, 500, 400]], 46)],
+    () => ["0 0 400 580", build(200, 290, [["Doctor", 1, 72, 160], ["HOA manager", 1, 328, 160], ["Insurance agent", 1, 72, 430],
+      ["Health insurer", 0, 200, 80], ["Bank", 0, 328, 430], ["Utility", 0, 200, 500]], 42)]);
+}
+
+/* Members: invite tree */
+function inviteTree() {
+  draw("#invite-tree",
+    () => {
+      let h = `<path id="it1" class="flow blue" d="M230 120 H456"/><path id="it2" class="flow blue" d="M544 120 C640 120, 680 50, 780 50"/><path id="it3" class="flow blue" d="M544 120 C640 120, 680 190, 780 190"/>`;
+      h += anim(packet("it1", 2, 0) + packet("it2", 2, 1, "v") + packet("it3", 2, 1.3, "v"));
+      h += `<rect x="90" y="86" width="140" height="68" rx="18" fill="#fff" stroke="#D8D8DE"/>${label(160, 116, "Your provider", "t-strong")}${label(160, 136, "invites you", "t-small")}`;
+      h += orb(500, 120, 44, "You", 15) + label(500, 192, "First case closed", "t-lbl") + label(500, 210, "unlocks 2 invites", "t-small");
+      [[820, 50], [820, 190]].forEach(([x, y]) => (h += `<circle cx="${x}" cy="${y}" r="36" fill="#fff" stroke="#5E5CE6" stroke-width="2.5"/>${label(x, y + 5, "Friend", "t-strong")}`));
+      return ["0 0 1000 250", h];
+    },
+    () => {
+      let h = `<path id="it1" class="flow blue" d="M200 84 V166"/><path id="it2" class="flow blue" d="M200 254 C200 310, 110 300, 110 364"/><path id="it3" class="flow blue" d="M200 254 C200 310, 290 300, 290 364"/>`;
+      h += anim(packet("it1", 1.6, 0) + packet("it2", 2, .8, "v") + packet("it3", 2, 1.1, "v"));
+      h += `<rect x="130" y="16" width="140" height="68" rx="18" fill="#fff" stroke="#D8D8DE"/>${label(200, 46, "Your provider", "t-strong")}${label(200, 66, "invites you", "t-small")}`;
+      h += orb(200, 210, 44, "You", 15) + label(256, 206, "First case closed", "t-lbl", "start") + label(256, 224, "unlocks 2 invites", "t-small", "start");
+      [[110, 400], [290, 400]].forEach(([x, y]) => (h += `<circle cx="${x}" cy="${y}" r="36" fill="#fff" stroke="#5E5CE6" stroke-width="2.5"/>${label(x, y + 5, "Friend", "t-strong")}`));
+      return ["0 0 400 450", h];
+    });
+}
+
+/* Partners: before / after (same layout everywhere; fonts scale up on phones via CSS) */
+function beforeAfter() {
+  const chans = ["Phone", "Email", "Fax", "Portal", "Walk-in"], ys = [40, 95, 150, 205, 260];
+  let hb = "", ha = "";
+  chans.forEach((c, i) => {
+    hb += label(10, ys[i] + 5, c, "t-lbl", "start");
+    ha += label(10, ys[i] + 5, c, "t-lbl", "start");
+    [`M80 ${ys[i]} C160 ${ys[(i + 2) % 5]}, 200 ${ys[(i + 4) % 5]}, 250 ${ys[(i + 1) % 5]} S 320 ${ys[(i + 3) % 5]}, 350 150`,
+     `M80 ${ys[i]} C140 ${ys[(i + 3) % 5]}, 230 ${ys[(i + 1) % 5]}, 280 ${ys[(i + 2) % 5]} S 330 140, 350 150`]
+      .forEach((d, k) => (hb += `<path id="bf${i}${k}" d="${d}" class="flow tangle"/>`));
+    hb += anim(packet(`bf${i}0`, 4 + i * 0.7, i * 0.6, "red", 3.5));
+    ha += `<path id="af${i}" d="M80 ${ys[i]} C170 ${ys[i]}, 170 150, 236 150" class="flow blue"/>` + anim(packet(`af${i}`, 1.8, i * 0.36, "", 3.5));
+  });
+  hb += `<circle cx="385" cy="150" r="38" fill="#fff" stroke="#FF453A" stroke-width="2.5"/>${label(385, 146, "Front", "t-strong")}${label(385, 164, "desk", "t-strong")}`;
+  hb += `<g transform="translate(412 118)"><circle r="13" fill="#FF453A"/>${label(0, 5, "12", "t-white")}</g>`;
+  ha += orb(262, 150, 28, "onus", 14) + `<path d="M290 150 H330" class="flow blue"/>`;
+  [0, 1, 2, 3].forEach((k) => (ha += `<rect x="338" y="${96 + k * 28}" width="112" height="20" rx="6" fill="#F5F5F7"/><circle cx="350" cy="${106 + k * 28}" r="4" fill="${k === 2 ? "#FF9F0A" : "#28A745"}"/><rect x="362" y="${102 + k * 28}" width="${70 - k * 8}" height="7" rx="3.5" fill="#D8D8DE"/>`));
+  ha += label(394, 230, "One queue", "t-strong");
+  $("#before").innerHTML = hb; $("#after").innerHTML = ha;
+}
+
+/* Partners: venn */
+function venn() {
+  const L = ["Doctor's bills", "Car insurance", "Kids' school forms", "Home repairs"];
+  const R = ["Vendor invoices", "Payroll questions", "Tenant requests", "Business insurance"];
+  draw("#venn",
+    () => {
+      let h = `<circle cx="390" cy="190" r="170" fill="#0A84FF" fill-opacity=".09" stroke="#0A84FF" stroke-opacity=".35" stroke-width="2"/>
+        <circle cx="610" cy="190" r="170" fill="#5E5CE6" fill-opacity=".09" stroke="#5E5CE6" stroke-opacity=".35" stroke-width="2"/>`;
+      h += label(300, 70, "Personal admin", "t-strong") + label(700, 70, "Business admin", "t-strong");
+      L.forEach((t, i) => (h += label(300, 130 + i * 34, t))); R.forEach((t, i) => (h += label(700, 130 + i * 34, t)));
+      h += label(500, 120, "Owner-operator", "t-strong");
+      ["Same inbox", "Same phone", "Same evenings"].forEach((t, i) => (h += label(500, 160 + i * 30, t)));
+      return ["0 0 1000 380", h + `<rect x="440" y="262" width="120" height="30" rx="15" fill="url(#gOrb)"/>${label(500, 282, "One Onus", "t-white")}`];
+    },
+    () => {
+      let h = `<circle cx="200" cy="190" r="165" fill="#0A84FF" fill-opacity=".09" stroke="#0A84FF" stroke-opacity=".35" stroke-width="2"/>
+        <circle cx="200" cy="420" r="165" fill="#5E5CE6" fill-opacity=".09" stroke="#5E5CE6" stroke-opacity=".35" stroke-width="2"/>`;
+      h += label(200, 72, "Personal admin", "t-strong");
+      L.forEach((t, i) => (h += label(200, 104 + i * 28, t)));
+      h += label(200, 284, "Owner-operator", "t-strong") + label(200, 304, "Same inbox, phone, evenings", "t-small");
+      h += `<rect x="140" y="314" width="120" height="30" rx="15" fill="url(#gOrb)"/>${label(200, 334, "One Onus", "t-white")}`;
+      R.forEach((t, i) => (h += label(200, 412 + i * 28, t)));
+      return ["0 0 400 600", h + label(200, 548, "Business admin", "t-strong")];
+    });
+}
+
+function renderDiagrams() { heroFlow(); stall(); dots(); flywheel(); swim(); network(); inviteTree(); beforeAfter(); venn(); }
+renderDiagrams();
+NARROW.addEventListener("change", renderDiagrams);
+
+/* Members: tracker animation */
+(function tracker() {
+  const rows = [...document.querySelectorAll("#tracker .stage-row")];
+  let i = 0;
+  function step() {
+    rows.forEach((r, k) => { r.classList.toggle("done", k < i); r.classList.toggle("now", k === i); });
+    if (i === rows.length - 1) rows[i].classList.add("done");
+  }
+  if (REDUCED) { i = rows.length - 1; step(); return; }
+  step();
+  setInterval(() => { i = (i + 1) % (rows.length + 1); if (i === rows.length) { i = rows.length - 1; step(); i = -1; return; } step(); }, 1500);
+})();
+
+/* metric sparkline */
+function spark(seed, down) {
+  let v = 30, pts = [];
+  for (let i = 0; i < 12; i++) { seed = (seed * 9301 + 49297) % 233280; v += (seed / 233280 - (down ? 0.75 : 0.25)) * 8; v = Math.max(6, Math.min(40, v)); pts.push(`${i * 18},${44 - v}`); }
+  const line = pts.join(" ");
+  return `<svg viewBox="0 0 200 44" preserveAspectRatio="none"><polyline points="0,44 ${line} 198,44" fill="url(#gGlow)" opacity=".6"/><polyline points="${line}" fill="none" stroke="url(#gBlue)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${pts[11].split(",")[0]}" cy="${pts[11].split(",")[1]}" r="3.5" fill="#5E5CE6"/></svg>`;
+}
+
+/* ---------- iPhone + live scenarios ---------- */
+const STATUS = `<div class="status"><span>9:41</span><span class="icons">
+  <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="#000"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="#000"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#000"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="#000"/></svg>
+  <svg width="15" height="11" viewBox="0 0 15 11"><path d="M7.5 2.2c2.1 0 4 .8 5.4 2.1l1.1-1.1A9.2 9.2 0 0 0 7.5.6 9.2 9.2 0 0 0 1 3.2l1.1 1.1a7.6 7.6 0 0 1 5.4-2.1Zm0 3.2c1.2 0 2.3.5 3.1 1.2l1.1-1.1A6 6 0 0 0 7.5 3.8a6 6 0 0 0-4.2 1.7l1.1 1.1c.8-.7 1.9-1.2 3.1-1.2Zm0 3.2c.4 0 .8.2 1 .4L7.5 10 6.5 9c.2-.2.6-.4 1-.4Z" fill="#000"/></svg>
+  <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" fill="none" stroke="#000" stroke-opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#000"/><path d="M23 4v4c.8-.3 1.3-1.1 1.3-2S23.8 4.3 23 4Z" fill="#000" fill-opacity=".4"/></svg>
+</span></div>`;
+
+function bubble(thread, i) {
+  const [who, text] = thread[i], next = thread[i + 1];
+  if (who === "ts") return `<div class="ts">${text}</div>`;
+  if (who === "link") return `<div class="rich"><div class="img"><span>🔒</span></div><div class="t"><b>${text}</b><span>onus.link · secure</span></div></div>`;
+  if (who === "read") return `<div class="delivered">${text}</div>`;
+  const tail = !next || next[0] !== who;
+  return `<div class="b ${who}${tail ? " tail" : ""}">${text}</div>`;
+}
+function phone(thread, live) {
+  const body = live ? "" : thread.map((_, i) => bubble(thread, i)).join("");
+  return `<div class="iphone"><div class="screen"><div class="island"></div>${STATUS}
+    <div class="ihead"><span class="back">‹</span><div class="avatar">O</div><span class="name">Onus</span></div>
+    <div class="thread">${body}</div>
+    <div class="compose"><span class="plus">+</span><span class="field">iMessage</span></div></div></div>`;
+}
+
+const HOLD = 4200;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const plain = (t) => t.replace(/<[^>]+>/g, "");
+function delays([who, text]) {
+  if (who === "ai") return [700 + Math.min(plain(text).length * 14, 1300), 300];
+  if (who === "me") return [1000 + Math.min(plain(text).length * 8, 600), 300];
+  if (who === "link") return [500, 400];
+  return [350, 150];
+}
+const duration = (thread) => thread.reduce((s, m) => s + delays(m)[0] + delays(m)[1], 0) + HOLD;
+
+async function play(threadEl, thread, alive) {
+  for (let i = 0; i < thread.length; i++) {
+    const [pre, post] = delays(thread[i]);
+    let typing = null;
+    if (thread[i][0] === "ai") {
+      threadEl.insertAdjacentHTML("beforeend", `<div class="typing enter"><i></i><i></i><i></i></div>`);
+      typing = threadEl.lastElementChild;
+      threadEl.scrollTo({ top: threadEl.scrollHeight, behavior: "smooth" });
+    }
+    await sleep(pre);
+    if (!alive()) return false;
+    if (typing) typing.remove();
+    threadEl.insertAdjacentHTML("beforeend", bubble(thread, i));
+    threadEl.lastElementChild.classList.add("enter");
+    threadEl.scrollTo({ top: threadEl.scrollHeight, behavior: "smooth" });
+    await sleep(post);
+    if (!alive()) return false;
+  }
+  return true;
+}
+function countUp(el, target) {
+  const n = parseFloat(target.replace(/[^0-9.]/g, "")) || 0;
+  const pre = target.match(/^[^0-9]*/)[0];
+  const t0 = performance.now();
+  (function tick(t) {
+    const k = Math.min((t - t0) / 900, 1), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = pre + Math.round(n * e).toLocaleString("en-US");
+    if (k < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+function progress(el, keys, k, thread, auto) {
+  el.innerHTML = keys.map((x, i) => {
+    const cls = x === k ? "on" : (auto && i < keys.indexOf(k) ? "done" : "");
+    return `<i class="${cls}" style="--dur:${duration(thread)}ms"></i>`;
+  }).join("");
+}
+function seg(el, data, pick) {
+  el.innerHTML = Object.entries(data).map(([k, v]) => `<button role="tab" data-v="${k}">${v.label}</button>`).join("");
+  el.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) pick(b.dataset.v); });
+}
+const sel = (el, k) => el.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.v === k));
+
+function scenario({ data, segEl, progEl, setup, finish }) {
+  const keys = Object.keys(data);
+  let run = 0, auto = true, current = keys[0];
+  async function go(k) {
+    current = k;
+    const id = ++run, alive = () => id === run;
+    sel(segEl, k);
+    const v = data[k];
+    const threadEl = setup(v, !REDUCED);
+    progress(progEl, keys, k, v.thread, auto && !REDUCED);
+    if (REDUCED) { finish(v, false); return; }
+    if (!(await play(threadEl, v.thread, alive))) return;
+    finish(v, true);
+    await sleep(HOLD);
+    if (alive() && auto) go(keys[(keys.indexOf(k) + 1) % keys.length]);
+  }
+  seg(segEl, data, (k) => { auto = false; go(k); });
+  return { go, restart: () => go(current), stop: () => run++ };
+}
+
+const MEMBER = {
+  health: {
+    label: "Health",
+    thread: [
+      ["ts", "<b>Mon, Sep 8</b> 9:14 AM"],
+      ["me", "Got a $1,240 bill for my MRI. Insurance was supposed to cover it."],
+      ["ai", "I'll take it from here. Send me a photo of the bill and your insurance card."],
+      ["link", "Upload documents"],
+      ["ai", "It was denied for a missing prior authorization. Lakeview Family Medicine can file one retroactively. I've sent them the request."],
+      ["ts", "<b>Thu, Sep 11</b> 2:02 PM"],
+      ["ai", "Lakeview filed it this morning. Your insurer confirmed they received it."],
+      ["ts", "<b>Fri, Sep 19</b> 10:47 AM"],
+      ["ai", "Approved. Your new balance is an $85 copay. Pay with your card ending 4410?"],
+      ["me", "Yes"],
+      ["read", "Read 10:48 AM"],
+      ["ai", "Paid. Case closed ✓"]
+    ],
+    notif: ["Case closed", "MRI claim approved. You paid $85 of $1,240."],
+    widget: { big: "$1,155", what: "saved on an MRI bill", rows: [["Follow-ups", "4"], ["Offices involved", "3"], ["Time to close", "11 days"]] }
+  },
+  money: {
+    label: "Money",
+    thread: [
+      ["ts", "<b>Tue, Aug 26</b> 8:31 PM"],
+      ["me", "There's a $389 hotel charge on my card. I wasn't there."],
+      ["ai", "Disputing it now. Want me to freeze the card and order a replacement?"],
+      ["me", "Yes please"],
+      ["ai", "Done. Card frozen, new one ships tomorrow, dispute filed with your bank."],
+      ["ts", "<b>Thu, Sep 4</b> 11:20 AM"],
+      ["ai", "The hotel says you booked. Your statement shows you in Chicago that night. OK to send it to the bank?"],
+      ["me", "Go for it"],
+      ["ts", "<b>Thu, Sep 18</b> 4:05 PM"],
+      ["ai", "You won the dispute. The $389 is back for good."],
+      ["ai", "I also spotted two smaller charges from them in June. Want me to look into those?"],
+      ["me", "Please"]
+    ],
+    notif: ["Dispute won", "$389 returned to your account permanently."],
+    widget: { big: "$389", what: "recovered from a fraudulent charge", rows: [["Follow-ups", "3"], ["Card replaced", "Yes"], ["Time to close", "23 days"]] }
+  },
+  home: {
+    label: "Home",
+    thread: [
+      ["ts", "<b>Mon, Sep 1</b> 7:52 AM"],
+      ["me", "Water's coming through the ceiling again. The HOA said they'd fix the roof in July 😩"],
+      ["ai", "I've got it. Can you send a couple of photos?"],
+      ["ai", "Filed an urgent work order with Crestline Management, your HOA manager, and linked your July request."],
+      ["ts", "<b>Tue, Sep 2</b> 1:15 PM"],
+      ["ai", "A roofer is booked for Thursday, 9–11 AM. Does that work?"],
+      ["me", "Perfect"],
+      ["ts", "<b>Wed, Sep 17</b> 8:03 AM"],
+      ["ai", "It rained last night. Any water coming in?"],
+      ["me", "Totally dry!"],
+      ["ai", "Closing this one. I've also asked whether the HOA's policy covers your drywall."]
+    ],
+    notif: ["Case closed", "Roof repaired at no cost to you. Leak confirmed fixed."],
+    widget: { big: "$0", what: "you paid for the roof repair", rows: [["Follow-ups", "2"], ["Repair visits", "1"], ["Time to close", "16 days"]] }
+  }
+};
+
+const PARTNER = {
+  health: {
+    label: "Health", org: "Lakeview Family Medicine",
+    thread: [["ts", "<b>Today</b> 9:14 AM"], ["me", "My MRI claim got denied. Can you sort it out?"], ["ai", "On it. Lakeview can file the missing authorization. I've sent them everything they need."], ["me", "Thank you!!"]],
+    queue: [["Retro prior auth · MRI", "Patient texted 9:14 · EOB, order, card attached", "Ready"], ["Billing question", "Statement matched to EOB", "Ready"], ["Records to Dr. Kim", "Release signed", "Ready"], ["Reschedule physical", "Waiting on patient's choice", "Waiting"]],
+    title: "Medical and dental practices.",
+    today: "Your front desk spends hours on billing questions, denials, records and rescheduling, mostly on the phone.",
+    cols: [["i-folder", "Off your desk", ["Billing questions with the EOB attached", "Appeal and auth packets, prefilled", "Scheduling and reminders by text", "Records requests with signed releases"]],
+           ["i-plug", "What we modernize", ["Structured intake into your PM system", "Status patients can check without calling", "Denial patterns by payer"]]],
+    metrics: ["Calls per patient", "Days from denial to resolution", "No-show rate"],
+    rules: "We sign a BAA before touching patient data. Admin and billing only, never clinical advice."
+  },
+  money: {
+    label: "Money", org: "Harbor Insurance Agency",
+    thread: [["ts", "<b>Today</b> 6:40 PM"], ["me", "Someone backed into my car in a parking lot. What do I do?"], ["ai", "Sorry! Send photos and the other driver's info. I'll get it to Harbor so they can open the claim."], ["me", "Sent 👍"]],
+    queue: [["Auto claim · first notice", "Photos, police report, policy matched", "Ready"], ["Tax documents", "4 of 5 collected", "Waiting"], ["Renewal quotes", "Client asked to compare", "Ready"], ["Business card fraud", "Bank notified, card frozen", "Ready"]],
+    title: "Insurance agencies, CPA and wealth practices.",
+    today: "Your team's time goes to claims hand-holding, renewal paperwork, document chasing and quick client questions.",
+    cols: [["i-folder", "Off your desk", ["First notice of loss with photos and policy", "Documents collected by text", "Renewal requests routed to your producer", "First response on card fraud"]],
+           ["i-plug", "What we modernize", ["Documents filed and named in your AMS", "Status updates without phone calls", "One view of every open client issue"]]],
+    metrics: ["Staff hours per claim", "Document turnaround", "Retention at renewal"],
+    rules: "Your licensed staff make every coverage and advice decision. Onus doesn't act as an adjuster or advisor."
+  },
+  home: {
+    label: "Home", org: "Crestline Management",
+    thread: [["ts", "<b>Today</b> 7:52 AM"], ["me", "Water's coming through the ceiling again 😩"], ["ai", "I've filed an urgent work order with Crestline and attached your photos."], ["me", "You're the best"]],
+    queue: [["Roof leak · Unit 4B · urgent", "Photos attached, linked to July ticket", "Ready"], ["Dues statement question", "Matched to ledger", "Ready"], ["Drywall · master policy", "Waiting on board", "Waiting"], ["Violation response", "Resident photos attached", "Ready"]],
+    title: "HOA and property managers.",
+    today: "Requests come in by email and phone, alongside violation disputes, dues questions and board updates.",
+    cols: [["i-folder", "Off your desk", ["Work orders with unit, photos and priority", "Vendor scheduling with residents", "Dues questions answered from your ledger", "Violation responses collected"]],
+           ["i-plug", "What we modernize", ["One queue for email, phone and portal", "Vendor confirmations and completion checks", "Board-ready reports"]]],
+    metrics: ["Days to close a work order", "Repeat requests", "Staff hours per door"],
+    rules: "Your managers approve all vendor spend. Resident data stays with your association."
+  }
+};
+
+const members = scenario({
+  data: MEMBER, segEl: $("#m-seg"), progEl: $("#m-prog"),
+  setup(v, live) {
+    $("#m-phone").innerHTML = phone(v.thread, live);
+    const n = $("#m-notif"), w = $("#m-widget");
+    const note = live ? ["Case opened", "I'm on it. I'll message you when something changes."] : v.notif;
+    n.innerHTML = `<span class="app"></span><div><div class="row"><b>Onus</b><span>now</span></div><b>${note[0]}</b><p>${note[1]}</p></div>`;
+    w.innerHTML = `<div class="top"><span>Case</span><span class="closed">${live ? "In progress" : "Closed"}</span></div>
+      <div><div class="big">${live ? v.widget.big.replace(/[0-9,]+/, "0") : v.widget.big}</div><div class="what">${v.widget.what}</div></div>
+      <dl>${v.widget.rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`;
+    n.classList.toggle("wait", live); w.classList.toggle("wait", live);
+    return $("#m-phone .thread");
+  },
+  finish(v, live) {
+    const n = $("#m-notif"), w = $("#m-widget");
+    n.classList.remove("wait"); w.classList.remove("wait");
+    n.querySelector("div > b").textContent = v.notif[0];
+    n.querySelector("p").textContent = v.notif[1];
+    w.querySelector(".closed").textContent = "Closed";
+    if (live) countUp(w.querySelector(".big"), v.widget.big);
+  }
+});
+
+function queueRow([t, d, s], fresh) {
+  return `<div class="q${fresh ? " new" : ""}"><span class="dot ${s === "Ready" ? "ready" : "wait"}"></span><div><b>${t}</b><span>${d}</span></div><em>${fresh ? "New" : s}</em></div>`;
+}
+const partners = scenario({
+  data: PARTNER, segEl: $("#p-seg"), progEl: $("#p-prog"),
+  setup(v, live) {
+    $("#p-phone").innerHTML = phone(v.thread, live);
+    const rows = live ? v.queue.slice(1) : v.queue;
+    $("#p-mac").innerHTML = `<div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>Onus · ${v.org}</span></div>
+      <div class="body"><h4>Client requests <span>Today</span></h4><div id="p-rows">${rows.map((r) => queueRow(r)).join("")}</div></div>`;
+    $("#p-title").textContent = v.title;
+    $("#p-today").textContent = "Today: " + v.today.charAt(0).toLowerCase() + v.today.slice(1);
+    $("#p-cols").innerHTML = v.cols.map(([ic, h, items]) =>
+      `<div class="tile"><span class="ico soft"><svg><use href="#${ic}"/></svg></span><h3>${h}</h3><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")
+      + `<div class="tile"><span class="ico soft"><svg><use href="#i-spark"/></svg></span><h3>What we measure</h3>${v.metrics.map((m, i) => `<div class="metric"><b>${m}</b>${spark(i * 37 + v.label.length * 11, true)}</div>`).join("")}<span class="small">Example trends</span></div>`;
+    $("#p-rules").innerHTML = `<span style="display:inline-flex;gap:8px;align-items:center"><svg width="16" height="16" style="color:#28A745"><use href="#i-shield"/></svg>${v.rules}</span>`;
+    return $("#p-phone .thread");
+  },
+  finish(v, live) {
+    if (live) $("#p-rows").insertAdjacentHTML("afterbegin", queueRow(v.queue[0], true));
+  }
+});
+
+/* ---------- tabs ---------- */
+const PAGES = ["members", "partners", "thesis"];
+const RUNNERS = { members, partners };
+function show(p) {
+  if (!PAGES.includes(p)) p = "members";
+  PAGES.forEach((x) => { $("#page-" + x).hidden = x !== p; $("#tab-" + x).setAttribute("aria-selected", x === p); });
+  Object.entries(RUNNERS).forEach(([name, r]) => (name === p ? r.restart() : r.stop()));
+  try { localStorage.setItem("onus-tab", p); } catch (e) {}
+}
+document.querySelectorAll(".nav .seg button").forEach((b) => b.addEventListener("click", () => {
+  show(b.dataset.page);
+  try { history.replaceState(null, "", "#" + b.dataset.page); } catch (e) {}
+  window.scrollTo({ top: 0 });
+}));
+document.querySelectorAll("[data-jump]").forEach((a) => a.addEventListener("click", () =>
+  document.getElementById(a.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" })));
+let start = location.hash.slice(1);
+if (!PAGES.includes(start)) { try { start = localStorage.getItem("onus-tab") || "members"; } catch (e) { start = "members"; } }
+show(start);
+if (REDUCED) document.querySelectorAll("svg").forEach((s) => s.pauseAnimations && s.pauseAnimations());
+
+function preview(form, msg, req) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    msg.textContent = req.some((id) => !$("#" + id).value.trim())
+      ? "Add your name and contact details to continue."
+      : "This is a concept preview, so nothing was sent. Requests open with the beta.";
+  });
+}
+preview($("#m-form"), $("#m-msg"), ["m-name", "m-phone-in"]);
+preview($("#p-form"), $("#p-msg"), ["p-name", "p-org"]);
+</script>
+
+</body>
+</html>
