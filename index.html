@@ -293,6 +293,53 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   .seg.lg button { padding: 7px 14px; font-size: 0.85rem; }
 }
 
+/* vertical themes */
+@property --vt { syntax: "<color>"; inherits: true; initial-value: rgba(10,132,255,0.08); }
+:root { --v: #0A84FF; --v2: #5E5CE6; --vt: rgba(10,132,255,0.08); }
+[data-v="health"] { --v: #0A9FB5; --v2: #2DC6A0; --vt: rgba(10,159,181,0.12); }
+[data-v="money"] { --v: #7A4DF0; --v2: #C15AF2; --vt: rgba(122,77,240,0.11); }
+[data-v="home"] { --v: #F2702A; --v2: #FFB020; --vt: rgba(242,112,42,0.12); }
+.page-v { transition: --vt 0.8s ease; }
+.seg button { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+.seg .si { width: 16px; height: 16px; margin-right: 6px; flex: none; }
+.seg.lg button[aria-selected="true"] { color: var(--v); }
+.vglow { position: relative; isolation: isolate; }
+.vglow::before { content: ""; position: absolute; inset: -40px -20px; z-index: -1; background: radial-gradient(50% 55% at 50% 50%, var(--vt), transparent 70%); pointer-events: none; }
+.vtag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 600; color: var(--v); }
+.vtag .chipi { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--v), var(--v2)); }
+.vtag .chipi svg { width: 18px; height: 18px; }
+.vtag span:last-child { color: var(--muted); font-weight: 500; }
+.widget .big { background: linear-gradient(90deg, var(--v), var(--v2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ico.soft { background: var(--vt); color: var(--v); }
+.ico.ok { background: rgba(40,167,69,0.12); color: var(--green); }
+.tile[data-v] { background: linear-gradient(180deg, var(--vt), rgba(255,255,255,0) 70%), var(--alt); }
+.tile[data-v] .ico { background: linear-gradient(135deg, var(--v), var(--v2)); }
+.tile[data-v] h3 { color: var(--v); }
+.tile[data-v] li::before { background: var(--v); }
+.mini { background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 24px -14px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.05); display: grid; gap: 6px; font-size: 0.82rem; }
+.mini .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+.mini .row { display: flex; justify-content: space-between; gap: 8px; }
+.mini s { color: var(--faint); }
+.mini .owe { font-weight: 600; color: var(--v); font-size: 1rem; }
+.mini.card { color: #fff; background: linear-gradient(135deg, var(--v), var(--v2)); aspect-ratio: 1.586; max-width: 260px; align-content: space-between; }
+.mini.card .k { color: rgba(255,255,255,0.75); }
+.mini .pill { justify-self: start; font-size: 0.72rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,0.22); }
+.mini .bar { height: 6px; border-radius: 3px; background: #EEE; overflow: hidden; }
+.mini .bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--v), var(--v2)); }
+.mini .steps { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
+.mac .org { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; color: #fff; background: linear-gradient(135deg, var(--v), var(--v2)); margin-right: 6px; vertical-align: -4px; }
+.mac .org svg { width: 11px; height: 11px; }
+.mac h4.auto { margin-top: 14px; }
+.q .okc { width: 16px; height: 16px; color: var(--green); }
+.q .dot.team { background: var(--v); }
+.q.new { background: linear-gradient(90deg, var(--vt), transparent) !important; }
+.q.new em { color: var(--v) !important; }
+.q.done em { color: var(--green); }
+.vtitle { display: grid; gap: 14px; justify-items: center; }
+.pkt.green { fill: var(--green); }
+#p-cols li::before, .page-v .rules3 li::before { background: var(--v); }
+.rules3 .tile { gap: 10px; }
+
 /* phone-only / desktop-only */
 .only-m { display: none !important; }
 .tl { list-style: none; margin: 0; padding: 0; display: grid; }
@@ -374,7 +421,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 <main>
 
 <!-- ================= MEMBERS ================= -->
-<div id="page-members" role="tabpanel" aria-labelledby="tab-members" hidden>
+<div id="page-members" class="page-v" data-v="health" role="tabpanel" aria-labelledby="tab-members" hidden>
   <section class="band">
     <div class="wrap">
       <div class="head center">
@@ -384,7 +431,8 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
         <div class="btns"><button class="btn" data-jump="m-join">Request an invite</button><button class="link" data-jump="m-how">See how it works</button></div>
       </div>
       <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a case" id="m-seg"></div><div class="progress" id="m-prog"></div><span class="live">Live scenario</span></div>
-      <div class="stage">
+      <div class="center"><div class="vtag" id="m-vtag"></div></div>
+      <div class="stage vglow">
         <div class="notif" id="m-notif"></div>
         <div id="m-phone"></div>
         <div class="widget" id="m-widget"></div>
@@ -450,9 +498,15 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
     <div class="wrap">
       <div class="head center"><h2>What it takes off your plate.</h2></div>
       <div class="grid3">
-        <div class="tile"><span class="ico"><svg><use href="#i-heart"/></svg></span><h3>Health</h3><ul><li>Denied claims and appeals</li><li>Surprise and incorrect bills</li><li>Prior authorizations</li><li>Appointments and referrals</li></ul></div>
-        <div class="tile"><span class="ico"><svg><use href="#i-card"/></svg></span><h3>Money</h3><ul><li>Card fraud and disputes</li><li>Insurance claim follow-up</li><li>Subscriptions and bill errors</li><li>Renewals, with your approval</li></ul></div>
-        <div class="tile"><span class="ico"><svg><use href="#i-home"/></svg></span><h3>Home</h3><ul><li>HOA requests and disputes</li><li>Repairs and contractors</li><li>Warranty and home claims</li><li>Utilities and service issues</li></ul></div>
+        <div class="tile" data-v="health">
+          <div class="mini"><span class="k">Explanation of benefits</span><div class="row"><span>MRI · Lakeview Imaging</span><s>$1,240</s></div><div class="row"><span>After appeal</span><span class="owe">You owe $85</span></div></div>
+          <span class="ico"><svg><use href="#i-heart"/></svg></span><h3>Health</h3><ul><li>Denied claims and appeals</li><li>Surprise and incorrect bills</li><li>Prior authorizations</li><li>Appointments and referrals</li></ul></div>
+        <div class="tile" data-v="money">
+          <div class="mini card"><span class="k">Debit · •••• 4410</span><span class="pill">Disputed $389 · Won</span><div class="row"><span>Alex Rivera</span><span>08/29</span></div></div>
+          <span class="ico"><svg><use href="#i-card"/></svg></span><h3>Money</h3><ul><li>Card fraud and disputes</li><li>Insurance claim follow-up</li><li>Subscriptions and bill errors</li><li>Renewals, with your approval</li></ul></div>
+        <div class="tile" data-v="home">
+          <div class="mini"><span class="k">Work order R-3310</span><div class="row"><b>Roof leak · Unit 4B</b><span class="owe">Fixed</span></div><div class="bar"><i></i></div><div class="steps"><span>Filed</span><span>Scheduled</span><span>Repaired</span><span>Verified</span></div></div>
+          <span class="ico"><svg><use href="#i-home"/></svg></span><h3>Home</h3><ul><li>HOA requests and disputes</li><li>Repairs and contractors</li><li>Warranty and home claims</li><li>Utilities and service issues</li></ul></div>
       </div>
     </div>
   </section>
@@ -489,28 +543,41 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 </div>
 
 <!-- ================= PARTNERS ================= -->
-<div id="page-partners" role="tabpanel" aria-labelledby="tab-partners" hidden>
+<div id="page-partners" class="page-v" data-v="health" role="tabpanel" aria-labelledby="tab-partners" hidden>
   <section class="band">
     <div class="wrap">
       <div class="head center">
         <span class="eyebrow">For practices, agencies and property managers</span>
         <h1>Your clients' problems.<br><span class="grad">Solved before they call.</span></h1>
-        <p class="sub">Your clients text Onus. Their requests reach your team complete, structured and ready to act on.</p>
+        <p class="sub">Your clients text Onus. Routine requests resolve on their own. The rest reach your team complete and ready to act on.</p>
         <div class="btns"><button class="btn" data-jump="p-join">Become a founding partner</button><button class="link" data-jump="p-how">How a pilot works</button></div>
       </div>
       <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a vertical" id="p-seg"></div><div class="progress" id="p-prog"></div><span class="live">Live scenario</span></div>
-      <div class="duo-wrap">
+      <div class="duo-wrap vglow">
         <div class="duo">
           <div id="p-phone"></div>
           <div class="mac" id="p-mac"></div>
         </div>
-        <div class="caption"><span><b>Their side.</b> One text.</span><span><b>Your side.</b> A finished request.</span></div>
+        <div class="caption"><span><b>Their side.</b> One text.</span><span><b>Your side.</b> Resolved, or ready for your team.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- two lanes -->
+  <section class="band alt">
+    <div class="wrap">
+      <div class="head center"><h2>Some requests close themselves.<br>The rest come to you, ready.</h2><p class="sub">You decide which request types Onus can resolve on its own. Everything else, and anything unusual, goes to your team with the work already done.</p></div>
+      <svg class="viz" viewBox="0 0 1000 380" id="lanes" role="img" aria-label="Client requests flow into Onus and split: routine ones are resolved automatically, the rest go to your team ready to act"></svg>
+      <div class="grid3 rules3">
+        <div class="tile"><span class="ico ok"><svg><use href="#i-check"/></svg></span><h3>Resolved automatically</h3><p class="muted">Scheduling, status questions, document collection and other routine requests, handled inside your rules and your systems.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-users"/></svg></span><h3>Sent to your team</h3><p class="muted">Anything that needs judgment arrives with the documents, history and a suggested next step, so staff act in one touch.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-shield"/></svg></span><h3>You set the line</h3><p class="muted">Start with everything coming to you. Move request types to automatic as you see them handled well. Every action is logged.</p></div>
       </div>
     </div>
   </section>
 
   <!-- before / after -->
-  <section class="band alt">
+  <section class="band">
     <div class="wrap">
       <div class="head center"><h2>From five channels<br>to one clean queue.</h2><p class="sub">Today requests arrive however clients feel like sending them. With Onus they arrive the way your team works.</p></div>
       <div class="grid2">
@@ -521,16 +588,16 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   </section>
 
   <!-- vertical detail -->
-  <section class="band">
+  <section class="band alt">
     <div class="wrap">
-      <div class="head center"><h2 id="p-title"></h2><p class="sub" id="p-today"></p></div>
-      <div class="grid3" id="p-cols"></div>
+      <div class="head center"><div class="vtitle"><div class="vtag" id="p-vtag"></div><h2 id="p-title"></h2></div><p class="sub" id="p-today"></p></div>
+      <div class="grid2" id="p-cols"></div>
       <p class="small center" id="p-rules"></p>
     </div>
   </section>
 
   <!-- owner operators venn -->
-  <section class="band alt">
+  <section class="band">
     <div class="wrap">
       <div class="head center"><h2>Your business is already<br>half personal.</h2><p class="sub">Owners and staff get their own membership, because in a practice, an agency or a few rental units the line between work and life admin is blurry.</p></div>
       <svg class="viz" viewBox="0 0 1000 380" id="venn" role="img" aria-label="Venn diagram: personal admin and business admin overlap for owner-operators"></svg>
@@ -538,7 +605,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   </section>
 
   <!-- pilot -->
-  <section class="band" id="p-how">
+  <section class="band alt" id="p-how">
     <div class="wrap">
       <div class="head center"><h2>How a pilot works.</h2><p class="sub">We learn your workflows from your clients' side first, then fix the slowest steps on both ends.</p></div>
       <div class="stepper">
@@ -550,7 +617,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
     </div>
   </section>
 
-  <section class="band alt" id="p-join">
+  <section class="band" id="p-join">
     <div class="wrap join" style="grid-template-columns:1fr 1fr">
       <div class="head">
         <h2>A few founding partners per city.</h2>
@@ -812,7 +879,7 @@ function swim() {
   let prev = null;
   SWIM_EVENTS.forEach(([lane, day]) => {
     const x = x0 + (day - 1) * dx, y = ly(lane);
-    if (prev) h += `<path d="M${prev[0]} ${prev[1]} C${(prev[0] + x) / 2} ${prev[1]}, ${(prev[0] + x) / 2} ${y}, ${x} ${y}" class="flow" stroke="#C9D8F5"/>`;
+    if (prev) h += `<path d="M${prev[0]} ${prev[1]} C${(prev[0] + x) / 2} ${prev[1]}, ${(prev[0] + x) / 2} ${y}, ${x} ${y}" class="flow" style="stroke:#C9D8F5"/>`;
     prev = [x, y];
   });
   SWIM_EVENTS.forEach(([lane, day, t], i) => {
@@ -919,7 +986,33 @@ function venn() {
     });
 }
 
-function renderDiagrams() { heroFlow(); stall(); dots(); flywheel(); swim(); network(); inviteTree(); beforeAfter(); venn(); }
+/* Partners: two lanes (auto-resolved vs your team) */
+function lanes() {
+  const box = (x, y, w, h, tint, stroke, icon, title, lines, fs = 14) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="${tint}" stroke="${stroke}" stroke-opacity=".35"/>
+    <g transform="translate(${x + 18} ${y + 18})"><circle cx="13" cy="13" r="13" fill="${stroke}"/><svg x="5" y="5" width="16" height="16" style="color:#fff"><use href="#${icon}"/></svg></g>
+    ${title.map((t, i) => label(x + 54, y + 36 + i * 18, t, "t-strong", "start")).join("")}
+    ${lines.map((t, i) => label(x + 20, y + 36 + title.length * 18 + 16 + i * 24, "• " + t, "t-lbl", "start")).join("")}`;
+  const bubbles = (x, y) => `<g transform="translate(${x} ${y})"><rect x="40" y="0" width="120" height="26" rx="13" fill="#0A84FF"/><rect x="10" y="38" width="150" height="26" rx="13" fill="#0A84FF" opacity=".8"/><rect x="60" y="76" width="100" height="26" rx="13" fill="#0A84FF" opacity=".6"/><rect x="30" y="114" width="130" height="26" rx="13" fill="#0A84FF" opacity=".45"/></g>`;
+  draw("#lanes",
+    () => ["0 0 1000 380", `${bubbles(20, 120)}${label(100, 300, "Client requests", "t-strong")}${label(100, 320, "by text, any time")}
+      <path id="ln0" class="flow blue" d="M190 190 H372"/>
+      <circle cx="420" cy="190" r="90" fill="url(#gGlow)"/>${orb(420, 190, 48, "onus", 18)}
+      <path id="ln1" d="M468 175 C540 175, 540 100, 610 100" class="flow" style="stroke:#28A745;stroke-width:2.5"/>
+      <path id="ln2" d="M468 205 C540 205, 540 280, 610 280" class="flow blue"/>
+      ${anim(packet("ln0", 1.4, 0) + packet("ln0", 1.4, 0.7) + packet("ln1", 1.6, 0.2, "green") + packet("ln1", 1.6, 0.8, "green") + packet("ln1", 1.6, 1.3, "green") + packet("ln2", 2.2, 0.5))}
+      ${box(612, 20, 380, 160, "rgba(40,167,69,0.06)", "#28A745", "i-check", ["Resolved by Onus"], ["Scheduling and rescheduling", "Status and balance questions", "Document collection"])}
+      ${box(612, 200, 380, 160, "rgba(10,132,255,0.06)", "#0A84FF", "i-users", ["Sent to your team, ready to act"], ["Decisions that need judgment", "Money, coverage or clinical calls", "Anything unusual"])}`],
+    () => ["0 0 400 566", `${bubbles(115, 0)}${label(200, 166, "Client requests", "t-strong")}
+      <path id="ln0" class="flow blue" d="M200 176 V222"/>
+      <circle cx="200" cy="270" r="80" fill="url(#gGlow)"/>${orb(200, 270, 46, "onus", 17)}
+      <path id="ln1" d="M180 312 C120 340, 100 350, 100 384" class="flow" style="stroke:#28A745;stroke-width:2.5"/>
+      <path id="ln2" d="M220 312 C280 340, 300 350, 300 384" class="flow blue"/>
+      ${anim(packet("ln0", 1.2, 0) + packet("ln1", 1.4, 0.3, "green") + packet("ln1", 1.4, 0.9, "green") + packet("ln2", 2, 0.6))}
+      ${box(4, 388, 190, 170, "rgba(40,167,69,0.06)", "#28A745", "i-check", ["Resolved", "by Onus"], ["Scheduling", "Status questions", "Documents"])}
+      ${box(206, 388, 190, 170, "rgba(10,132,255,0.06)", "#0A84FF", "i-users", ["Sent to", "your team"], ["Judgment calls", "Coverage, clinical", "Anything unusual"])}`]);
+}
+
+function renderDiagrams() { heroFlow(); stall(); dots(); flywheel(); swim(); network(); inviteTree(); beforeAfter(); venn(); lanes(); }
 renderDiagrams();
 NARROW.addEventListener("change", renderDiagrams);
 
@@ -1015,7 +1108,7 @@ function progress(el, keys, k, thread, auto) {
   }).join("");
 }
 function seg(el, data, pick) {
-  el.innerHTML = Object.entries(data).map(([k, v]) => `<button role="tab" data-v="${k}">${v.label}</button>`).join("");
+  el.innerHTML = Object.entries(data).map(([k, v]) => `<button role="tab" data-v="${k}">${v.icon ? `<svg class="si"><use href="#${v.icon}"/></svg>` : ""}${v.label}</button>`).join("");
   el.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) pick(b.dataset.v); });
 }
 const sel = (el, k) => el.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.v === k));
@@ -1042,7 +1135,7 @@ function scenario({ data, segEl, progEl, setup, finish }) {
 
 const MEMBER = {
   health: {
-    label: "Health",
+    label: "Health", icon: "i-heart", tag: "Denied MRI claim",
     thread: [
       ["ts", "<b>Mon, Sep 8</b> 9:14 AM"],
       ["me", "Got a $1,240 bill for my MRI. Insurance was supposed to cover it."],
@@ -1061,7 +1154,7 @@ const MEMBER = {
     widget: { big: "$1,155", what: "saved on an MRI bill", rows: [["Follow-ups", "4"], ["Offices involved", "3"], ["Time to close", "11 days"]] }
   },
   money: {
-    label: "Money",
+    label: "Money", icon: "i-card", tag: "Fraudulent card charge",
     thread: [
       ["ts", "<b>Tue, Aug 26</b> 8:31 PM"],
       ["me", "There's a $389 hotel charge on my card. I wasn't there."],
@@ -1080,7 +1173,7 @@ const MEMBER = {
     widget: { big: "$389", what: "recovered from a fraudulent charge", rows: [["Follow-ups", "3"], ["Card replaced", "Yes"], ["Time to close", "23 days"]] }
   },
   home: {
-    label: "Home",
+    label: "Home", icon: "i-home", tag: "Leaking roof, slow HOA",
     thread: [
       ["ts", "<b>Mon, Sep 1</b> 7:52 AM"],
       ["me", "Water's coming through the ceiling again. The HOA said they'd fix the roof in July 😩"],
@@ -1101,35 +1194,41 @@ const MEMBER = {
 
 const PARTNER = {
   health: {
-    label: "Health", org: "Lakeview Family Medicine",
+    label: "Health", icon: "i-heart", tag: "Health", org: "Lakeview Family Medicine",
     thread: [["ts", "<b>Today</b> 9:14 AM"], ["me", "My MRI claim got denied. Can you sort it out?"], ["ai", "On it. Lakeview can file the missing authorization. I've sent them everything they need."], ["me", "Thank you!!"]],
-    queue: [["Retro prior auth · MRI", "Patient texted 9:14 · EOB, order, card attached", "Ready"], ["Billing question", "Statement matched to EOB", "Ready"], ["Records to Dr. Kim", "Release signed", "Ready"], ["Reschedule physical", "Waiting on patient's choice", "Waiting"]],
+    team: [["Retro prior auth · MRI", "Patient texted 9:14 · EOB, order, card attached"], ["Billing dispute · lab charge", "Statement and history attached"], ["Medication question", "Routed to the nurse line"]],
+    auto: [["Rescheduled annual physical", "Moved to Oct 14, calendar updated"], ["Balance question answered", "From your billing system"], ["Records sent to Dr. Kim", "Release signed, sent securely"]],
     title: "Medical and dental practices.",
     today: "Your front desk spends hours on billing questions, denials, records and rescheduling, mostly on the phone.",
-    cols: [["i-folder", "Off your desk", ["Billing questions with the EOB attached", "Appeal and auth packets, prefilled", "Scheduling and reminders by text", "Records requests with signed releases"]],
-           ["i-plug", "What we modernize", ["Structured intake into your PM system", "Status patients can check without calling", "Denial patterns by payer"]]],
+    autoList: ["Booking, rescheduling and reminders", "Balance and statement questions", "Records requests with signed releases", "Form and referral status checks"],
+    teamList: ["Appeals and retro auths, packet prefilled", "Billing disputes that need judgment", "Anything clinical, routed to your nurses", "Upset or unusual cases"],
+    modernize: ["Structured intake into your PM system", "Status patients can check without calling", "Denial patterns by payer"],
     metrics: ["Calls per patient", "Days from denial to resolution", "No-show rate"],
     rules: "We sign a BAA before touching patient data. Admin and billing only, never clinical advice."
   },
   money: {
-    label: "Money", org: "Harbor Insurance Agency",
+    label: "Money", icon: "i-card", tag: "Money", org: "Harbor Insurance Agency",
     thread: [["ts", "<b>Today</b> 6:40 PM"], ["me", "Someone backed into my car in a parking lot. What do I do?"], ["ai", "Sorry! Send photos and the other driver's info. I'll get it to Harbor so they can open the claim."], ["me", "Sent 👍"]],
-    queue: [["Auto claim · first notice", "Photos, police report, policy matched", "Ready"], ["Tax documents", "4 of 5 collected", "Waiting"], ["Renewal quotes", "Client asked to compare", "Ready"], ["Business card fraud", "Bank notified, card frozen", "Ready"]],
+    team: [["Auto claim · first notice", "Photos, police report, policy matched"], ["Renewal · wants quotes", "Current coverage summarized"], ["Business card fraud", "Bank notified, card frozen"]],
+    auto: [["Insurance ID card sent", "From your AMS, by text"], ["Tax documents collected", "5 of 5, filed in the client folder"], ["Claim status update", "Carrier portal checked, client told"]],
     title: "Insurance agencies, CPA and wealth practices.",
     today: "Your team's time goes to claims hand-holding, renewal paperwork, document chasing and quick client questions.",
-    cols: [["i-folder", "Off your desk", ["First notice of loss with photos and policy", "Documents collected by text", "Renewal requests routed to your producer", "First response on card fraud"]],
-           ["i-plug", "What we modernize", ["Documents filed and named in your AMS", "Status updates without phone calls", "One view of every open client issue"]]],
+    autoList: ["ID cards and policy documents", "Tax-season document collection", "Payment and renewal reminders", "Claim status checks and updates"],
+    teamList: ["New claims, first notice prepped", "Coverage questions and quotes", "Anything that counts as advice", "Fraud and urgent account issues"],
+    modernize: ["Documents filed and named in your AMS", "Status updates without phone calls", "One view of every open client issue"],
     metrics: ["Staff hours per claim", "Document turnaround", "Retention at renewal"],
     rules: "Your licensed staff make every coverage and advice decision. Onus doesn't act as an adjuster or advisor."
   },
   home: {
-    label: "Home", org: "Crestline Management",
+    label: "Home", icon: "i-home", tag: "Home", org: "Crestline Management",
     thread: [["ts", "<b>Today</b> 7:52 AM"], ["me", "Water's coming through the ceiling again 😩"], ["ai", "I've filed an urgent work order with Crestline and attached your photos."], ["me", "You're the best"]],
-    queue: [["Roof leak · Unit 4B · urgent", "Photos attached, linked to July ticket", "Ready"], ["Dues statement question", "Matched to ledger", "Ready"], ["Drywall · master policy", "Waiting on board", "Waiting"], ["Violation response", "Resident photos attached", "Ready"]],
+    team: [["Roof leak · Unit 4B · urgent", "Photos attached, linked to July ticket"], ["Violation dispute", "Resident photos and letter attached"], ["Drywall · master policy", "Needs a board decision"]],
+    auto: [["Dues balance question", "Answered from your ledger"], ["Clubhouse booked", "Saturday 2–6 PM, deposit paid"], ["Resale certificate sent", "Generated and emailed to the title company"]],
     title: "HOA and property managers.",
     today: "Requests come in by email and phone, alongside violation disputes, dues questions and board updates.",
-    cols: [["i-folder", "Off your desk", ["Work orders with unit, photos and priority", "Vendor scheduling with residents", "Dues questions answered from your ledger", "Violation responses collected"]],
-           ["i-plug", "What we modernize", ["One queue for email, phone and portal", "Vendor confirmations and completion checks", "Board-ready reports"]]],
+    autoList: ["Dues and statement questions", "Routine work orders to approved vendors", "Amenity bookings", "Bylaws, resale and document requests"],
+    teamList: ["Urgent or costly repairs", "Violation disputes", "Anything needing a board decision", "Common-area insurance claims"],
+    modernize: ["One queue for email, phone and portal", "Vendor confirmations and completion checks", "Board-ready reports"],
     metrics: ["Days to close a work order", "Repeat requests", "Staff hours per door"],
     rules: "Your managers approve all vendor spend. Resident data stays with your association."
   }
@@ -1138,6 +1237,8 @@ const PARTNER = {
 const members = scenario({
   data: MEMBER, segEl: $("#m-seg"), progEl: $("#m-prog"),
   setup(v, live) {
+    $("#page-members").dataset.v = v.label.toLowerCase();
+    $("#m-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span><span>${v.tag}</span>`;
     $("#m-phone").innerHTML = phone(v.thread, live);
     const n = $("#m-notif"), w = $("#m-widget");
     const note = live ? ["Case opened", "I'm on it. I'll message you when something changes."] : v.notif;
@@ -1158,26 +1259,32 @@ const members = scenario({
   }
 });
 
-function queueRow([t, d, s], fresh) {
-  return `<div class="q${fresh ? " new" : ""}"><span class="dot ${s === "Ready" ? "ready" : "wait"}"></span><div><b>${t}</b><span>${d}</span></div><em>${fresh ? "New" : s}</em></div>`;
+function queueRow([t, d], fresh) {
+  return `<div class="q${fresh ? " new" : ""}"><span class="dot team"></span><div><b>${t}</b><span>${d}</span></div><em>${fresh ? "New" : "Ready"}</em></div>`;
 }
+const autoRow = ([t, d]) => `<div class="q done"><svg class="okc"><use href="#i-check"/></svg><div><b>${t}</b><span>${d}</span></div><em>Done</em></div>`;
+const listTile = (ic, cls, h, items) => `<div class="tile"><span class="ico ${cls}"><svg><use href="#${ic}"/></svg></span><h3>${h}</h3><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`;
 const partners = scenario({
   data: PARTNER, segEl: $("#p-seg"), progEl: $("#p-prog"),
   setup(v, live) {
+    $("#page-partners").dataset.v = v.label.toLowerCase();
     $("#p-phone").innerHTML = phone(v.thread, live);
-    const rows = live ? v.queue.slice(1) : v.queue;
-    $("#p-mac").innerHTML = `<div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>Onus · ${v.org}</span></div>
-      <div class="body"><h4>Client requests <span>Today</span></h4><div id="p-rows">${rows.map((r) => queueRow(r)).join("")}</div></div>`;
+    const team = live ? v.team.slice(1) : v.team;
+    $("#p-mac").innerHTML = `<div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span><span class="org"><svg><use href="#${v.icon}"/></svg></span>Onus · ${v.org}</span></div>
+      <div class="body"><h4>Needs your team <span>Ready to act</span></h4><div id="p-rows">${team.map((r) => queueRow(r)).join("")}</div>
+      <h4 class="auto">Resolved by Onus <span>No staff time</span></h4>${v.auto.map(autoRow).join("")}</div>`;
+    $("#p-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span>`;
     $("#p-title").textContent = v.title;
     $("#p-today").textContent = "Today: " + v.today.charAt(0).toLowerCase() + v.today.slice(1);
-    $("#p-cols").innerHTML = v.cols.map(([ic, h, items]) =>
-      `<div class="tile"><span class="ico soft"><svg><use href="#${ic}"/></svg></span><h3>${h}</h3><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")
+    $("#p-cols").innerHTML = listTile("i-check", "ok", "Resolves on its own", v.autoList)
+      + listTile("i-users", "soft", "Comes to your team, ready", v.teamList)
+      + listTile("i-plug", "soft", "What we modernize", v.modernize)
       + `<div class="tile"><span class="ico soft"><svg><use href="#i-spark"/></svg></span><h3>What we measure</h3>${v.metrics.map((m, i) => `<div class="metric"><b>${m}</b>${spark(i * 37 + v.label.length * 11, true)}</div>`).join("")}<span class="small">Example trends</span></div>`;
     $("#p-rules").innerHTML = `<span style="display:inline-flex;gap:8px;align-items:center"><svg width="16" height="16" style="color:#28A745"><use href="#i-shield"/></svg>${v.rules}</span>`;
     return $("#p-phone .thread");
   },
   finish(v, live) {
-    if (live) $("#p-rows").insertAdjacentHTML("afterbegin", queueRow(v.queue[0], true));
+    if (live) $("#p-rows").insertAdjacentHTML("afterbegin", queueRow(v.team[0], true));
   }
 });
 
