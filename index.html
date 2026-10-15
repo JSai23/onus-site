@@ -8,7 +8,7 @@
 </head>
 <body>
 <title>Onus</title>
-<meta name="description" content="Onus is a personal AI you text that owns the problem until it's done, working with the offices on the other side.">
+<meta name="description" content="Onus modernizes the front door of PE-owned mid-market businesses: it answers inbound requests and does the work behind them, across every office's software.">
 <style>
 /* Layout: Apple-style product pages. Light only, by choice. Wide whitespace, centered display type, white / soft-grey bands; every idea gets a visual (live iPhones, flow diagrams, swimlanes, network maps) instead of a table. */
 :root {
@@ -123,6 +123,8 @@ svg text { font-family: var(--sans); }
 .b.me { align-self: flex-end; background: var(--imsg); color: #fff; }
 .b.ai { align-self: flex-start; background: var(--bubble); color: #000; }
 .b.me.tail { border-bottom-right-radius: 5px; }
+.sms .b.me { background: #34C759; }
+.avatar.brand { background: linear-gradient(135deg, var(--v), var(--v2)); }
 .b.ai.tail { border-bottom-left-radius: 5px; }
 .b + .ts { margin-top: 12px; }
 .rich { align-self: flex-start; width: 72%; border-radius: 17px; overflow: hidden; background: var(--bubble); font-size: 12px; }
@@ -337,7 +339,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 .q.done em { color: var(--green); }
 .vtitle { display: grid; gap: 14px; justify-items: center; }
 .pkt.green { fill: var(--green); }
-#p-cols li::before, .page-v .rules3 li::before { background: var(--v); }
+#o-cols li::before, .page-v .rules3 li::before { background: var(--v); }
 .rules3 .tile { gap: 10px; }
 
 /* phone-only / desktop-only */
@@ -470,6 +472,7 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 .bm-top b { font-size: 0.95rem; }
 .bm-logo { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; background: linear-gradient(135deg, #0A9FB5, #2DC6A0); flex: none; }
 .bm-logo.o { background: linear-gradient(135deg, var(--imsg), var(--violet)); }
+.bm-logo.m { background: linear-gradient(135deg, #7A4DF0, #C15AF2); }
 .bm-msg { align-self: start; justify-self: start; background: var(--bubble); border-radius: 16px; border-bottom-left-radius: 5px; padding: 8px 12px; font-size: 0.88rem; max-width: 90%; }
 
 /* trust chips + chapters */
@@ -513,8 +516,8 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   <div class="nav-in">
     <div class="logo"><i></i>onus</div>
     <div class="seg" role="tablist" aria-label="Sections">
-      <button role="tab" id="tab-members" data-page="members">Members</button>
-      <button role="tab" id="tab-partners" data-page="partners">Partners</button>
+      <button role="tab" id="tab-pe" data-page="pe">PE firms</button>
+      <button role="tab" id="tab-operators" data-page="operators">Operators</button>
       <button role="tab" id="tab-thesis" data-page="thesis">Thesis</button>
     </div>
   </div>
@@ -522,178 +525,162 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 
 <main>
 
-<!-- ================= MEMBERS ================= -->
-<div id="page-members" class="page-v" data-v="health" role="tabpanel" aria-labelledby="tab-members" hidden>
+<!-- ================= PE FIRMS ================= -->
+<div id="page-pe" role="tabpanel" aria-labelledby="tab-pe" hidden>
   <section class="band">
     <div class="wrap">
       <div class="head center">
-        <span class="eyebrow">Personal AI. By invitation.</span>
-        <h1>Hand it off.<br><span class="grad">It stays handled.</span></h1>
-        <p class="sub">Text Onus the thing that keeps dragging on. It opens a case, works with the people on the other side, and doesn't stop until it's done.</p>
-        <div class="btns"><button class="btn" data-jump="m-join">Request an invite</button><button class="link" data-jump="m-stuck">Why it works</button></div>
+        <span class="eyebrow">For private equity operating teams</span>
+        <h1>Modernize the front door.<br><span class="grad">Across the portfolio.</span></h1>
+        <p class="sub">Onus answers the calls, texts and requests that pile up at your companies' front desks, and does the work behind them, on whatever software each office already runs.</p>
+        <div class="btns"><button class="btn" data-jump="pe-join">Talk about a pilot</button><button class="link" data-jump="pe-gap">Where the hours go</button></div>
       </div>
-      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a case" id="m-seg"></div><div class="ctrl"><span class="live">Live scenario</span><button class="replay" id="m-replay" type="button">↻ Replay</button></div></div>
-      <div class="center"><div class="vtag" id="m-vtag"></div></div>
-      <div class="stage vglow">
-        <div class="notif" id="m-notif"></div>
-        <div id="m-phone"></div>
-        <div class="widget" id="m-widget"></div>
-      </div>
-      <p class="small center">Illustrative scenario. Onus is in private development.</p>
+      <svg class="viz" viewBox="0 0 1000 300" id="pe" role="img" aria-label="One Onus rollout connects to every office in a platform, each running different software, and gives each office's customers a text line"></svg>
+      <p class="small center">Illustrative. Onus is in private development.</p>
     </div>
   </section>
 
-  <section class="band alt" id="m-stuck">
+  <section class="band alt" id="pe-gap">
     <div class="wrap">
-      <div class="head center"><h2>Other AI gets stuck.<br>Onus gets through.</h2><p class="sub">Most offices are built for people. AI agents hit logins, forms and phone menus, and stall.</p></div>
-      <div id="vs-members"></div>
+      <div class="head center"><h2>Roll-ups buy offices.<br>They inherit front desks.</h2><p class="sub">Every acquired office keeps its own phones, its own software and its own way of handling requests. The work lands on people.</p></div>
+      <div class="grid3">
+        <div class="tile"><span class="ico"><svg><use href="#i-msg"/></svg></span><h3>Requests wait</h3><p class="muted">Calls ring out at lunch and after hours. Referrals and forms sit in a fax tray until someone has time.</p></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-folder"/></svg></span><h3>The work behind the call is manual</h3><p class="muted">Benefits checks, certificates, records requests and status updates get typed by hand, one system at a time.</p></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Every office runs different software</h3><p class="muted">Tools built for one system leave the rest of the platform out, so the front office never gets standardized.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><h2>We work with trusted partners.</h2><p class="sub">Onus partners with doctors' offices, insurance agencies and HOA managers. They've asked for your requests, so nothing gets lost in a portal.</p></div>
-      <div class="grid2">
-        <div class="tile"><span class="ico"><svg><use href="#i-check"/></svg></span><h3>If your provider is a partner</h3><p class="muted">Your request goes straight into their system, in the format they need. No forms, no hold music.</p></div>
-        <div class="tile"><span class="ico soft"><svg><use href="#i-loop"/></svg></span><h3>If they aren't yet</h3><p class="muted">Onus still has a head start. It learns from the partners in your area, so it very likely already knows your provider: who to contact, what they need and how long they take.</p></div>
-      </div>
-      <div class="chips">
-        <span><svg><use href="#i-check"/></svg>Knows how claims, disputes and repairs work everywhere</span>
-        <span><svg><use href="#i-check"/></svg>Knows how your provider works specifically</span>
-        <span><svg><use href="#i-check"/></svg>Learns from every partner in your area</span>
-      </div>
-      <svg class="viz" viewBox="0 0 1000 460" id="network" role="img" aria-label="You at the center, connected directly to partner offices and through standard follow-up to other companies"></svg>
-      <div class="legend"><span><i></i>Partner: straight into their system</span><span><i class="dash"></i>Not a partner yet: Onus uses what partners nearby taught it, plus email, forms and calls</span></div>
+      <div class="head center"><h2>Answering the phone is solved.<br>Finishing the request isn't.</h2><p class="sub">AI receptionists pick up and take a message. The request still waits for a person. Onus does the work behind it.</p></div>
+      <div id="vs-pe"></div>
     </div>
   </section>
 
   <section class="band alt">
     <div class="wrap">
-      <div class="head center"><h2>What it takes off your plate.</h2></div>
-      <div class="grid3">
-        <div class="tile" data-v="health">
-          <div class="mini"><span class="k">Explanation of benefits</span><div class="row"><span>MRI · Lakeview Imaging</span><s>$1,240</s></div><div class="row"><span>After appeal</span><span class="owe">You owe $85</span></div></div>
-          <span class="ico"><svg><use href="#i-heart"/></svg></span><h3>Health</h3><ul><li>Denied claims and appeals</li><li>Surprise and incorrect bills</li><li>Appointments and follow-ups</li><li>Prior authorizations</li></ul></div>
-        <div class="tile" data-v="money">
-          <div class="mini card"><span class="k">Debit · •••• 4410</span><span class="pill">Disputed $389 · Won</span><div class="row"><span>Alex Rivera</span><span>08/29</span></div></div>
-          <span class="ico"><svg><use href="#i-card"/></svg></span><h3>Money</h3><ul><li>Card fraud and disputes</li><li>Insurance claims</li><li>Subscriptions and bill errors</li><li>Renewals, with your approval</li></ul></div>
-        <div class="tile" data-v="home">
-          <div class="mini"><span class="k">Work order R-3310</span><div class="row"><b>Roof leak · Unit 4B</b><span class="owe">Fixed</span></div><div class="bar"><i></i></div><div class="steps"><span>Filed</span><span>Scheduled</span><span>Repaired</span><span>Verified</span></div></div>
-          <span class="ico"><svg><use href="#i-home"/></svg></span><h3>Home</h3><ul><li>HOA requests and disputes</li><li>Repairs and contractors</li><li>Warranty and home claims</li><li>Utilities and services</li></ul></div>
+      <div class="head center"><h2>Prove it in one company.<br>Then roll it out.</h2><p class="sub">Operating teams run new tools the same way: a pilot at one platform, a clear scorecard, then the rest of the portfolio.</p></div>
+      <div class="stepper">
+        <div><span class="ico"><svg><use href="#i-map"/></svg></span><h3>Pick a platform</h3><p>One portfolio company with multi-site offices and a busy front desk.</p></div>
+        <div><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Pilot a few offices</h3><p>Three to five offices, including ones on different software.</p></div>
+        <div><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Measure</h3><p>Against the numbers the operating team already tracks.</p></div>
+        <div><span class="ico"><svg><use href="#i-loop"/></svg></span><h3>Replicate</h3><p>Every office, then the next platform. The templates carry over.</p></div>
+      </div>
+      <div class="chips">
+        <span><svg><use href="#i-check"/></svg>Speed to answer</span>
+        <span><svg><use href="#i-check"/></svg>Requests closed without staff time</span>
+        <span><svg><use href="#i-check"/></svg>Intake completed</span>
+        <span><svg><use href="#i-check"/></svg>Staff hours per 100 requests</span>
       </div>
     </div>
   </section>
 
-  <section class="band" id="m-join">
-    <div class="wrap join">
-      <div class="pass" aria-label="Example invitation">
-        <div class="row"><b style="font-size:1.1rem;letter-spacing:-0.03em">onus</b><div><div class="lbl">Membership</div><div class="val">Founding</div></div></div>
-        <div><div class="lbl">Invited by</div><div class="huge">Lakeview Family Medicine</div></div>
-        <div class="row"><div><div class="lbl">Member</div><div class="val">Alex Rivera</div></div><div><div class="lbl">Invites</div><div class="val">2 to share</div></div></div>
-        <div class="code" aria-hidden="true"></div>
+  <section class="band">
+    <div class="wrap">
+      <div class="head center"><h2>More capacity.<br>Not fewer people.</h2><p class="sub">Front-desk teams push back on tools that look like their replacement. Onus starts where they're stretched thinnest.</p></div>
+      <div class="grid3">
+        <div class="tile"><span class="ico soft"><svg><use href="#i-loop"/></svg></span><h3>Overflow and after hours</h3><p class="muted">Onus takes what the desk can't reach, so a vacancy or a lunch hour doesn't mean an unanswered customer.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-folder"/></svg></span><h3>The paperwork first</h3><p class="muted">Staff keep the conversations that need a person. Onus takes the forms, checks and follow-ups behind them.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-spark"/></svg></span><h3>Hours returned, reported</h3><p class="muted">The scorecard shows time given back to each office and where it went.</p></div>
       </div>
-      <div class="head">
-        <h2>You can't sign up.<br>You get invited.</h2>
-        <p class="sub">Membership comes through a provider on Onus, or from a friend. Every member gets two invites after their first closed case.</p>
-        <form id="m-form" novalidate>
+    </div>
+  </section>
+
+  <section class="band alt" id="pe-join">
+    <div class="wrap">
+      <div class="join" style="grid-template-columns:1fr 1fr">
+        <div class="head"><h2>Start with one platform.</h2><p class="sub">We're choosing a small number of first pilots, starting with physical therapy and rehab groups and with insurance agencies and brokers.</p></div>
+        <form id="pe-form" novalidate>
           <div class="two">
-            <div><label class="sr" for="m-name">Name</label><input id="m-name" autocomplete="name" placeholder="Name"></div>
-            <div><label class="sr" for="m-phone-in">Mobile number</label><input id="m-phone-in" inputmode="tel" autocomplete="tel" placeholder="Mobile number"></div>
+            <div><label class="sr" for="pe-name">Your name</label><input id="pe-name" autocomplete="name" placeholder="Your name"></div>
+            <div><label class="sr" for="pe-org">Firm</label><input id="pe-org" autocomplete="organization" placeholder="Firm"></div>
           </div>
-          <label class="sr" for="m-waiting">What are you still waiting on?</label>
-          <input id="m-waiting" placeholder="What's the one thing you're still waiting on?">
-          <div class="btns" style="justify-content:flex-start"><button class="btn" type="submit">Request an invite</button></div>
-          <p class="form-msg" id="m-msg" aria-live="polite"></p>
+          <label class="sr" for="pe-type">Your role</label>
+          <select id="pe-type"><option>Operating partner or value-creation team</option><option>Deal team</option><option>Portfolio company executive</option><option>Other</option></select>
+          <div class="btns" style="justify-content:flex-start"><button class="btn" type="submit">Request a pilot conversation</button></div>
+          <p class="form-msg" id="pe-msg" aria-live="polite"></p>
         </form>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ================= PARTNERS ================= -->
-<div id="page-partners" class="page-v" data-v="health" role="tabpanel" aria-labelledby="tab-partners" hidden>
+<!-- ================= OPERATORS ================= -->
+<div id="page-operators" class="page-v" data-v="health" role="tabpanel" aria-labelledby="tab-operators" hidden>
   <section class="band">
     <div class="wrap">
       <div class="head center">
-        <span class="eyebrow">For practices, agencies and property managers</span>
-        <h1>Your clients' problems.<br><span class="grad">Solved before they call.</span></h1>
-        <p class="sub">Your clients text Onus. Routine requests resolve on their own. The rest reach your team complete and ready to act on.</p>
-        <div class="btns"><button class="btn" data-jump="p-join">Become a founding partner</button><button class="link" data-jump="p-stuck">Why now</button></div>
+        <span class="eyebrow">For multi-site practices and agencies</span>
+        <h1>Every request answered.<br><span class="grad">The work behind it done.</span></h1>
+        <p class="sub">Your customers text or call your office. Onus closes the routine requests on its own and hands your team the rest with the paperwork already done.</p>
+        <div class="btns"><button class="btn" data-jump="o-join">Request a pilot</button><button class="link" data-jump="o-lanes">How it works</button></div>
       </div>
-      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a vertical" id="p-seg"></div><div class="ctrl"><span class="live">Live scenario</span><button class="replay" id="p-replay" type="button">↻ Replay</button></div></div>
+      <div class="head center" style="gap:14px"><div class="seg lg" role="tablist" aria-label="Choose a business" id="o-seg"></div><div class="ctrl"><span class="live">Live scenario</span><button class="replay" id="o-replay" type="button">↻ Replay</button></div></div>
       <div class="duo-wrap vglow">
         <div class="duo">
-          <div id="p-phone"></div>
-          <div class="mac" id="p-mac"></div>
+          <div id="o-phone"></div>
+          <div class="mac" id="o-mac"></div>
         </div>
-        <div class="caption"><span><b>Their side.</b> One text.</span><span><b>Your side.</b> Resolved, or ready for your team.</span></div>
+        <div class="caption"><span><b>Your customer.</b> One text, under your name.</span><span><b>Your team.</b> Done, or ready to act.</span></div>
       </div>
+      <p class="small center">Illustrative scenario. Businesses and people shown are fictional.</p>
     </div>
   </section>
 
-  <section class="band alt" id="p-stuck">
+  <section class="band alt" id="o-lanes">
     <div class="wrap">
-      <div class="head center"><h2>Your clients' AI is already<br>reaching out. It's getting stuck.</h2><p class="sub">Your portal and phones were built for people. When both ends are connected, your clients get answers and your staff get time back.</p></div>
-      <div id="vs-partners"></div>
+      <div class="head center"><h2>Some requests close themselves.<br>The rest come to you, ready.</h2><p class="sub">You decide which request types Onus can finish on its own. Everything else goes to your team with the work already done.</p></div>
+      <svg class="viz" viewBox="0 0 1000 380" id="lanes" role="img" aria-label="Customer requests flow into Onus and split: routine ones are resolved automatically, the rest go to your team ready to act"></svg>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><h2>Some requests close themselves.<br>The rest come to you, ready.</h2><p class="sub">You decide which request types Onus can resolve on its own. Everything else goes to your team with the work already done.</p></div>
-      <svg class="viz" viewBox="0 0 1000 380" id="lanes" role="img" aria-label="Client requests flow into Onus and split: routine ones are resolved automatically, the rest go to your team ready to act"></svg>
+      <div class="head center"><div class="vtitle"><div class="vtag" id="o-vtag"></div><h2 id="o-title"></h2></div><p class="sub" id="o-today"></p></div>
+      <div class="grid2" id="o-cols"></div>
+      <p class="small center" id="o-rules"></p>
     </div>
   </section>
 
   <section class="band alt">
     <div class="wrap">
-      <div class="head center"><h2>What the big groups have.<br>Sized for you.</h2><p class="sub">The hospital system and the national carrier build their own AI. For a practice your size, building it costs too much and enterprise software is more than you need.</p></div>
-      <div class="grid3">
-        <div class="tile cmp"><span class="k">Option 1</span><h3>Build it in-house</h3><ul><li class="x"><b>✕</b>Engineers you'd need to hire</li><li class="x"><b>✕</b>Needs data from both sides to know what works</li><li class="x"><b>✕</b>You pay before you know it pays off</li></ul></div>
-        <div class="tile cmp"><span class="k">Option 2</span><h3>Enterprise software</h3><ul><li class="x"><b>✕</b>Priced for hospital systems and national carriers</li><li class="x"><b>✕</b>Long IT projects to set up</li><li class="x"><b>✕</b>Only fixes your side of the conversation</li></ul></div>
-        <div class="tile cmp win"><span class="k">Onus</span><h3>Both ends, ready-made</h3><ul><li class="ok"><b>✓</b>Built for offices your size</li><li class="ok"><b>✓</b>Connects your clients and your team, so requests actually resolve</li><li class="ok"><b>✓</b>Nothing to install. Start with a pilot</li></ul></div>
-      </div>
+      <div class="head center"><h2>Works across the systems<br>you inherited.</h2><p class="sub">Requests come in by phone, text, email and fax. Onus reads and writes each office's own software, so you don't have to standardize first.</p></div>
+      <svg class="viz" viewBox="0 0 1000 300" id="channels" role="img" aria-label="Phone, text, email and fax requests flow through Onus into offices that each run different software"></svg>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><div class="vtitle"><div class="vtag" id="p-vtag"></div><h2 id="p-title"></h2></div><p class="sub" id="p-today"></p></div>
-      <div class="grid2" id="p-cols"></div>
-      <p class="small center" id="p-rules"></p>
-    </div>
-  </section>
-
-  <section class="band alt">
-    <div class="wrap">
-      <div class="head center"><h2>Your brand or ours.</h2><p class="sub">Either way, it's the same Onus underneath.</p></div>
+      <div class="head center"><h2>Your name on it.<br>Their history in it.</h2><p class="sub">Each business gives its customers a text line under its own brand. It remembers who they are and what's still open.</p></div>
       <div class="grid2">
-        <div class="tile"><div class="bm"><div class="bm-top"><span class="bm-logo">L</span><div><b>Lakeview Assistant</b><span class="small">powered by Onus</span></div></div><div class="bm-msg">You're booked with Dr. Patel on Tue, Oct 14 at 10:30.</div></div><h3>Under your brand</h3><p class="muted">Put it in your own site, app or text line with your name on it. Your clients stay in your world.</p></div>
-        <div class="tile"><div class="bm"><div class="bm-top"><span class="bm-logo o">O</span><div><b>Onus</b><span class="small">Lakeview Family Medicine · Partner</span></div></div><div class="bm-msg">Lakeview is an Onus partner near you. Want me to book a new-patient visit?</div></div><h3>Through hosted Onus</h3><p class="muted">Your clients use Onus directly. Members looking for a practice, agent or manager see partners first, so it brings you new clients too.</p></div>
+        <div class="tile"><div class="bm"><div class="bm-top"><span class="bm-logo">R</span><div><b>Riverbend PT</b><span class="small">Text line</span></div></div><div class="bm-msg">Hi Maya, you have 2 visits left on this authorization. I've already asked Dr. Alvarez's office for the renewal.</div></div><h3>For a therapy group</h3><p class="muted">Patients hear from their clinic, not a call center, and nothing slips between visits.</p></div>
+        <div class="tile"><div class="bm"><div class="bm-top"><span class="bm-logo m">H</span><div><b>Harbor Insurance</b><span class="small">Text line</span></div></div><div class="bm-msg">Hi Dan, your policy renews in 45 days. I've pulled last year's details. Anything changed with the trucks?</div></div><h3>For an agency</h3><p class="muted">Clients get answers between renewals. Account managers get the facts before the call.</p></div>
       </div>
+      <p class="small center"><span style="display:inline-flex;gap:8px;align-items:center"><svg width="16" height="16" style="color:#28A745"><use href="#i-shield"/></svg>Customer data stays with the business it belongs to.</span></p>
     </div>
   </section>
 
-  <section class="band" id="p-join">
+  <section class="band alt" id="o-join">
     <div class="wrap">
       <div class="head center"><h2>How a pilot works.</h2></div>
       <div class="stepper">
         <div><span class="ico"><svg><use href="#i-map"/></svg></span><h3>Map</h3><p>A few sessions with your front desk on your most common requests.</p></div>
-        <div><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Connect</h3><p>Into the systems you already use. Nothing to rip out.</p></div>
-        <div><span class="ico"><svg><use href="#i-send"/></svg></span><h3>Invite</h3><p>Offer Onus to your clients as a member benefit.</p></div>
-        <div><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Improve</h3><p>Move more request types to automatic as trust builds.</p></div>
+        <div><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Connect</h3><p>Into the software each office already runs. Nothing to rip out.</p></div>
+        <div><span class="ico"><svg><use href="#i-send"/></svg></span><h3>Launch</h3><p>Overflow and after-hours first, plus a text line under your name.</p></div>
+        <div><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Expand</h3><p>Move more request types to automatic as trust builds.</p></div>
       </div>
       <div class="join" style="grid-template-columns:1fr 1fr">
-        <div class="head"><h3 style="font-size:1.6rem">A few founding partners per city.</h3><p class="muted">We keep each area small so we can map every workflow properly. Founding partners' clients get first access to membership.</p></div>
-        <form id="p-form" novalidate>
+        <div class="head"><h3 style="font-size:1.6rem">A few first pilots.</h3><p class="muted">We're starting with multi-site physical therapy and rehab groups and with insurance agencies and brokers.</p></div>
+        <form id="o-form" novalidate>
           <div class="two">
-            <div><label class="sr" for="p-name">Your name</label><input id="p-name" autocomplete="name" placeholder="Your name"></div>
-            <div><label class="sr" for="p-org">Organization</label><input id="p-org" autocomplete="organization" placeholder="Organization"></div>
+            <div><label class="sr" for="o-name">Your name</label><input id="o-name" autocomplete="name" placeholder="Your name"></div>
+            <div><label class="sr" for="o-org">Organization</label><input id="o-org" autocomplete="organization" placeholder="Organization"></div>
           </div>
-          <label class="sr" for="p-type">Organization type</label>
-          <select id="p-type"><option>Medical or dental practice</option><option>Insurance agency</option><option>CPA, wealth or family office</option><option>HOA or property management</option><option>Law firm</option><option>Other</option></select>
+          <label class="sr" for="o-type">Organization type</label>
+          <select id="o-type"><option>Physical therapy or rehab group</option><option>Insurance agency or broker</option><option>Other multi-site practice</option><option>Other</option></select>
           <div class="btns" style="justify-content:flex-start"><button class="btn" type="submit">Request a pilot conversation</button></div>
-          <p class="form-msg" id="p-msg" aria-live="polite"></p>
+          <p class="form-msg" id="o-msg" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -705,81 +692,74 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
   <section class="band">
     <div class="wrap">
       <div class="head center">
-        <span class="eyebrow">Thesis · Draft, October 2026</span>
-        <p class="statement">Personal AI can only own outcomes if someone modernizes the other side. <span>So we build both sides, and the businesses we modernize bring us their clients.</span></p>
+        <span class="eyebrow">Thesis · Draft v0.3, October 2026</span>
+        <p class="statement">The mid-market's front door still runs on phones and people. <span>We modernize it for the private equity firms that own these businesses, and give every customer an assistant that remembers them.</span></p>
       </div>
     </div>
   </section>
 
   <section class="band alt">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>1</b> · The problem</span><h2>Personal AI looks magical online.<br>Most real cases still fail.</h2>
-        <p class="lede">Offices are built for people. Their portals, forms and phone menus need steps AI is unreliable at, and teaching AI to brute-force every office's system costs more per case than the case is worth. Even AI talking to an office's AI phone agent stalls, because the two sides were never built to work together.</p></div>
-      <div id="vs-thesis"></div>
-      <div class="head center" style="margin-top:12px"><h3 style="font-size:1.6rem">And nobody is fixing both halves.</h3><p class="sub">Consumer AI stops at the office. Office software stops at the front door.</p></div>
-      <svg class="viz" viewBox="0 0 1000 330" id="stall" role="img" aria-label="Consumer AI stalls at the office; office software only covers the inside of the firm; Onus covers the whole case"></svg>
+      <div class="head center"><span class="chap"><b>1</b> · The problem</span><h2>Inbound work is still<br>done by hand.</h2>
+        <p class="lede">At a physical therapy group or an insurance agency, customers call, text, email and fax. Staff answer, then re-type each request into the office's software, check benefits or policies, chase documents and call back with status. After a roll-up, each office does this its own way, on its own system.</p></div>
+      <div class="head center" style="margin-top:12px"><h3 style="font-size:1.6rem">The tools stop halfway.</h3><p class="sub">AI receptionists stop at the message. Office software stops at the record. The request in between waits for a person.</p></div>
+      <svg class="viz" viewBox="0 0 1000 330" id="stall" role="img" aria-label="AI receptionists stop after answering; office software only stores the record; Onus carries the request from arrival to the customer being told"></svg>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>2</b> · The insight</span><h2>Modernization is easy<br>when you control both ends.</h2>
-        <p class="lede">When one party runs the consumer's agent and the office's intake, there's nothing to translate. The request arrives in exactly the form the office needs, and every case teaches us how that office and that kind of problem work.</p></div>
-      <svg class="viz" viewBox="0 0 1000 300" id="hero-flow" role="img" aria-label="Member, Onus and partner office connected, with requests flowing in both directions"></svg>
-      <div class="head center" style="margin-top:12px"><h3 style="font-size:1.6rem">It doesn't depend on owning the app.</h3><p class="sub">iMessage is the front door, not the product. The connection to the offices is the product, so it works through any interface.</p></div>
-      <svg class="viz" viewBox="0 0 1000 300" id="channels" role="img" aria-label="iMessage, WhatsApp, web and a partner's own app all connect through Onus to partner offices"></svg>
+      <div class="head center"><span class="chap"><b>2</b> · The insight</span><h2>Answering is crowded.<br>The work behind it is open.</h2>
+        <p class="lede">Funded vendors already answer calls in most verticals, and the big software owners are adding their own voice AI. Few handle the certificates, authorizations, records requests and status updates behind the call, and fewer work across the mixed systems a roll-up inherits. That is where we start.</p></div>
+      <svg class="viz" viewBox="0 0 1000 300" id="hero-flow" role="img" aria-label="The customer, Onus and the office's own systems connected, with requests flowing in both directions"></svg>
     </div>
   </section>
 
   <section class="band alt">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>3</b> · The market</span><h2>The mid-market can't buy<br>what the big players build.</h2>
-        <p class="lede">Large enterprises build AI in-house because their scale pays for it. The small law firm and the family dental practice can't. Building costs too much, enterprise software is built for someone else, and they watch the big dental group and the hospital system pull ahead.</p></div>
-      <svg class="viz" viewBox="0 0 1000 400" id="cost" role="img" aria-label="Illustrative chart: cost per client of making AI work falls with company size for in-house builds; Onus is cheapest across the mid-market"></svg>
+      <div class="head center"><span class="chap"><b>3</b> · The buyer</span><h2>PE owns the businesses.<br>PE sets the agenda.</h2>
+        <p class="lede">Mid-market businesses, about $2M to $100M in revenue, are being rolled up by private equity. Owners want margin and consistency across offices but can't justify building AI themselves. The operating team sets the program; the platform's operators run it. One yes covers many offices.</p></div>
+      <svg class="viz" viewBox="0 0 1000 400" id="cost" role="img" aria-label="Illustrative chart: cost per customer of making AI work falls with company size for in-house builds; Onus is cheapest across the mid-market"></svg>
       <p class="small center">Illustrative, not measured.</p>
       <div class="grid2">
-        <div class="tile"><span class="ico soft"><svg><use href="#i-users"/></svg></span><h3>Who we serve first</h3><p class="muted">Independent and group practices, insurance agencies, CPA and wealth offices, HOA and property managers, small law firms. Mid-market and commercial, in health, money and home.</p></div>
-        <div class="tile"><svg class="viz" viewBox="0 0 300 110" aria-hidden="true" style="max-width:260px"><circle cx="115" cy="55" r="48" fill="#0A84FF" fill-opacity=".14" stroke="#0A84FF" stroke-opacity=".4"/><circle cx="185" cy="55" r="48" fill="#5E5CE6" fill-opacity=".14" stroke="#5E5CE6" stroke-opacity=".4"/><text x="88" y="59" class="t-small" text-anchor="middle">Personal</text><text x="212" y="59" class="t-small" text-anchor="middle">Business</text><text x="150" y="59" class="t-small" text-anchor="middle" style="font-weight:600;fill:#1D1D1F">Owner</text></svg><h3>Personal is business here</h3><p class="muted">Owner-operators run their business by text, email and phone, mixed in with their personal lives. They won't buy enterprise software. A personal agent fits them.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-users"/></svg></span><h3>Who we serve first</h3><p class="muted">Multi-site physical therapy and rehab groups, and insurance agencies and brokers, owned by PE platforms. Other multi-site practices next.</p></div>
+        <div class="tile"><span class="ico soft"><svg><use href="#i-spark"/></svg></span><h3>What we're testing now</h3><p class="muted">Which requests cost each office the most, what software they run, and whether operating teams will pay to fix it. We're interviewing operators and operating partners before we build.</p></div>
       </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>4</b> · The product</span><h2>One product, two sides.</h2></div>
+      <div class="head center"><span class="chap"><b>4</b> · The product</span><h2>One platform, two sides.</h2></div>
       <div class="grid2">
-        <div class="tile"><span class="ico"><svg><use href="#i-msg"/></svg></span><h3>For members</h3><ul><li>Text a problem, Onus opens a case</li><li>Works with trusted partners, follows up with everyone else</li><li>Live pages, bookings, reminders and approvals right in the chat</li><li>Closes only when the result is real</li></ul></div>
-        <div class="tile"><span class="ico"><svg><use href="#i-folder"/></svg></span><h3>For partners</h3><ul><li>Routine requests resolve on their own</li><li>Everything else arrives complete and ready to act on</li><li>The partner decides where that line sits</li><li>Under their brand, or through hosted Onus</li></ul></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-folder"/></svg></span><h3>For the business</h3><ul><li>Every call, text, email and fax answered</li><li>Routine requests finished end to end</li><li>Everything else arrives complete and ready to act on</li><li>Works across each office's own software</li></ul></div>
+        <div class="tile"><span class="ico"><svg><use href="#i-msg"/></svg></span><h3>For its customers</h3><ul><li>A text line under the business's own name</li><li>Remembers their history and what's still open</li><li>Follows each request until it's done</li><li>Later: one assistant across the businesses they use, with their consent</li></ul></div>
       </div>
     </div>
   </section>
 
   <section class="band alt">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>5</b> · Go-to-market</span><h2>Partners bring their clients.<br>Clients bring the next partner.</h2></div>
+      <div class="head center"><span class="chap"><b>5</b> · Go-to-market</span><h2>One platform deal,<br>many offices.</h2></div>
       <div class="stepper">
-        <div><span class="ico"><svg><use href="#i-map"/></svg></span><h3>Land partners</h3><p>Mid-market offices in health, money and home.</p></div>
-        <div><span class="ico"><svg><use href="#i-send"/></svg></span><h3>They invite clients</h3><p>Membership as a benefit, under the partner's name.</p></div>
-        <div><span class="ico"><svg><use href="#i-users"/></svg></span><h3>Members invite friends</h3><p>Two invites, unlocked after the first closed case.</p></div>
-        <div><span class="ico"><svg><use href="#i-loop"/></svg></span><h3>Stuck cases sell</h3><p>Offices where members get stuck become the next leads.</p></div>
+        <div><span class="ico"><svg><use href="#i-map"/></svg></span><h3>Win a platform</h3><p>Through the PE firm's operating team.</p></div>
+        <div><span class="ico"><svg><use href="#i-plug"/></svg></span><h3>Pilot</h3><p>Three to five offices on mixed systems.</p></div>
+        <div><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Prove</h3><p>On the numbers the operating team tracks.</p></div>
+        <div><span class="ico"><svg><use href="#i-loop"/></svg></span><h3>Replicate</h3><p>Across the platform, then the portfolio.</p></div>
       </div>
-      <svg class="viz" viewBox="0 0 1000 520" id="flywheel" role="img" aria-label="Flywheel: partner joins, invites clients, cases open, workflow data, better outcomes, clients ask their other providers"></svg>
-      <ol class="fly only-m" id="fly-list"></ol>
-      <div class="head center" style="margin-top:12px"><h3 style="font-size:1.6rem">One PE deal, many offices.</h3><p class="sub">Private equity is rolling up practices and agencies. One platform deal puts Onus in every office in the portfolio, and in front of all their clients.</p></div>
-      <svg class="viz" viewBox="0 0 1000 280" id="pe" role="img" aria-label="One private equity platform connects to many offices, each with many clients"></svg>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="head center"><span class="chap"><b>6</b> · Economics</span><h2>Every partner makes<br>the next one cheaper.</h2>
-        <p class="lede">The first practice takes custom mapping. By the hundredth, most of the work is templates. The modernization half becomes standard software, which is what makes the PE math and the long-term white-label business work.</p></div>
-      <svg class="viz" viewBox="0 0 1000 320" id="onboard" role="img" aria-label="Illustrative curve: effort to onboard each new partner falls as more partners are onboarded"></svg>
+      <div class="head center"><span class="chap"><b>6</b> · Economics</span><h2>Every office makes<br>the next one cheaper.</h2>
+        <p class="lede">The first office takes custom mapping. By the hundredth, most of the work is templates: the same request types, the same systems, the same rules. That is what makes portfolio-wide pricing work.</p></div>
+      <svg class="viz" viewBox="0 0 1000 320" id="onboard" role="img" aria-label="Illustrative curve: effort to onboard each new office falls as more offices are onboarded"></svg>
       <p class="small center">Illustrative, not measured.</p>
       <div class="grid3">
-        <div class="tile"><span class="k" style="font-size:.85rem;color:var(--faint);font-weight:600">Revenue</span><h3>Partners pay from day one</h3><p class="muted">Per-member or per-case fees from offices. Consumer pricing stays open.</p></div>
+        <div class="tile"><span class="k" style="font-size:.85rem;color:var(--faint);font-weight:600">Revenue</span><h3>The business pays</h3><p class="muted">Per location, per request or a portfolio license. We're testing which in the first pilots.</p></div>
         <div class="tile"><span class="k" style="font-size:.85rem;color:var(--faint);font-weight:600">Margin</span><h3>Templates replace services</h3><p class="muted">Each vertical's workflows get reused across every office in it.</p></div>
-        <div class="tile"><span class="k" style="font-size:.85rem;color:var(--faint);font-weight:600">Long haul</span><h3>White-label software</h3><p class="muted">Offices run Onus under their own brand, and other agents route through us.</p></div>
+        <div class="tile"><span class="k" style="font-size:.85rem;color:var(--faint);font-weight:600">Long haul</span><h3>The customer layer</h3><p class="muted">Customers who use one business's assistant can bring it to the next, with their consent.</p></div>
       </div>
     </div>
   </section>
@@ -788,9 +768,9 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
     <div class="wrap">
       <div class="head center"><span class="chap"><b>7</b> · Where it ends up</span><h2>Each layer builds on the last.</h2></div>
       <div class="stack">
-        <div class="layer l1"><b>Consumer AI for the mid-market</b><span>The simplest way to modernize for businesses that will never buy enterprise software</span></div>
-        <div class="layer l2"><b>The vertical provider for personal agents</b><span>Any agent's case that touches medical billing, a claim or an HOA runs through our partners</span></div>
-        <div class="layer l3"><b>The two-sided data layer</b><span>How mid-market workflows really run, seen from the customer's side and the office's</span></div>
+        <div class="layer l1"><b>The front door for PE-owned businesses</b><span>Inbound and the work behind it, across mixed systems, sold portfolio by portfolio</span></div>
+        <div class="layer l2"><b>One assistant across the businesses a customer uses</b><span>White-labeled per business, linked behind the scenes only when the customer agrees</span></div>
+        <div class="layer l3"><b>How mid-market requests really get resolved</b><span>Seen from the customer's side and the office's, across verticals</span></div>
       </div>
     </div>
   </section>
@@ -799,12 +779,12 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
     <div class="wrap">
       <div class="head center"><span class="chap"><b>8</b> · Risks</span><h2>How this could fail.</h2></div>
       <div class="grid3">
-        <div class="tile risk"><span class="r">Hollow membership</span><span class="why">Most member problems involve companies that aren't partners yet.</span><span class="ans">A strong generalist. Partners are the fast lane, not the only lane.</span></div>
-        <div class="tile risk"><span class="r">Partners won't distribute</span><span class="why">They fear losing the client relationship.</span><span class="ans">Their brand on it, or new clients from hosted Onus.</span></div>
-        <div class="tile risk"><span class="r">Regulation</span><span class="why">HIPAA, public-adjuster licensing, practice of law, messaging consent.</span><span class="ans">Admin and advocacy only, with legal review per vertical.</span></div>
-        <div class="tile risk"><span class="r">Unit economics</span><span class="why">Long cases and human escalations are expensive.</span><span class="ans">Partner fees first. Templates bring onboarding cost down.</span></div>
-        <div class="tile risk"><span class="r">Big players copy it</span><span class="why">Instinct or OpenAI add persistence.</span><span class="ans">Persistence is copyable. Partner connections aren't.</span></div>
-        <div class="tile risk"><span class="r">AI gets good at portals</span><span class="why">Computer-use agents keep improving.</span><span class="ans">Still slower and costlier per case than a direct connection.</span></div>
+        <div class="tile risk"><span class="r">PE won't buy</span><span class="why">Operating teams may see one more AI vendor.</span><span class="ans">Pilot on their own scorecard before any rollout.</span></div>
+        <div class="tile risk"><span class="r">Answering is crowded</span><span class="why">Funded voice vendors already sell to these buyers.</span><span class="ans">Start behind the call, where few vendors work.</span></div>
+        <div class="tile risk"><span class="r">Software owners add AI</span><span class="why">Practice and agency systems ship their own features.</span><span class="ans">They serve their own system. Roll-ups run several.</span></div>
+        <div class="tile risk"><span class="r">Staff push back</span><span class="why">Front desks reject tools that look like replacement.</span><span class="ans">Overflow and paperwork first. Report hours returned.</span></div>
+        <div class="tile risk"><span class="r">Regulation</span><span class="why">HIPAA, insurance licensing, messaging consent.</span><span class="ans">BAAs, licensed staff decide, front-office work only.</span></div>
+        <div class="tile risk"><span class="r">Customers won't link brands</span><span class="why">One assistant across businesses raises privacy questions.</span><span class="ans">A number per business. Linking only with consent.</span></div>
       </div>
     </div>
   </section>
@@ -812,7 +792,8 @@ footer p { max-width: 1080px; margin: 0 auto; font-size: 0.78rem; line-height: 1
 
 </main>
 
-<footer><p>Onus is a working name. This is a concept preview: the product is not live, and every conversation, page, queue, chart and invitation shown is an illustrative example. Calls, payments and iMessage delivery are planned capabilities, not yet available.</p></footer>
+<footer><p>Onus is a working name. This is a concept preview: the product is not live. Every business, person, conversation, queue and chart shown is an illustrative example.</p></footer>
+
 
 <script>
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -847,25 +828,25 @@ function heroFlow() {
       <path id="hf3" class="flow blue" d="M550 120 C600 90, 670 70, 785 110"/><path id="hf4" class="flow blue" d="M785 150 C670 180, 600 175, 550 145"/>
       ${miniPhone(120, 40)}${orb(500, 132, 52, "onus")}${miniOffice(785, 50)}
       ${anim(packet("hf1", 2.4, 0) + packet("hf1", 2.4, 1.2) + packet("hf3", 2.4, .6, "v") + packet("hf3", 2.4, 1.8, "v") + packet("hf4", 2.6, .3, "v") + packet("hf2", 2.6, 1.5))}
-      ${label(168, 256, "The member", "t-strong")}${label(168, 276, "texts a problem")}
-      ${label(500, 222, "Onus", "t-strong")}${label(500, 242, "runs both ends")}
-      ${label(855, 256, "The partner office", "t-strong")}${label(855, 276, "gets it in its own format")}`],
+      ${label(168, 256, "The customer", "t-strong")}${label(168, 276, "texts or calls")}
+      ${label(500, 222, "Onus", "t-strong")}${label(500, 242, "does the work behind it")}
+      ${label(855, 256, "The office", "t-strong")}${label(855, 276, "updated in its own software")}`],
     () => ["0 0 400 640", `<circle cx="200" cy="300" r="110" fill="url(#gGlow)"/>
       <path id="hf1" class="flow blue" d="M185 195 C165 225, 170 245, 186 258"/><path id="hf2" class="flow blue" d="M214 258 C230 245, 235 225, 215 195"/>
       <path id="hf3" class="flow blue" d="M186 344 C170 365, 165 395, 185 418"/><path id="hf4" class="flow blue" d="M215 418 C235 395, 230 365, 214 344"/>
       ${miniPhone(152, 10)}${orb(200, 300, 46, "onus", 18)}${miniOffice(130, 420)}
       ${anim(packet("hf1", 2, 0) + packet("hf3", 2, .8, "v") + packet("hf4", 2.2, .4, "v") + packet("hf2", 2.2, 1.4))}
-      ${label(266, 92, "The member", "t-strong", "start")}${label(266, 112, "texts a problem", "t-lbl", "start")}
-      ${label(262, 294, "Onus runs", "t-strong", "start")}${label(262, 314, "both ends", "t-lbl", "start")}
-      ${label(200, 606, "The partner office", "t-strong")}${label(200, 626, "gets it in its own format")}`]);
+      ${label(266, 92, "The customer", "t-strong", "start")}${label(266, 112, "texts or calls", "t-lbl", "start")}
+      ${label(262, 294, "Onus does", "t-strong", "start")}${label(262, 314, "the work", "t-lbl", "start")}
+      ${label(200, 606, "The office", "t-strong")}${label(200, 626, "updated in its own software")}`]);
 }
 
 const STALL = [
-  { name: "Consumer AI", short: ["Consumer", "AI"], note: "Stalls at the office", from: 0, to: 2.55, color: "#C7C7CC", end: "stall" },
-  { name: "Office software", short: ["Office", "software"], note: "Only inside one firm", from: 3, to: 4, color: "#C7C7CC", end: "none" },
-  { name: "Onus", short: ["Onus", ""], note: "The whole case, both sides", from: 0, to: 5, color: "url(#gBlue)", end: "done" }
+  { name: "AI receptionist", short: ["AI", "reception"], note: "Stops at the message", from: 0, to: 1.55, color: "#C7C7CC", end: "stall" },
+  { name: "Office software", short: ["Office", "software"], note: "Stores the record", from: 2, to: 3, color: "#C7C7CC", end: "none" },
+  { name: "Onus", short: ["Onus", ""], note: "The whole request", from: 0, to: 5, color: "url(#gBlue)", end: "done" }
 ];
-const STAGES = ["Ask", "Gather documents", "Reach the office", "Office processes it", "Verified result"];
+const STAGES = ["Request arrives", "Answered", "Logged in system", "Work done", "Customer told"];
 const xMark = (x, y) => `<g transform="translate(${x} ${y})"><circle r="12" fill="#FF453A"/><path d="M-4 -4 4 4M4 -4 -4 4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g>`;
 const vMark = (x, y) => `<g transform="translate(${x} ${y})"><circle r="14" fill="#28A745"/><path d="M-5 0 -1 4 6 -4" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
 const grow = (attr, to) => anim(`<animate attributeName="${attr}" from="0" to="${to}" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".2 .8 .2 1"/>`);
@@ -908,7 +889,7 @@ function stall() {
 
 /* interface-agnostic */
 function channels() {
-  const ins = ["iMessage", "WhatsApp", "Web", "Partner's own app"], outs = ["Practices", "Agencies", "HOA managers"];
+  const ins = ["Phone", "Text", "Email", "Fax and web forms"], outs = ["Office on system A", "Office on system B", "Office on system C"];
   const pill = (x, y, w, t, cls) => `<rect x="${x - w / 2}" y="${y - 18}" width="${w}" height="36" rx="18" fill="${cls === "o" ? "#fff" : "#F5F5F7"}" stroke="${cls === "o" ? "#5E5CE6" : "#D8D8DE"}" stroke-width="${cls === "o" ? 2 : 1}"/>${label(x, y + 5, t, cls === "o" ? "t-strong" : "t-lbl")}`;
   draw("#channels",
     () => {
@@ -945,7 +926,7 @@ function costChart() {
     h += `<line x1="${L}" y1="${H - B}" x2="${W - R}" y2="${H - B}" stroke="#D1D1D6"/><line x1="${L}" y1="${T - 10}" x2="${L}" y2="${H - B}" stroke="#D1D1D6"/>`;
     h += label(sx(0.06), H - B + 22, "Small", "t-small") + label((sx(0.22) + sx(0.72)) / 2, H - B + 22, "Mid-size", "t-small") + label(sx(0.94), H - B + 22, "Enterprise", "t-small");
     h += label((L + W - R) / 2, H - 6, "Company size →", "t-lbl");
-    h += `<text transform="translate(${L - 14} ${(T + H - B) / 2}) rotate(-90)" class="t-lbl" text-anchor="middle">${small ? "Cost per client" : "Cost per client to make AI work"} →</text>`;
+    h += `<text transform="translate(${L - 14} ${(T + H - B) / 2}) rotate(-90)" class="t-lbl" text-anchor="middle">${small ? "Cost per customer" : "Cost per customer to make AI work"} →</text>`;
     curves.forEach((c, k) => {
       const pts = Array.from({ length: 41 }, (_, i) => `${sx(i / 40).toFixed(1)},${sy(c.f(i / 40)).toFixed(1)}`).join(" ");
       h += `<polyline points="${pts}" fill="none" stroke="${c.color}" stroke-width="${c.strong ? 4 : 2.5}" stroke-dasharray="${c.dash}" stroke-linecap="round"/>`;
@@ -959,29 +940,32 @@ function costChart() {
   draw("#cost", () => ["0 0 1000 400", build(1000, 400, 70, 20, 40, 60, false)], () => ["0 0 400 420", build(400, 420, 34, 10, 40, 60, true)]);
 }
 
-/* PE fan-out */
+/* PE fan-out: one rollout, offices on mixed software, each office's customers */
 function peFan() {
+  const SYS = ["A", "B", "A", "C", "B"];
+  const chip = (x, y, w, t) => `<rect x="${x - w / 2}" y="${y - 10}" width="${w}" height="20" rx="10" fill="rgba(94,92,230,0.10)"/>${label(x, y + 4, t, "t-small")}`;
   draw("#pe",
     () => {
-      let h = `<rect x="40" y="110" width="170" height="60" rx="18" fill="url(#gOrb)"/>${label(125, 146, "PE platform", "t-white")}`;
-      for (let i = 0; i < 6; i++) {
-        const y = 30 + i * 44;
-        h += `<path id="pe${i}" class="flow blue" d="M210 140 C330 140, 340 ${y}, 450 ${y}"/>` + anim(packet("pe" + i, 1.8, i * 0.25));
-        h += `<rect x="450" y="${y - 15}" width="120" height="30" rx="10" fill="#fff" stroke="#D8D8DE"/>${label(510, y + 5, "Office " + (i + 1), "t-lbl")}`;
-        for (let j = 0; j < 9; j++) h += `<circle cx="${640 + j * 30}" cy="${y}" r="6" fill="${j % 2 ? "#5E5CE6" : "#0A84FF"}" opacity="${(0.35 + ((i * 9 + j) % 5) * 0.15).toFixed(2)}"/>`;
-        h += `<line x1="572" y1="${y}" x2="628" y2="${y}" stroke="#D8D8DE" stroke-dasharray="3 4"/>`;
-      }
-      return ["0 0 1000 280", h + label(125, 200, "One deal", "t-lbl") + label(790, 278, "Their clients, as members", "t-lbl")];
+      let h = `<circle cx="125" cy="150" r="110" fill="url(#gGlow)"/><rect x="40" y="120" width="170" height="60" rx="18" fill="url(#gOrb)"/>${label(125, 156, "onus", "t-white")}`;
+      h += label(525, 24, "Offices on different software", "t-small") + label(800, 24, "Their customers, each with a text line", "t-small");
+      SYS.forEach((sys, i) => {
+        const y = 60 + i * 50;
+        h += `<path id="pe${i}" class="flow blue" d="M210 150 C330 150, 330 ${y}, 440 ${y}"/>` + anim(packet("pe" + i, 1.8, i * 0.3));
+        h += `<rect x="440" y="${y - 17}" width="170" height="34" rx="11" fill="#fff" stroke="#D8D8DE"/>${label(456, y + 5, "Office " + (i + 1), "t-lbl", "start")}${chip(568, y, 66, "System " + sys)}`;
+        h += `<line x1="612" y1="${y}" x2="668" y2="${y}" stroke="#D8D8DE" stroke-dasharray="3 4"/>`;
+        for (let j = 0; j < 9; j++) h += `<circle cx="${680 + j * 30}" cy="${y}" r="6" fill="${j % 2 ? "#5E5CE6" : "#0A84FF"}" opacity="${(0.35 + ((i * 9 + j) % 5) * 0.15).toFixed(2)}"/>`;
+      });
+      return ["0 0 1000 300", h + label(125, 210, "One rollout", "t-strong") + label(125, 230, "across the platform")];
     },
     () => {
-      let h = `<rect x="115" y="10" width="170" height="54" rx="18" fill="url(#gOrb)"/>${label(200, 43, "PE platform", "t-white")}`;
-      for (let i = 0; i < 6; i++) {
-        const x = 40 + i * 64;
-        h += `<path id="pe${i}" class="flow blue" d="M200 64 C200 110, ${x} 100, ${x} 140"/>` + anim(packet("pe" + i, 1.8, i * 0.25));
-        h += `<rect x="${x - 26}" y="140" width="52" height="34" rx="10" fill="#fff" stroke="#D8D8DE"/>${label(x, 162, "Office", "t-small")}`;
+      let h = `<rect x="115" y="10" width="170" height="54" rx="18" fill="url(#gOrb)"/>${label(200, 43, "onus", "t-white")}`;
+      SYS.forEach((sys, i) => {
+        const x = 44 + i * 78;
+        h += `<path id="pe${i}" class="flow blue" d="M200 64 C200 110, ${x} 100, ${x} 136"/>` + anim(packet("pe" + i, 1.8, i * 0.3));
+        h += `<rect x="${x - 34}" y="136" width="68" height="40" rx="10" fill="#fff" stroke="#D8D8DE"/>${label(x, 153, "Office", "t-small")}${label(x, 168, "System " + sys, "t-small")}`;
         for (let j = 0; j < 6; j++) h += `<circle cx="${x}" cy="${200 + j * 22}" r="6" fill="${j % 2 ? "#5E5CE6" : "#0A84FF"}" opacity="${(0.35 + ((i * 6 + j) % 5) * 0.15).toFixed(2)}"/>`;
-      }
-      return ["0 0 400 360", h + label(200, 350, "Their clients, as members", "t-lbl")];
+      });
+      return ["0 0 400 370", h + label(200, 342, "Offices on different software,", "t-lbl") + label(200, 362, "each customer with a text line", "t-lbl")];
     });
 }
 
@@ -993,62 +977,17 @@ function onboard() {
     let h = `<polyline points="${sx(0)},${sy(0)} ${pts} ${sx(1)},${sy(0)}" fill="url(#gGlow)" opacity=".7"/>`;
     h += `<polyline points="${pts}" fill="none" stroke="url(#gBlue)" stroke-width="4" stroke-linecap="round"/>`;
     h += `<line x1="${L}" y1="${H - B}" x2="${W - R}" y2="${H - B}" stroke="#D1D1D6"/>`;
-    h += label(L, H - B + 22, "1st partner", "t-small", "start") + label(W - R, H - B + 22, small ? "100th" : "100th partner", "t-small", "end");
+    h += label(L, H - B + 22, "1st office", "t-small", "start") + label(W - R, H - B + 22, small ? "100th" : "100th office", "t-small", "end");
     h += `<circle cx="${sx(0)}" cy="${sy(f(0))}" r="7" fill="#0A84FF"/><circle cx="${sx(1)}" cy="${sy(f(1))}" r="7" fill="#5E5CE6"/>`;
     h += label(sx(0) + 16, sy(f(0)) + 5, small ? "Custom mapping" : "Custom mapping, by hand", "t-strong", "start");
     h += label(sx(1), sy(f(1)) - 18, small ? "Mostly templates" : "Mostly templates", "t-strong", "end");
-    h += label((L + W - R) / 2, H - 6, "Effort to onboard each new partner", "t-lbl");
+    h += label((L + W - R) / 2, H - 6, "Effort to onboard each new office", "t-lbl");
     return h;
   };
   draw("#onboard", () => ["0 0 1000 320", build(1000, 320, 30, 30, 30, 60, false)], () => ["0 0 400 300", build(400, 300, 20, 20, 30, 60, true)]);
 }
 
-/* flywheel */
-const FLY = ["Partner joins", "Invites its clients", "Cases open", "Workflow data", "Better outcomes", "Clients ask their other providers"];
-function flywheel() {
-  const ring = (cx, cy, R, orbR, withLabels) => {
-    let h = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#E3E3E8" stroke-width="2"/>
-      <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#gBlue)" stroke-width="3" stroke-dasharray="${R * 0.63} ${R * 6}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})">${anim(`<animateTransform attributeName="transform" type="rotate" from="-90 ${cx} ${cy}" to="270 ${cx} ${cy}" dur="9s" repeatCount="indefinite"/>`)}</circle>
-      <circle cx="${cx}" cy="${cy}" r="${orbR * 1.3}" fill="url(#gGlow)"/><circle cx="${cx}" cy="${cy}" r="${orbR}" fill="url(#gOrb)"/>
-      ${label(cx, cy - 4, "onus", "t-white")}${label(cx, cy + 16, "gets better", "t-white")}`;
-    FLY.forEach((t, i) => {
-      const a = -Math.PI / 2 + (i * 2 * Math.PI) / 6, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
-      h += `<circle cx="${x}" cy="${y}" r="16" fill="#fff" stroke="#0A84FF" stroke-width="2.5"/>${label(x, y + 5, i + 1, "t-strong")}`;
-      if (withLabels) {
-        const lx = cx + (R + 34) * Math.cos(a), ly = cy + (R + 34) * Math.sin(a);
-        const anchor = Math.abs(Math.cos(a)) < 0.2 ? "middle" : Math.cos(a) > 0 ? "start" : "end";
-        h += label(lx, ly + (Math.sin(a) > 0.9 ? 14 : Math.sin(a) < -0.9 ? -4 : 5), t, "t-strong", anchor);
-      }
-    });
-    return h;
-  };
-  draw("#flywheel", () => ["0 0 1000 520", ring(500, 260, 190, 70, true)], () => ["0 0 400 380", ring(200, 190, 150, 62, false)]);
-  $("#fly-list").innerHTML = FLY.map((t, i) => `<li><span>${i + 1}</span>${t}</li>`).join("");
-}
-
-/* Members: trusted-partner network */
-function network() {
-  const build = (cx, cy, nodes, youR) => {
-    let h = `<circle cx="${cx}" cy="${cy}" r="${youR * 2.4}" fill="url(#gGlow)"/>`;
-    nodes.forEach(([n, p, x, y], i) => {
-      h += `<path id="nw${i}" d="M${cx} ${cy} Q${(cx + x) / 2 + (i % 2 ? 30 : -30)} ${(cy + y) / 2} ${x} ${y}" class="flow ${p ? "blue" : "dash"}"/>`;
-      if (p) h += anim(packet("nw" + i, 2.2, i * 0.5) + packet("nw" + i, 2.2, i * 0.5 + 1.1, "v"));
-    });
-    nodes.forEach(([n, p, x, y]) => {
-      h += `<circle cx="${x}" cy="${y}" r="26" fill="#fff" stroke="${p ? "#0A84FF" : "#C7C7CC"}" stroke-width="${p ? 3 : 2}"/>`;
-      h += p ? `<circle cx="${x}" cy="${y}" r="9" fill="url(#gOrb)"/>` : `<circle cx="${x}" cy="${y}" r="7" fill="#C7C7CC"/>`;
-      h += label(x, y > cy ? y + 50 : y - 38, n, "t-strong");
-    });
-    return h + `<circle cx="${cx}" cy="${cy}" r="${youR}" fill="#0A84FF"/>${label(cx, cy + 6, "You", "t-white")}`;
-  };
-  draw("#network",
-    () => ["0 0 1000 460", build(500, 225, [["Your doctor", 1, 180, 100], ["Your HOA manager", 1, 820, 100], ["Your insurance agent", 1, 170, 340],
-      ["Health insurer", 0, 500, 60], ["Your bank", 0, 830, 340], ["Utility company", 0, 500, 400]], 46)],
-    () => ["0 0 400 580", build(200, 290, [["Doctor", 1, 72, 160], ["HOA manager", 1, 328, 160], ["Insurance agent", 1, 72, 430],
-      ["Health insurer", 0, 200, 80], ["Bank", 0, 328, 430], ["Utility", 0, 200, 500]], 42)]);
-}
-
-/* Partners: two lanes */
+/* Operators: two lanes */
 function lanes() {
   const box = (x, y, w, h, tint, stroke, icon, title, lines) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="${tint}" stroke="${stroke}" stroke-opacity=".35"/>
     <g transform="translate(${x + 18} ${y + 18})"><circle cx="13" cy="13" r="13" fill="${stroke}"/><svg x="5" y="5" width="16" height="16" style="color:#fff"><use href="#${icon}"/></svg></g>
@@ -1056,7 +995,7 @@ function lanes() {
     ${lines.map((t, i) => label(x + 20, y + 36 + title.length * 18 + 16 + i * 24, "• " + t, "t-lbl", "start")).join("")}`;
   const bubbles = (x, y) => `<g transform="translate(${x} ${y})"><rect x="40" y="0" width="120" height="26" rx="13" fill="#0A84FF"/><rect x="10" y="38" width="150" height="26" rx="13" fill="#0A84FF" opacity=".8"/><rect x="60" y="76" width="100" height="26" rx="13" fill="#0A84FF" opacity=".6"/><rect x="30" y="114" width="130" height="26" rx="13" fill="#0A84FF" opacity=".45"/></g>`;
   draw("#lanes",
-    () => ["0 0 1000 380", `${bubbles(20, 120)}${label(100, 300, "Client requests", "t-strong")}${label(100, 320, "by text, any time")}
+    () => ["0 0 1000 380", `${bubbles(20, 120)}${label(100, 300, "Customer requests", "t-strong")}${label(100, 320, "call, text, email, fax")}
       <path id="ln0" class="flow blue" d="M190 190 H372"/>
       <circle cx="420" cy="190" r="90" fill="url(#gGlow)"/>${orb(420, 190, 48, "onus", 18)}
       <path id="ln1" d="M468 175 C540 175, 540 100, 610 100" class="flow" style="stroke:#28A745;stroke-width:2.5"/>
@@ -1064,7 +1003,7 @@ function lanes() {
       ${anim(packet("ln0", 1.4, 0) + packet("ln0", 1.4, 0.7) + packet("ln1", 1.6, 0.2, "green") + packet("ln1", 1.6, 0.8, "green") + packet("ln1", 1.6, 1.3, "green") + packet("ln2", 2.2, 0.5))}
       ${box(612, 20, 380, 160, "rgba(40,167,69,0.06)", "#28A745", "i-check", ["Resolved by Onus"], ["Scheduling and rescheduling", "Status and balance questions", "Document collection"])}
       ${box(612, 200, 380, 160, "rgba(10,132,255,0.06)", "#0A84FF", "i-users", ["Sent to your team, ready to act"], ["Decisions that need judgment", "Money, coverage or clinical calls", "Anything unusual"])}`],
-    () => ["0 0 400 566", `${bubbles(115, 0)}${label(200, 166, "Client requests", "t-strong")}
+    () => ["0 0 400 566", `${bubbles(115, 0)}${label(200, 166, "Customer requests", "t-strong")}
       <path id="ln0" class="flow blue" d="M200 176 V222"/>
       <circle cx="200" cy="270" r="80" fill="url(#gGlow)"/>${orb(200, 270, 46, "onus", 17)}
       <path id="ln1" d="M180 312 C120 340, 100 350, 100 384" class="flow" style="stroke:#28A745;stroke-width:2.5"/>
@@ -1074,35 +1013,42 @@ function lanes() {
       ${box(206, 388, 190, 170, "rgba(10,132,255,0.06)", "#0A84FF", "i-users", ["Sent to", "your team"], ["Judgment calls", "Coverage, clinical", "Anything unusual"])}`]);
 }
 
-function renderDiagrams() { heroFlow(); stall(); channels(); costChart(); peFan(); onboard(); flywheel(); network(); lanes(); }
+function renderDiagrams() { heroFlow(); stall(); channels(); costChart(); peFan(); onboard(); lanes(); }
 renderDiagrams();
 NARROW.addEventListener("change", renderDiagrams);
 
-/* ---------- Stuck vs through ---------- */
-const VS_LEFT = {
-  portal: { sub: "Trying the insurer's web portal", lines: [["i", "Opening the claims portal…"], ["w", "Login needs a code sent to your phone"], ["w", "Form has 14 required fields and 3 drop-downs"], ["w", "Upload rejected: file type not supported"], ["x", "Session expired. Start over."]] },
-  phone: { sub: "Calling the office's phone line", lines: [["i", "Calling Lakeview Imaging…"], ["q", "<span>Phone bot: Say “billing” or “scheduling.”</span>"], ["a", "<span>Agent: I'm calling about a denied MRI claim for—</span>"], ["q", "<span>Phone bot: Sorry, I didn't catch that.</span>"], ["x", "On hold for the next representative: 47 min"]] }
+/* ---------- AI receptionist vs Onus ---------- */
+const VS_MODES = {
+  referral: {
+    label: "PT referral",
+    left: { sub: "Answering the clinic's phone", lines: [["i", "Maya calls: “I have a referral for my knee.”"], ["q", "<span>AI: I can take a message for the front desk.</span>"], ["w", "Message logged: new patient, call back"], ["w", "The faxed referral is still in the tray"], ["x", "Callback two days later. Maya booked elsewhere."]] },
+    right: { sub: "Doing the work behind the call", lines: [["on", "Faxed referral read and matched to Maya"], ["on", "Benefits checked in the clinic's own system"], ["on", "Evaluation booked by text, intake form sent"], ["ok", "Booked before she hung up"]] }
+  },
+  certificate: {
+    label: "Certificate request",
+    left: { sub: "Answering the agency's phone", lines: [["i", "Dan calls: “I need a certificate for a job site.”"], ["q", "<span>AI: I'll pass that to your account manager.</span>"], ["w", "Email sent to the service inbox"], ["w", "Account manager is out until Monday"], ["x", "Dan can't start the job on Friday"]] },
+    right: { sub: "Doing the work behind the call", lines: [["on", "Policy pulled from the agency's system"], ["on", "Blanket additional insured confirmed"], ["on", "Certificate issued to the contractor"], ["ok", "Sent the same morning, logged on the account"]] }
+  }
 };
-const VS_RIGHT = {
-  members: { sub: "Through a trusted partner", lines: [["on", "Sent to Lakeview Family Medicine, an Onus partner"], ["on", "Their billing team gets it with your documents"], ["on", "Resubmitted to your insurer the same day"], ["ok", "Approved. You owe $85."]] },
-  partners: { sub: "Straight into your queue", lines: [["on", "Arrives in your Onus queue, already structured"], ["on", "EOB, order and insurance card attached"], ["on", "Routed to billing with the packet prefilled"], ["ok", "Resolved in one touch"]] }
-};
-function vsMount(id, side) {
+function vsMount(id) {
   const root = $(id);
-  root.innerHTML = `<div class="ctrl" style="margin-bottom:20px"><div class="seg" role="tablist" aria-label="Choose a channel"><button role="tab" data-m="phone">Phone call</button><button role="tab" data-m="portal">Web portal</button></div><button class="replay" type="button">↻ Replay</button></div>
+  root.innerHTML = `<div class="ctrl" style="margin-bottom:20px"><div class="seg" role="tablist" aria-label="Choose a request">${Object.entries(VS_MODES).map(([k, m]) => `<button role="tab" data-m="${k}">${m.label}</button>`).join("")}</div><button class="replay" type="button">↻ Replay</button></div>
     <div class="vs">
-      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av">AI</span><div><b>A typical AI agent</b><span class="small sub-l"></span></div><span class="st st-l">Waiting</span></div><div class="vs-log log-l"></div></div>
-      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av on">O</span><div><b>Onus</b><span class="small">${VS_RIGHT[side].sub}</span></div><span class="st st-r">Waiting</span></div><div class="vs-log log-r"></div></div>
-    </div>`;
+      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av">AI</span><div><b>A typical AI receptionist</b><span class="small sub-l"></span></div><span class="st st-l">Waiting</span></div><div class="vs-log log-l"></div></div>
+      <div class="tile vs-panel"><div class="vs-head"><span class="vs-av on">O</span><div><b>Onus</b><span class="small sub-r"></span></div><span class="st st-r">Waiting</span></div><div class="vs-log log-r"></div></div>
+    </div>
+    <p class="small center" style="margin-top:16px">Illustrative example.</p>`;
   const q = (s) => root.querySelector(s), replay = q(".replay");
-  let run = 0, mode = "phone", played = false;
+  let run = 0, mode = Object.keys(VS_MODES)[0], played = false;
   const line = ([c, t]) => `<div class="ln ${c} pend"><i></i><span>${t}</span></div>`;
   function lay(m, final) {
     mode = m;
+    const M = VS_MODES[m];
     root.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-selected", b.dataset.m === m));
-    q(".sub-l").textContent = VS_LEFT[m].sub;
-    q(".log-l").innerHTML = VS_LEFT[m].lines.map(line).join("");
-    q(".log-r").innerHTML = VS_RIGHT[side].lines.map(line).join("");
+    q(".sub-l").textContent = M.left.sub;
+    q(".sub-r").textContent = M.right.sub;
+    q(".log-l").innerHTML = M.left.lines.map(line).join("");
+    q(".log-r").innerHTML = M.right.lines.map(line).join("");
     const sl = q(".st-l"), sr = q(".st-r");
     sl.className = "st st-l"; sr.className = "st st-r";
     if (final) {
@@ -1126,21 +1072,12 @@ function vsMount(id, side) {
     }
     replay.disabled = false;
   }
-  lay("phone", REDUCED);
+  lay(mode, REDUCED);
   root.querySelector(".seg").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) go(b.dataset.m); });
   replay.addEventListener("click", () => go(mode));
   new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting && !played) go(mode); }), { threshold: 0.4 }).observe(q(".vs"));
-  return { stop: () => run++ };
 }
-const VS = { members: [vsMount("#vs-members", "members")], partners: [vsMount("#vs-partners", "partners")], thesis: [vsMount("#vs-thesis", "members")] };
-
-/* metric sparkline */
-function spark(seed, down) {
-  let v = 30, pts = [];
-  for (let i = 0; i < 12; i++) { seed = (seed * 9301 + 49297) % 233280; v += (seed / 233280 - (down ? 0.75 : 0.25)) * 8; v = Math.max(6, Math.min(40, v)); pts.push(`${i * 18},${44 - v}`); }
-  const line = pts.join(" ");
-  return `<svg viewBox="0 0 200 44" preserveAspectRatio="none"><polyline points="0,44 ${line} 198,44" fill="url(#gGlow)" opacity=".6"/><polyline points="${line}" fill="none" stroke="url(#gBlue)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${pts[11].split(",")[0]}" cy="${pts[11].split(",")[1]}" r="3.5" fill="#5E5CE6"/></svg>`;
-}
+vsMount("#vs-pe");
 
 /* ---------- iPhone + live scenarios ---------- */
 const STATUS = `<div class="status"><span>9:41</span><span class="icons">
@@ -1170,12 +1107,13 @@ function bubble(thread, i) {
   const tail = !next || next[0] !== who;
   return `<div class="b ${who}${tail ? " tail" : ""}">${d}</div>`;
 }
-function phone(thread, live) {
+/* the customer's phone: a text thread with the business's own white-labeled line */
+function phone(thread, live, brand) {
   const body = live ? "" : thread.map((_, i) => bubble(thread, i)).join("");
-  return `<div class="iphone"><div class="screen"><div class="island"></div>${STATUS}
-    <div class="ihead"><span class="back">‹</span><div class="avatar">O</div><span class="name">Onus</span></div>
+  return `<div class="iphone sms"><div class="screen"><div class="island"></div>${STATUS}
+    <div class="ihead"><span class="back">‹</span><div class="avatar brand">${brand.init}</div><span class="name">${brand.name}</span></div>
     <div class="thread">${body}</div>
-    <div class="compose"><span class="plus">+</span><span class="field">iMessage</span></div></div></div>`;
+    <div class="compose"><span class="plus">+</span><span class="field">Text Message</span></div></div></div>`;
 }
 
 const HOLD = 4200;
@@ -1214,16 +1152,6 @@ async function play(threadEl, thread, alive) {
   }
   return true;
 }
-function countUp(el, target) {
-  const n = parseFloat(target.replace(/[^0-9.]/g, "")) || 0;
-  const pre = target.match(/^[^0-9]*/)[0];
-  const t0 = performance.now();
-  (function tick(t) {
-    const k = Math.min((t - t0) / 900, 1), e = 1 - Math.pow(1 - k, 3);
-    el.textContent = pre + Math.round(n * e).toLocaleString("en-US");
-    if (k < 1) requestAnimationFrame(tick);
-  })(t0);
-}
 function seg(el, data, pick) {
   el.innerHTML = Object.entries(data).map(([k, v]) => `<button role="tab" data-v="${k}">${v.icon ? `<svg class="si"><use href="#${v.icon}"/></svg>` : ""}${v.label}</button>`).join("");
   el.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) pick(b.dataset.v); });
@@ -1255,164 +1183,83 @@ function scenario({ data, segEl, replayEl, watchEl, setup, finish }) {
   return { stop: () => run++ };
 }
 
-const MEMBER = {
-  health: {
-    label: "Health", icon: "i-heart", tag: "Denied MRI claim",
+const OPS = {
+  pt: {
+    label: "Physical therapy", icon: "i-heart", theme: "health", brand: { name: "Riverbend PT", init: "R" }, org: "Riverbend Physical Therapy · 14 clinics",
     thread: [
-      ["ts", "<b>Mon, Sep 8</b> 9:14 AM"],
-      ["me", "Got a $1,240 bill for my MRI. Insurance was supposed to cover it."],
-      ["ai", "I'll take it from here. Add the bill and your insurance card:"],
-      ["web", { title: "Secure upload · Case H-2041", page: PG.head("Secure upload", "H-2041") + PG.rows([["MRI bill.pdf", "✓ Added", "ok"], ["Insurance card", "✓ Added", "ok"]]) }],
-      ["ai", "It was denied for a missing prior auth. Lakeview Family Medicine is an Onus partner, so I sent it straight to their billing team."],
-      ["ts", "<b>Thu, Sep 11</b> 2:02 PM"],
-      ["web", { title: "MRI claim · live status", page: PG.head("Claim status", "Blue Shield") + PG.steps(["Denied", "Resubmitted", "Approved"], 1) }],
-      ["ts", "<b>Fri, Sep 19</b> 10:47 AM"],
-      ["ai", "Approved. Your balance is now an $85 copay."],
-      ["approve", { amt: "$85.00", to: "Lakeview", card: "Visa •• 4410" }],
-      ["me", "Approved"],
-      ["ai", "Paid. Dr. Patel wants a follow-up, so I booked the first slot that fits your calendar:"],
-      ["cal", { mon: "OCT", day: "14", title: "Follow-up · Dr. Patel", time: "Tue 10:30 – 11:00 AM", where: "Lakeview Family Medicine" }]
+      ["ts", "<b>Today</b> 8:12 AM"],
+      ["me", "Hi, Dr. Alvarez sent over a referral for my knee. How do I get started?"],
+      ["ai", "Hi Maya, it's Riverbend PT. We have the referral. Your plan covers 20 visits a year, with an authorization after visit 6."],
+      ["web", { title: "New patient · Riverbend PT", page: PG.head("New patient", "Eastside") + PG.rows([["Referral", "✓ Received", "ok"], ["Benefits", "✓ Verified", "ok"], ["Intake form", "2 min"]]) }],
+      ["slots", { title: "Evaluation · Eastside clinic", opts: ["Thu 7:30 AM", "Thu 5:15 PM"], pick: 1 }],
+      ["me", "Thursday 5:15 works"],
+      ["cal", { mon: "OCT", day: "16", title: "Evaluation · Riverbend PT", time: "Thu 5:15 – 6:15 PM", where: "Eastside clinic" }]
     ],
-    notif: ["Case closed", "MRI claim approved. You paid $85 of $1,240."],
-    widget: { big: "$1,155", what: "saved on an MRI bill", rows: [["Follow-ups", "4"], ["Partner", "Lakeview"], ["Time to close", "11 days"]] }
+    fresh: ["Evaluation booked · Maya R.", "Referral matched, benefits verified, intake sent"],
+    team: [["Authorization · J. Chen · visit 6 of 6", "Packet prefilled from the plan of care"], ["Referral missing a diagnosis", "Request sent to the referring office"], ["Billing question · copay amount", "Statement and plan details attached"]],
+    auto: [["3:00 PM cancellation filled", "From the waitlist, by text"], ["Benefits verified · 4 new patients", "Visit limits saved to each chart"], ["Records sent to Dr. Kim", "Release signed, sent securely"]],
+    title: "Physical therapy and rehab groups.",
+    today: "Your front desk spends its day on referral faxes, benefits checks, authorizations and rescheduling, mostly by phone.",
+    autoList: ["Referral intake and first-visit booking", "Benefits checks and visit-limit tracking", "Rescheduling and waitlist fill", "Intake forms and records requests"],
+    teamList: ["Authorizations, with the packet prefilled", "Billing questions that need judgment", "Anything clinical, routed to your therapists", "Upset or unusual cases"],
+    rules: "We sign a BAA before touching patient data. Front-office work only, never clinical advice."
   },
-  money: {
-    label: "Money", icon: "i-card", tag: "Fraudulent card charge",
+  ins: {
+    label: "Insurance", icon: "i-shield", theme: "money", brand: { name: "Harbor Insurance", init: "H" }, org: "Harbor Insurance Group · 9 offices",
     thread: [
-      ["ts", "<b>Tue, Aug 26</b> 8:31 PM"],
-      ["me", "There's a $389 hotel charge on my card. I wasn't there."],
-      ["ai", "Card frozen and dispute filed with your bank. Follow it here:"],
-      ["web", { title: "Dispute · Hotel Lumen Denver", page: PG.head("Card dispute", "$389.00") + PG.steps(["Filed", "Credit", "Decision"], 1) + PG.rows([["Card", "Frozen · new one shipped"]]) }],
-      ["ai", "Your new card arrives Friday. I'll move your subscriptions over then."],
-      ["remind", { title: "Move Netflix, Spotify and Con Edison to the new card", when: "Fri, Aug 29 · 6:00 PM" }],
-      ["ts", "<b>Thu, Sep 18</b> 4:05 PM"],
-      ["ai", "You won the dispute. The $389 is back for good."],
-      ["web", { title: "Case closed · M-0877", page: PG.head("Case closed", "23 days") + PG.rows([["Recovered", "$389.00", "ok"], ["Subscriptions moved", "3 of 3", "ok"]]) }],
-      ["me", "Amazing, thank you"]
+      ["ts", "<b>Today</b> 6:40 AM"],
+      ["me", "Need a certificate of insurance for a new job site today. The GC is Northgate Builders and they need to be additional insured."],
+      ["ai", "Morning Dan, it's Harbor Insurance. Your general liability policy includes blanket additional insured, so I can issue this now."],
+      ["web", { title: "Certificate · Northgate Builders", page: PG.head("Certificate", "General liability") + PG.rows([["Holder", "Northgate Builders"], ["Additional insured", "✓ Blanket", "ok"], ["Sent to GC", "✓ 6:42 AM", "ok"]]) }],
+      ["me", "That was fast. Thanks!"],
+      ["ai", "Anytime. Your renewal is in 45 days, so I'll start gathering what your account manager needs."],
+      ["remind", { title: "Send your updated vehicle list for renewal", when: "Fri, Oct 24 · 9:00 AM" }]
     ],
-    notif: ["Dispute won", "$389 returned to your account permanently."],
-    widget: { big: "$389", what: "recovered from a fraudulent charge", rows: [["Follow-ups", "3"], ["Subscriptions moved", "3"], ["Time to close", "23 days"]] }
-  },
-  home: {
-    label: "Home", icon: "i-home", tag: "Leaking roof, slow HOA",
-    thread: [
-      ["ts", "<b>Mon, Sep 1</b> 7:52 AM"],
-      ["me", "Water's coming through the ceiling again. The HOA said they'd fix the roof in July 😩"],
-      ["ai", "On it. Crestline, your HOA manager, is an Onus partner. I filed an urgent work order with your photos."],
-      ["web", { title: "Work order R-3310 · Unit 4B", page: PG.head("Work order", "Urgent") + PG.steps(["Filed", "Scheduled", "Repaired", "Verified"], 1) }],
-      ["slots", { title: "Roofer visit · Unit 4B", opts: ["Thu 9–11 AM", "Fri 1–3 PM"], pick: 0 }],
-      ["me", "Thursday morning"],
-      ["cal", { mon: "SEP", day: "4", title: "Roofer visit · Unit 4B", time: "Thu 9:00 – 11:00 AM", where: "Crestline Management" }],
-      ["remind", { title: "Clear the hall closet before the roofer arrives", when: "Wed, Sep 3 · 8:00 PM" }],
-      ["ts", "<b>Wed, Sep 17</b> 8:03 AM"],
-      ["ai", "It rained last night. Any water coming in?"],
-      ["me", "Totally dry!"],
-      ["ai", "Closing this one ✓"]
-    ],
-    notif: ["Case closed", "Roof repaired at no cost to you. Leak confirmed fixed."],
-    widget: { big: "$0", what: "you paid for the roof repair", rows: [["Follow-ups", "2"], ["Partner", "Crestline"], ["Time to close", "16 days"]] }
+    fresh: ["Certificate issued · Northgate Builders", "Blanket additional insured confirmed on the policy"],
+    team: [["Endorsement · add a vehicle · Dan's Roofing", "VIN and registration attached, carrier form prefilled"], ["Coverage question · new equipment", "Needs a licensed agent"], ["Renewal · fleet changes", "Last year's schedule pulled"]],
+    auto: [["ID cards sent", "From the agency system, by text"], ["Claim status update", "Carrier checked, client told"], ["Payment reminder", "Client paid through the link"]],
+    title: "Insurance agencies and brokers.",
+    today: "Your service team's time goes to certificates, endorsements, ID cards, claim status and renewal paperwork.",
+    autoList: ["Certificates the policy already allows", "ID cards and policy documents", "Claim status checks and updates", "Renewal document collection"],
+    teamList: ["Endorsements, with the carrier form prefilled", "Coverage questions and quotes", "Anything that counts as advice", "Claims and urgent account issues"],
+    rules: "Your licensed staff make every coverage decision. Onus never binds coverage or gives advice."
   }
 };
 
-const PARTNER = {
-  health: {
-    label: "Health", icon: "i-heart", org: "Lakeview Family Medicine",
-    thread: [["ts", "<b>Today</b> 9:14 AM"], ["me", "My MRI claim got denied. Can you sort it out?"], ["ai", "On it. Lakeview is an Onus partner, so this goes straight to their billing team."],
-      ["web", { title: "Case H-2041 · sent to Lakeview", page: PG.head("Request sent", "Lakeview") + PG.rows([["Documents", "EOB, order, card", "ok"], ["Status", "With billing team"]]) }], ["me", "Thank you!!"]],
-    team: [["Retro prior auth · MRI", "Patient texted 9:14 · EOB, order, card attached"], ["Billing dispute · lab charge", "Statement and history attached"], ["Medication question", "Routed to the nurse line"]],
-    auto: [["Rescheduled annual physical", "Moved to Oct 14, calendar updated"], ["Balance question answered", "From your billing system"], ["Records sent to Dr. Kim", "Release signed, sent securely"]],
-    title: "Medical and dental practices.",
-    today: "Your front desk spends hours on billing questions, denials, records and rescheduling, mostly on the phone.",
-    autoList: ["Booking, rescheduling and reminders", "Balance and statement questions", "Records requests with signed releases", "Form and referral status checks"],
-    teamList: ["Appeals and retro auths, packet prefilled", "Billing disputes that need judgment", "Anything clinical, routed to your nurses", "Upset or unusual cases"],
-    metrics: ["Calls per patient", "Days from denial to resolution"],
-    rules: "We sign a BAA before touching patient data. Admin and billing only, never clinical advice."
-  },
-  money: {
-    label: "Money", icon: "i-card", org: "Harbor Insurance Agency",
-    thread: [["ts", "<b>Today</b> 6:40 PM"], ["me", "Someone backed into my car in a parking lot. What do I do?"], ["ai", "Sorry! Harbor is an Onus partner, so I'll open the claim with them. Add photos and the other driver's info:"],
-      ["web", { title: "Claim intake · Harbor Insurance", page: PG.head("Claim intake", "Auto") + PG.rows([["Photos", "4 added", "ok"], ["Other driver", "Info added", "ok"]]) }], ["me", "Done 👍"]],
-    team: [["Auto claim · first notice", "Photos, other driver, policy matched"], ["Renewal · wants quotes", "Current coverage summarized"], ["Business card fraud", "Bank notified, card frozen"]],
-    auto: [["Insurance ID card sent", "From your AMS, by text"], ["Tax documents collected", "5 of 5, filed in the client folder"], ["Claim status update", "Carrier portal checked, client told"]],
-    title: "Insurance agencies, CPA and wealth practices.",
-    today: "Your team's time goes to claims hand-holding, renewal paperwork, document chasing and quick client questions.",
-    autoList: ["ID cards and policy documents", "Tax-season document collection", "Payment and renewal reminders", "Claim status checks and updates"],
-    teamList: ["New claims, first notice prepped", "Coverage questions and quotes", "Anything that counts as advice", "Fraud and urgent account issues"],
-    metrics: ["Staff hours per claim", "Document turnaround"],
-    rules: "Your licensed staff make every coverage and advice decision. Onus doesn't act as an adjuster or advisor."
-  },
-  home: {
-    label: "Home", icon: "i-home", org: "Crestline Management",
-    thread: [["ts", "<b>Today</b> 7:52 AM"], ["me", "Water's coming through the ceiling again 😩"], ["ai", "Crestline is an Onus partner. I've filed an urgent work order with your photos."],
-      ["web", { title: "Work order R-3310 · Unit 4B", page: PG.head("Work order", "Urgent") + PG.steps(["Filed", "Scheduled", "Repaired", "Verified"], 0) }], ["me", "You're the best"]],
-    team: [["Roof leak · Unit 4B · urgent", "Photos attached, linked to July ticket"], ["Violation dispute", "Resident photos and letter attached"], ["Drywall · master policy", "Needs a board decision"]],
-    auto: [["Dues balance question", "Answered from your ledger"], ["Clubhouse booked", "Saturday 2–6 PM, deposit paid"], ["Resale certificate sent", "Generated and sent to the title company"]],
-    title: "HOA and property managers.",
-    today: "Requests come in by email and phone, alongside violation disputes, dues questions and board updates.",
-    autoList: ["Dues and statement questions", "Routine work orders to approved vendors", "Amenity bookings", "Bylaws, resale and document requests"],
-    teamList: ["Urgent or costly repairs", "Violation disputes", "Anything needing a board decision", "Common-area insurance claims"],
-    metrics: ["Days to close a work order", "Staff hours per door"],
-    rules: "Your managers approve all vendor spend. Resident data stays with your association."
-  }
-};
-
-const members = scenario({
-  data: MEMBER, segEl: $("#m-seg"), replayEl: $("#m-replay"), watchEl: $("#m-phone"),
-  setup(v, live) {
-    $("#page-members").dataset.v = v.label.toLowerCase();
-    $("#m-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span><span>${v.tag}</span>`;
-    $("#m-phone").innerHTML = phone(v.thread, live);
-    const n = $("#m-notif"), w = $("#m-widget");
-    const note = live ? ["Case opened", "I'm on it. I'll message you when something changes."] : v.notif;
-    n.innerHTML = `<span class="app"></span><div><div class="row"><b>Onus</b><span>now</span></div><b>${note[0]}</b><p>${note[1]}</p></div>`;
-    w.innerHTML = `<div class="top"><span>Case</span><span class="closed">${live ? "In progress" : "Closed"}</span></div>
-      <div><div class="big">${live ? v.widget.big.replace(/[0-9,]+/, "0") : v.widget.big}</div><div class="what">${v.widget.what}</div></div>
-      <dl>${v.widget.rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`;
-    n.classList.toggle("wait", live); w.classList.toggle("wait", live);
-    return $("#m-phone .thread");
-  },
-  finish(v, live) {
-    const n = $("#m-notif"), w = $("#m-widget");
-    n.classList.remove("wait"); w.classList.remove("wait");
-    n.querySelector("div > b").textContent = v.notif[0];
-    n.querySelector("p").textContent = v.notif[1];
-    w.querySelector(".closed").textContent = "Closed";
-    if (live) countUp(w.querySelector(".big"), v.widget.big);
-  }
-});
-
-function queueRow([t, d], fresh) {
-  return `<div class="q${fresh ? " new" : ""}"><span class="dot team"></span><div><b>${t}</b><span>${d}</span></div><em>${fresh ? "New" : "Ready"}</em></div>`;
-}
-const autoRow = ([t, d]) => `<div class="q done"><svg class="okc"><use href="#i-check"/></svg><div><b>${t}</b><span>${d}</span></div><em>Done</em></div>`;
+const teamRow = ([t, d]) => `<div class="q"><span class="dot team"></span><div><b>${t}</b><span>${d}</span></div><em>Ready</em></div>`;
+const autoRow = ([t, d], extra = "") => `<div class="q done"${extra}><svg class="okc"><use href="#i-check"/></svg><div><b>${t}</b><span>${d}</span></div><em>Done</em></div>`;
 const listTile = (ic, cls, h, items) => `<div class="tile"><span class="ico ${cls}"><svg><use href="#${ic}"/></svg></span><h3>${h}</h3><ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`;
-const partners = scenario({
-  data: PARTNER, segEl: $("#p-seg"), replayEl: $("#p-replay"), watchEl: $("#p-phone"),
+scenario({
+  data: OPS, segEl: $("#o-seg"), replayEl: $("#o-replay"), watchEl: $("#o-phone"),
   setup(v, live) {
-    $("#page-partners").dataset.v = v.label.toLowerCase();
-    $("#p-phone").innerHTML = phone(v.thread, live);
-    const team = live ? v.team.slice(1) : v.team;
-    $("#p-mac").innerHTML = `<div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span><span class="org"><svg><use href="#${v.icon}"/></svg></span>Onus · ${v.org}</span></div>
-      <div class="body"><h4>Needs your team <span>Ready to act</span></h4><div id="p-rows">${team.map((r) => queueRow(r)).join("")}</div>
-      <h4 class="auto">Resolved by Onus <span>No staff time</span></h4>${v.auto.map(autoRow).join("")}</div>`;
-    $("#p-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span>`;
-    $("#p-title").textContent = v.title;
-    $("#p-today").textContent = "Today: " + v.today.charAt(0).toLowerCase() + v.today.slice(1);
-    $("#p-cols").innerHTML = listTile("i-check", "ok", "Resolves on its own", v.autoList)
+    $("#page-operators").dataset.v = v.theme;
+    $("#o-phone").innerHTML = phone(v.thread, live, v.brand);
+    /* the new row is laid out from the start but hidden, so nothing shifts when it appears */
+    $("#o-mac").innerHTML = `<div class="bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span><span class="org"><svg><use href="#${v.icon}"/></svg></span>Onus · ${v.org}</span></div>
+      <div class="body"><h4>Needs your team <span>Ready to act</span></h4>${v.team.map(teamRow).join("")}
+      <h4 class="auto">Resolved by Onus <span>No staff time</span></h4>${autoRow(v.fresh, ` id="o-fresh"${live ? ' style="visibility:hidden"' : ""}`)}${v.auto.map((r) => autoRow(r)).join("")}</div>`;
+    $("#o-vtag").innerHTML = `<span class="chipi"><svg><use href="#${v.icon}"/></svg></span><span>${v.label}</span>`;
+    $("#o-title").textContent = v.title;
+    $("#o-today").textContent = "Today: " + v.today.charAt(0).toLowerCase() + v.today.slice(1);
+    $("#o-cols").innerHTML = listTile("i-check", "ok", "Finishes on its own", v.autoList)
       + listTile("i-users", "soft", "Comes to your team, ready", v.teamList);
-    $("#p-rules").innerHTML = `<span style="display:inline-flex;gap:8px;align-items:center"><svg width="16" height="16" style="color:#28A745"><use href="#i-shield"/></svg>${v.rules}</span>`;
-    return $("#p-phone .thread");
+    $("#o-rules").innerHTML = `<span style="display:inline-flex;gap:8px;align-items:center"><svg width="16" height="16" style="color:#28A745"><use href="#i-shield"/></svg>${v.rules}</span>`;
+    return $("#o-phone .thread");
   },
   finish(v, live) {
-    if (live) $("#p-rows").insertAdjacentHTML("afterbegin", queueRow(v.team[0], true));
+    const f = $("#o-fresh");
+    f.style.visibility = "";
+    if (live) f.classList.add("new");
   }
 });
 
 /* ---------- tabs ---------- */
-const PAGES = ["members", "partners", "thesis"];
+const PAGES = ["pe", "operators", "thesis"];
+const OLD = { members: "operators", partners: "operators" };
 
 function show(p) {
-  if (!PAGES.includes(p)) p = "members";
+  p = OLD[p] || p;
+  if (!PAGES.includes(p)) p = "pe";
   PAGES.forEach((x) => { $("#page-" + x).hidden = x !== p; $("#tab-" + x).setAttribute("aria-selected", x === p); });
   try { localStorage.setItem("onus-tab", p); } catch (e) {}
 }
@@ -1424,7 +1271,7 @@ document.querySelectorAll(".nav .seg button").forEach((b) => b.addEventListener(
 document.querySelectorAll("[data-jump]").forEach((a) => a.addEventListener("click", () =>
   document.getElementById(a.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" })));
 let start = location.hash.slice(1);
-if (!PAGES.includes(start)) { try { start = localStorage.getItem("onus-tab") || "members"; } catch (e) { start = "members"; } }
+if (!PAGES.includes(start) && !OLD[start]) { try { start = localStorage.getItem("onus-tab") || "pe"; } catch (e) { start = "pe"; } }
 show(start);
 /* only animate diagrams that are on screen */
 const svgIO = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting && !REDUCED ? e.target.unpauseAnimations() : e.target.pauseAnimations())), { rootMargin: "100px" });
@@ -1434,12 +1281,12 @@ function preview(form, msg, req) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     msg.textContent = req.some((id) => !$("#" + id).value.trim())
-      ? "Add your name and contact details to continue."
-      : "This is a concept preview, so nothing was sent. Requests open with the beta.";
+      ? "Add your name and organization to continue."
+      : "This is a concept preview, so nothing was sent.";
   });
 }
-preview($("#m-form"), $("#m-msg"), ["m-name", "m-phone-in"]);
-preview($("#p-form"), $("#p-msg"), ["p-name", "p-org"]);
+preview($("#pe-form"), $("#pe-msg"), ["pe-name", "pe-org"]);
+preview($("#o-form"), $("#o-msg"), ["o-name", "o-org"]);
 </script>
 
 
